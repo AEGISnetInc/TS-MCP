@@ -27,8 +27,15 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
+    "@types/keytar": "^4.4.0",
     "@types/node": "^25.0.8",
     "typescript": "^5.9.3",
     "vitest": "^4.0.17"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.25.2",
+    "keytar": "^7.9.0",
+    "posthog-node": "^5.21.0",
+    "zod": "^4.3.5"
   }
 }
