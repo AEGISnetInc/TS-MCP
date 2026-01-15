@@ -1,0 +1,23 @@
+{
+  "name": "ts-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for conversational FHIR testing with Touchstone",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "ts-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "node dist/index.js"
+  },
+  "keywords": ["mcp", "fhir", "touchstone", "testing", "healthcare"],
+  "author": "AEGIS.net, Inc.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
