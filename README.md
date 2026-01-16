@@ -36,31 +36,57 @@ Add to your Claude Code CLI MCP configuration (`~/.claude/mcp.json`):
 | `TOUCHSTONE_BASE_URL` | `https://touchstone.aegis.net` | Touchstone API URL |
 | `TS_MCP_TELEMETRY` | `true` | Enable/disable anonymous usage tracking |
 
-## Usage
+## Prerequisites
 
-### Authentication
+Before using TS-MCP, you need:
 
-First, authenticate with your Touchstone credentials:
+1. **Touchstone Account** - Register at [touchstone.aegis.net](https://touchstone.aegis.net)
+2. **Test Setup** - Create a Test Setup in Touchstone UI that points to your FHIR server
+3. **Test Setup Name** - Note the exact name of your Test Setup (TS-MCP cannot list available setups)
 
-> "Authenticate me with Touchstone using my username and password"
+## End-to-End Workflow
 
-Your credentials are used once to obtain an API key, which is stored securely in your system keychain (macOS Keychain, Windows Credential Manager, or Linux Secret Service).
+### 1. Configure TS-MCP in Claude Code
 
-### Running Tests
+Add to `~/.claude/mcp.json` (see Configuration section above).
 
-Run a test setup by name:
+### 2. Authenticate with Touchstone
 
-> "Run my Patient-CRUD tests"
+In Claude Code, say:
 
-Or use the prompt directly:
+> "Authenticate me with Touchstone using username 'myuser' and password 'mypass'"
 
-> "Use the run-tests prompt with Patient-CRUD"
+Your credentials are exchanged for an API key, which is stored securely in your system keychain (macOS Keychain, Windows Credential Manager, or Linux Secret Service). You only need to authenticate once per machine.
 
-### Checking Results
+### 3. Run Tests by Test Setup Name
 
-Check results for a previous execution:
+Ask Claude to run your Test Setup by its exact name:
 
+> "Run Touchstone tests using Test Setup 'AEGIS-Patient-CRUD-R4'"
+
+Claude will:
+1. Launch the test execution via `launch_test_execution`
+2. Poll status via `get_test_status` until complete
+3. Retrieve results via `get_test_results`
+4. Present a summary of passed/failed tests
+
+### 4. Review and Iterate
+
+Review the test results, fix any conformance issues in your FHIR implementation, and run tests again.
+
+## Usage Examples
+
+**Authenticate:**
+> "Authenticate me with Touchstone"
+
+**Run tests:**
+> "Run tests using Test Setup 'My-Patient-Tests'"
+
+**Check previous execution:**
 > "Check the results for execution 12345"
+
+**Run with auto-polling prompt:**
+> "Use the run-tests prompt with testSetupName 'My-Patient-Tests'"
 
 ## Tools
 
