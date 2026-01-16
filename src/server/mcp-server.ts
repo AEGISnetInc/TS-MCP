@@ -201,9 +201,28 @@ export class TSMCPServer {
     const { executionId } = GetTestResultsInputSchema.parse(args);
     const apiKey = await this.authManager.getApiKey();
 
+    // Fetch execution detail (summary of all scripts)
     await this.rateLimiter.throttle('detail', RATE_LIMITS.DETAIL_ENDPOINT);
     const detail = await this.touchstoneClient.getExecutionDetail(apiKey, executionId);
-    const results = transformResults(detail);
+
+    // Fetch script details for non-passing scripts to get assertion-level info
+    const scriptDetails = new Map<string, import('../touchstone/types.js').ScriptExecDetailResponse>();
+    const scriptExecutions = detail.testScriptExecutions ?? [];
+
+    for (const script of scriptExecutions) {
+      const needsDetails = script.status !== 'Passed' && script.status !== 'PassedWithWarnings';
+      if (needsDetails) {
+        await this.rateLimiter.throttle('scriptDetail', RATE_LIMITS.SCRIPT_DETAIL_ENDPOINT);
+        const scriptDetail = await this.touchstoneClient.getScriptDetail(
+          apiKey,
+          executionId,
+          script.testScript
+        );
+        scriptDetails.set(script.testScript, scriptDetail);
+      }
+    }
+
+    const results = transformResults(detail, scriptDetails);
 
     this.analytics.track(AnalyticsEvents.TEST_COMPLETED, {
       execution_id: executionId,

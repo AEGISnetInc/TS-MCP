@@ -20,6 +20,7 @@ export class RateLimiter {
 
 // Constants for Touchstone API rate limits
 export const RATE_LIMITS = {
-  STATUS_ENDPOINT: 4000,    // 4 seconds
-  DETAIL_ENDPOINT: 15000    // 15 seconds
+  STATUS_ENDPOINT: 4000,         // 4 seconds
+  DETAIL_ENDPOINT: 15000,        // 15 seconds
+  SCRIPT_DETAIL_ENDPOINT: 15000  // 15 seconds (same as detail)
 } as const;

@@ -5,7 +5,7 @@ import {
   NetworkError,
   TouchstoneError
 } from '../utils/errors.js';
-import type { ExecutionStatusResponse, ExecutionDetailResponse } from './types.js';
+import type { ExecutionStatusResponse, ExecutionDetailResponse, ScriptExecDetailResponse } from './types.js';
 
 export class TouchstoneClient {
   constructor(private readonly baseUrl: string) {}
@@ -83,6 +83,15 @@ export class TouchstoneClient {
   async getExecutionDetail(apiKey: string, executionId: string): Promise<ExecutionDetailResponse> {
     return this.request<ExecutionDetailResponse>(
       `/testExecDetail/${executionId}`,
+      { method: 'GET' },
+      apiKey
+    );
+  }
+
+  async getScriptDetail(apiKey: string, executionId: string, testScript: string): Promise<ScriptExecDetailResponse> {
+    const encodedScript = encodeURIComponent(testScript);
+    return this.request<ScriptExecDetailResponse>(
+      `/scriptExecDetail/${executionId}?testscript=${encodedScript}`,
       { method: 'GET' },
       apiKey
     );

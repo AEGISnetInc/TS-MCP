@@ -107,16 +107,59 @@ describe('TouchstoneClient', () => {
         json: async () => ({
           testExecId: '12345',
           status: 'Passed',
-          scriptResults: [
-            { testScriptName: 'Patient-read', status: 'Passed', passCount: 5, failCount: 0 }
+          testScriptExecutions: [
+            {
+              testScript: '/FHIR/Patient/Patient-read',
+              status: 'Passed',
+              statusCounts: { numberOfTests: 5, numberOfTestPasses: 5, numberOfTestFailures: 0 }
+            }
           ]
         })
       } as Response);
 
       const result = await client.getExecutionDetail('api-key', '12345');
 
-      expect(result.scriptResults).toHaveLength(1);
-      expect(result.scriptResults![0].testScriptName).toBe('Patient-read');
+      expect(result.testScriptExecutions).toHaveLength(1);
+      expect(result.testScriptExecutions![0].testScript).toBe('/FHIR/Patient/Patient-read');
+    });
+  });
+
+  describe('getScriptDetail', () => {
+    it('returns script execution details', async () => {
+      mockFetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({
+          status: 'Passed',
+          testScript: '/FHIR/Patient/Patient-read',
+          testItemExecutions: [
+            {
+              name: '01-Read',
+              status: 'Passed',
+              operationExecutions: [
+                {
+                  assertionExecutions: [
+                    { status: 'Passed', summary: 'Response status code is 200' }
+                  ]
+                }
+              ]
+            }
+          ]
+        })
+      } as Response);
+
+      const result = await client.getScriptDetail('api-key', '12345', '/FHIR/Patient/Patient-read');
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        `${baseUrl}/touchstone/api/scriptExecDetail/12345?testscript=${encodeURIComponent('/FHIR/Patient/Patient-read')}`,
+        expect.objectContaining({
+          method: 'GET',
+          headers: expect.objectContaining({
+            'API-Key': 'api-key'
+          })
+        })
+      );
+      expect(result.testItemExecutions).toHaveLength(1);
+      expect(result.testItemExecutions![0].name).toBe('01-Read');
     });
   });
 
