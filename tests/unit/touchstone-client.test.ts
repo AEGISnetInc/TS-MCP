@@ -30,7 +30,7 @@ describe('TouchstoneClient', () => {
           headers: expect.objectContaining({
             'Content-Type': 'application/json'
           }),
-          body: JSON.stringify({ username: 'user', password: 'pass' })
+          body: JSON.stringify({ email: 'user', password: 'pass' })
         })
       );
       expect(result).toBe('test-api-key');
@@ -50,7 +50,7 @@ describe('TouchstoneClient', () => {
     it('launches test execution and returns ID', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ testExecId: 12345 })
+        json: async () => ({ testExecId: '12345' })
       } as Response);
 
       const result = await client.launchExecution('api-key', 'Patient-CRUD');
@@ -65,7 +65,7 @@ describe('TouchstoneClient', () => {
           body: JSON.stringify({ testSetup: 'Patient-CRUD' })
         })
       );
-      expect(result).toBe(12345);
+      expect(result).toBe('12345');
     });
 
     it('throws SessionExpiredError on 401', async () => {
@@ -82,10 +82,10 @@ describe('TouchstoneClient', () => {
     it('returns execution status', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ testExecId: 12345, status: 'Running' })
+        json: async () => ({ testExecId: '12345', status: 'Running' })
       } as Response);
 
-      const result = await client.getExecutionStatus('api-key', 12345);
+      const result = await client.getExecutionStatus('api-key', '12345');
 
       expect(mockFetch).toHaveBeenCalledWith(
         `${baseUrl}/touchstone/api/testExecution/12345`,
@@ -105,7 +105,7 @@ describe('TouchstoneClient', () => {
       mockFetch.mockResolvedValueOnce({
         ok: true,
         json: async () => ({
-          testExecId: 12345,
+          testExecId: '12345',
           status: 'Passed',
           scriptResults: [
             { testScriptName: 'Patient-read', status: 'Passed', passCount: 5, failCount: 0 }
@@ -113,7 +113,7 @@ describe('TouchstoneClient', () => {
         })
       } as Response);
 
-      const result = await client.getExecutionDetail('api-key', 12345);
+      const result = await client.getExecutionDetail('api-key', '12345');
 
       expect(result.scriptResults).toHaveLength(1);
       expect(result.scriptResults![0].testScriptName).toBe('Patient-read');
@@ -133,7 +133,7 @@ describe('TouchstoneClient', () => {
         status: 404
       } as Response);
 
-      await expect(client.getExecutionStatus('api-key', 99999)).rejects.toThrow('not found');
+      await expect(client.getExecutionStatus('api-key', '99999')).rejects.toThrow('not found');
     });
 
     it('throws TouchstoneError on 500', async () => {
@@ -142,7 +142,7 @@ describe('TouchstoneClient', () => {
         status: 500
       } as Response);
 
-      await expect(client.getExecutionStatus('api-key', 12345)).rejects.toThrow('Touchstone service error');
+      await expect(client.getExecutionStatus('api-key', '12345')).rejects.toThrow('Touchstone service error');
     });
   });
 });

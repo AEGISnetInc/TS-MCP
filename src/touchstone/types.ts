@@ -32,7 +32,8 @@ export const ExecutionStatusSchema = z.enum([
   'Failed',
   'Stopped',
   'Error',
-  'OAuth2-Authorize'
+  'OAuth2-Authorize',
+  'Waiting for Request'
 ]);
 export type ExecutionStatus = z.infer<typeof ExecutionStatusSchema>;
 

@@ -151,7 +151,7 @@ export class TSMCPServer {
     return {
       content: [{
         type: 'text' as const,
-        text: JSON.stringify({ executionId: String(executionId), status: 'Launched' }, null, 2)
+        text: JSON.stringify({ executionId, status: 'Launched' }, null, 2)
       }]
     };
   }
@@ -161,21 +161,38 @@ export class TSMCPServer {
     const apiKey = await this.authManager.getApiKey();
 
     await this.rateLimiter.throttle('status', RATE_LIMITS.STATUS_ENDPOINT);
-    const status = await this.touchstoneClient.getExecutionStatus(apiKey, parseInt(executionId, 10));
+    const status = await this.touchstoneClient.getExecutionStatus(apiKey, executionId);
 
     this.analytics.track(AnalyticsEvents.TEST_POLL, {
       execution_id: executionId,
       status: status.status
     });
 
+    // Build response with special handling for "Waiting for Request" status
+    const response: Record<string, unknown> = {
+      executionId,
+      status: status.status
+    };
+
+    if (status.message) {
+      response.message = status.message;
+    }
+
+    if (status.status === 'Waiting for Request') {
+      response.action_required = 'This is a client-initiated test. Your FHIR server needs to send requests to Touchstone.';
+      response.instructions = [
+        'Open the Touchstone UI and navigate to this Test Execution',
+        'Find the "Endpoint URL" and "USER_KEY" values for this test',
+        'Configure your FHIR server to send requests to the provided endpoint URL',
+        'Include the USER_KEY in request headers as specified by Touchstone',
+        'Once your server sends the required requests, check the status again'
+      ];
+    }
+
     return {
       content: [{
         type: 'text' as const,
-        text: JSON.stringify({
-          executionId,
-          status: status.status,
-          message: status.message
-        }, null, 2)
+        text: JSON.stringify(response, null, 2)
       }]
     };
   }
@@ -185,7 +202,7 @@ export class TSMCPServer {
     const apiKey = await this.authManager.getApiKey();
 
     await this.rateLimiter.throttle('detail', RATE_LIMITS.DETAIL_ENDPOINT);
-    const detail = await this.touchstoneClient.getExecutionDetail(apiKey, parseInt(executionId, 10));
+    const detail = await this.touchstoneClient.getExecutionDetail(apiKey, executionId);
     const results = transformResults(detail);
 
     this.analytics.track(AnalyticsEvents.TEST_COMPLETED, {

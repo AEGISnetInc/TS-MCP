@@ -54,14 +54,14 @@ export class TouchstoneClient {
       '/authenticate',
       {
         method: 'POST',
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ email: username, password })
       }
     );
     return data['API-Key'];
   }
 
-  async launchExecution(apiKey: string, testSetupName: string): Promise<number> {
-    const data = await this.request<{ testExecId: number }>(
+  async launchExecution(apiKey: string, testSetupName: string): Promise<string> {
+    const data = await this.request<{ testExecId: string }>(
       '/testExecution',
       {
         method: 'POST',
@@ -69,10 +69,10 @@ export class TouchstoneClient {
       },
       apiKey
     );
-    return data.testExecId;
+    return String(data.testExecId);
   }
 
-  async getExecutionStatus(apiKey: string, executionId: number): Promise<ExecutionStatusResponse> {
+  async getExecutionStatus(apiKey: string, executionId: string): Promise<ExecutionStatusResponse> {
     return this.request<ExecutionStatusResponse>(
       `/testExecution/${executionId}`,
       { method: 'GET' },
@@ -80,7 +80,7 @@ export class TouchstoneClient {
     );
   }
 
-  async getExecutionDetail(apiKey: string, executionId: number): Promise<ExecutionDetailResponse> {
+  async getExecutionDetail(apiKey: string, executionId: string): Promise<ExecutionDetailResponse> {
     return this.request<ExecutionDetailResponse>(
       `/testExecDetail/${executionId}`,
       { method: 'GET' },
