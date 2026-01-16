@@ -52,11 +52,15 @@ Add to `~/.claude/mcp.json` (see Configuration section above).
 
 ### 2. Authenticate with Touchstone
 
-In Claude Code, say:
+In your terminal (outside Claude Code), run:
 
-> "Authenticate me with Touchstone using username 'myuser' and password 'mypass'"
+```bash
+npx ts-mcp auth
+```
 
-Your credentials are exchanged for an API key, which is stored securely in your system keychain (macOS Keychain, Windows Credential Manager, or Linux Secret Service). You only need to authenticate once per machine.
+You'll be prompted for your Touchstone username and password. The password is entered securely (not echoed to screen). Your credentials are exchanged for an API key, which is stored in your system keychain (macOS Keychain, Windows Credential Manager, or Linux Secret Service).
+
+You only need to authenticate once per machine (or when your session expires).
 
 ### 3. Run Tests by Test Setup Name
 
@@ -76,10 +80,12 @@ Review the test results, fix any conformance issues in your FHIR implementation,
 
 ## Usage Examples
 
-**Authenticate:**
-> "Authenticate me with Touchstone"
+**Authenticate (in terminal, before using Claude Code):**
+```bash
+npx ts-mcp auth
+```
 
-**Run tests:**
+**Run tests (in Claude Code):**
 > "Run tests using Test Setup 'My-Patient-Tests'"
 
 **Check previous execution:**
@@ -88,11 +94,18 @@ Review the test results, fix any conformance issues in your FHIR implementation,
 **Run with auto-polling prompt:**
 > "Use the run-tests prompt with testSetupName 'My-Patient-Tests'"
 
-## Tools
+## CLI Commands
+
+| Command | Description |
+|---------|-------------|
+| `npx ts-mcp auth` | Authenticate with Touchstone (stores API key in keychain) |
+| `npx ts-mcp --help` | Show help |
+| `npx ts-mcp` | Start MCP server (used by Claude Code) |
+
+## MCP Tools
 
 | Tool | Description |
 |------|-------------|
-| `authenticate` | Authenticate with Touchstone |
 | `launch_test_execution` | Start a test run |
 | `get_test_status` | Check execution status |
 | `get_test_results` | Get detailed results |
@@ -124,7 +137,9 @@ npm run dev
 
 ```
 src/
-├── index.ts                 # Entry point
+├── index.ts                 # Entry point (CLI routing)
+├── cli/
+│   └── auth.ts              # CLI authentication command
 ├── server/
 │   ├── mcp-server.ts        # MCP server implementation
 │   ├── tools.ts             # Tool definitions
@@ -134,7 +149,7 @@ src/
 │   ├── types.ts             # Zod schemas
 │   └── rate-limiter.ts      # Rate limiting
 ├── auth/
-│   ├── auth-manager.ts      # Auth coordination
+│   ├── auth-manager.ts      # API key retrieval from keychain
 │   └── keychain.ts          # Secure credential storage
 ├── analytics/
 │   ├── posthog-client.ts    # PostHog wrapper

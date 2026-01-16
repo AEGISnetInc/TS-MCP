@@ -1,27 +1,17 @@
 import { KeychainService } from './keychain.js';
-import { TouchstoneClient } from '../touchstone/client.js';
 import { NotAuthenticatedError } from '../utils/errors.js';
 
-export interface AuthResult {
-  success: boolean;
-  message: string;
-}
-
+/**
+ * Manages API key retrieval from the system keychain.
+ * Authentication is handled separately via CLI (`npx ts-mcp auth`).
+ */
 export class AuthManager {
-  constructor(
-    private readonly keychain: KeychainService,
-    private readonly client: TouchstoneClient
-  ) {}
+  constructor(private readonly keychain: KeychainService) {}
 
-  async authenticate(username: string, password: string): Promise<AuthResult> {
-    const apiKey = await this.client.authenticate(username, password);
-    await this.keychain.setApiKey(apiKey);
-    return {
-      success: true,
-      message: 'Successfully authenticated with Touchstone.'
-    };
-  }
-
+  /**
+   * Retrieves the API key from the keychain.
+   * @throws NotAuthenticatedError if no API key is stored.
+   */
   async getApiKey(): Promise<string> {
     const apiKey = await this.keychain.getApiKey();
     if (!apiKey) {
@@ -30,10 +20,16 @@ export class AuthManager {
     return apiKey;
   }
 
+  /**
+   * Checks if an API key is stored in the keychain.
+   */
   async isAuthenticated(): Promise<boolean> {
     return this.keychain.hasApiKey();
   }
 
+  /**
+   * Removes the API key from the keychain.
+   */
   async logout(): Promise<void> {
     await this.keychain.deleteApiKey();
   }

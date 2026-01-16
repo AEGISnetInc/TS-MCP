@@ -11,7 +11,7 @@ export class TSMCPError extends Error {
 
 export class NotAuthenticatedError extends TSMCPError {
   constructor() {
-    super('Not authenticated. Please run authenticate first.', 'NOT_AUTHENTICATED');
+    super('Not authenticated. Run "npx ts-mcp auth" to authenticate.', 'NOT_AUTHENTICATED');
   }
 }
 
@@ -23,7 +23,7 @@ export class AuthenticationFailedError extends TSMCPError {
 
 export class SessionExpiredError extends TSMCPError {
   constructor() {
-    super('Session expired. Please re-authenticate.', 'SESSION_EXPIRED');
+    super('Session expired. Run "npx ts-mcp auth" to re-authenticate.', 'SESSION_EXPIRED');
   }
 }
 

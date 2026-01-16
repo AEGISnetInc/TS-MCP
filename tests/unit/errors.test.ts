@@ -27,7 +27,7 @@ describe('TSMCPError', () => {
 describe('NotAuthenticatedError', () => {
   it('has correct message and code', () => {
     const error = new NotAuthenticatedError();
-    expect(error.message).toBe('Not authenticated. Please run authenticate first.');
+    expect(error.message).toBe('Not authenticated. Run "npx ts-mcp auth" to authenticate.');
     expect(error.code).toBe('NOT_AUTHENTICATED');
   });
 });
@@ -43,7 +43,7 @@ describe('AuthenticationFailedError', () => {
 describe('SessionExpiredError', () => {
   it('has correct message and code', () => {
     const error = new SessionExpiredError();
-    expect(error.message).toBe('Session expired. Please re-authenticate.');
+    expect(error.message).toBe('Session expired. Run "npx ts-mcp auth" to re-authenticate.');
     expect(error.code).toBe('SESSION_EXPIRED');
   });
 });
@@ -100,7 +100,7 @@ describe('formatErrorResponse', () => {
     const error = new NotAuthenticatedError();
     const response = formatErrorResponse(error);
     expect(response).toEqual({
-      error: 'Not authenticated. Please run authenticate first.',
+      error: 'Not authenticated. Run "npx ts-mcp auth" to authenticate.',
       code: 'NOT_AUTHENTICATED'
     });
   });

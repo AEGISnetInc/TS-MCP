@@ -32,13 +32,6 @@ describe('MCP Server Integration', () => {
   });
 
   describe('Tool Definitions', () => {
-    it('defines authenticate tool', () => {
-      const tool = TOOL_DEFINITIONS.find(t => t.name === 'authenticate');
-      expect(tool).toBeDefined();
-      expect(tool?.inputSchema.required).toContain('username');
-      expect(tool?.inputSchema.required).toContain('password');
-    });
-
     it('defines launch_test_execution tool', () => {
       const tool = TOOL_DEFINITIONS.find(t => t.name === 'launch_test_execution');
       expect(tool).toBeDefined();
@@ -57,8 +50,8 @@ describe('MCP Server Integration', () => {
       expect(tool?.inputSchema.required).toContain('executionId');
     });
 
-    it('has four tools total', () => {
-      expect(TOOL_DEFINITIONS).toHaveLength(4);
+    it('has three tools total', () => {
+      expect(TOOL_DEFINITIONS).toHaveLength(3);
     });
   });
 

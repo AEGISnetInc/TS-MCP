@@ -5,7 +5,6 @@ const mockGetApiKey = jest.fn<() => Promise<string | null>>();
 const mockSetApiKey = jest.fn<() => Promise<void>>();
 const mockDeleteApiKey = jest.fn<() => Promise<boolean>>();
 const mockHasApiKey = jest.fn<() => Promise<boolean>>();
-const mockAuthenticate = jest.fn<() => Promise<string>>();
 
 jest.unstable_mockModule('../../src/auth/keychain.js', () => ({
   KeychainService: jest.fn().mockImplementation(() => ({
@@ -16,16 +15,9 @@ jest.unstable_mockModule('../../src/auth/keychain.js', () => ({
   }))
 }));
 
-jest.unstable_mockModule('../../src/touchstone/client.js', () => ({
-  TouchstoneClient: jest.fn().mockImplementation(() => ({
-    authenticate: mockAuthenticate
-  }))
-}));
-
 // Import after mocks are set up
 const { AuthManager } = await import('../../src/auth/auth-manager.js');
 const { KeychainService } = await import('../../src/auth/keychain.js');
-const { TouchstoneClient } = await import('../../src/touchstone/client.js');
 const { NotAuthenticatedError } = await import('../../src/utils/errors.js');
 
 describe('AuthManager', () => {
@@ -34,21 +26,7 @@ describe('AuthManager', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     const mockKeychain = new KeychainService();
-    const mockClient = new TouchstoneClient('https://example.com');
-    authManager = new AuthManager(mockKeychain, mockClient);
-  });
-
-  describe('authenticate', () => {
-    it('authenticates and stores API key', async () => {
-      mockAuthenticate.mockResolvedValue('new-api-key');
-      mockSetApiKey.mockResolvedValue();
-
-      const result = await authManager.authenticate('user', 'pass');
-
-      expect(mockAuthenticate).toHaveBeenCalledWith('user', 'pass');
-      expect(mockSetApiKey).toHaveBeenCalledWith('new-api-key');
-      expect(result).toEqual({ success: true, message: 'Successfully authenticated with Touchstone.' });
-    });
+    authManager = new AuthManager(mockKeychain);
   });
 
   describe('getApiKey', () => {

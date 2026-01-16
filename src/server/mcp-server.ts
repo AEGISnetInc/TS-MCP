@@ -18,7 +18,6 @@ import { formatErrorResponse, TSMCPError } from '../utils/errors.js';
 import { transformResults } from '../utils/result-transformer.js';
 import {
   TOOL_DEFINITIONS,
-  AuthenticateInputSchema,
   LaunchTestExecutionInputSchema,
   GetTestStatusInputSchema,
   GetTestResultsInputSchema
@@ -44,7 +43,7 @@ export class TSMCPServer {
     );
 
     this.touchstoneClient = new TouchstoneClient(this.config.touchstoneBaseUrl);
-    this.authManager = new AuthManager(new KeychainService(), this.touchstoneClient);
+    this.authManager = new AuthManager(new KeychainService());
     this.rateLimiter = new RateLimiter();
     this.analytics = new AnalyticsClient(this.config.telemetryEnabled);
 
@@ -99,8 +98,6 @@ export class TSMCPServer {
 
       try {
         switch (name) {
-          case 'authenticate':
-            return await this.handleAuthenticate(args);
           case 'launch_test_execution':
             return await this.handleLaunchExecution(args);
           case 'get_test_status':
@@ -124,19 +121,6 @@ export class TSMCPServer {
         };
       }
     });
-  }
-
-  private async handleAuthenticate(args: unknown) {
-    const { username, password } = AuthenticateInputSchema.parse(args);
-    const result = await this.authManager.authenticate(username, password);
-
-    this.analytics.track(AnalyticsEvents.AUTH_SUCCESS, {
-      base_url: this.config.touchstoneBaseUrl
-    });
-
-    return {
-      content: [{ type: 'text' as const, text: result.message }]
-    };
   }
 
   private async handleLaunchExecution(args: unknown) {
