@@ -1,0 +1,5 @@
+Method: GET
+Path: https://touchstone.aegis.net/touchstone/api/testReport/adsfasdfsdf?testscript=/FHIR3-0-2-Basic/P-R/Patient/Client Assigned Id/Patient-client-id-xml
+Headers:
+		API-Key=MujMAdVz7Mx29zu584214025061102d0318885161a4262a65200bf07620d1e09150f7e
+		Accept=application/xml;charset=UTF-8

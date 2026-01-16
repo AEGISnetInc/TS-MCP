@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecDetailResponse xmlns="http://touchstone.aegis.net/api">
+    <error>The value for 'Test Exec Id' must be at least 17 characters wide.</error>
+</testExecDetailResponse>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OperationOutcome xmlns="http://hl7.org/fhir">
+    <issue>
+        <severity value="error"/>
+        <code value="security"/>
+        <details>
+            <text value="The API-Key value of 'adsfasdgadfgdfg' is invalid."/>
+        </details>
+    </issue>
+</OperationOutcome>

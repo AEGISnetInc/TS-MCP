@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OperationOutcome xmlns="http://hl7.org/fhir">
+    <issue>
+        <severity value="error"/>
+        <code value="not-found"/>
+        <details>
+            <text value="Test Script Execution '202511211839306298841419-adfasdgafdsfd' could not be found."/>
+        </details>
+    </issue>
+</OperationOutcome>

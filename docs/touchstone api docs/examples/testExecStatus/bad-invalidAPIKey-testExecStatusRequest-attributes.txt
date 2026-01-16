@@ -1,0 +1,5 @@
+Method: GET
+Path: https://touchstone.aegis.net/touchstone/api/testExecution/202511211834052754534344
+Headers:
+		API-Key=adsfasdgadfgdfg
+		Accept=application/xml;charset=UTF-8

@@ -1,0 +1,118 @@
+{
+  "type" : "object",
+  "id" : "urn:jsonschema:TestExecStatusResponse",
+  "properties" : {
+    "error" : {
+      "type" : "string"
+    },
+    "warning" : {
+      "type" : "string"
+    },
+    "info" : {
+      "type" : "string"
+    },
+    "status" : {
+      "type" : "string"
+    },
+    "startTime" : {
+      "type" : "string"
+    },
+    "endTime" : {
+      "type" : "string"
+    },
+    "duration" : {
+      "type" : "string"
+    },
+    "testSetupName" : {
+      "type" : "string"
+    },
+    "origins" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "id" : "urn:jsonschema:TestSysAttributes",
+        "properties" : {
+          "testSystem" : {
+            "type" : "string"
+          },
+          "organization" : {
+            "type" : "string"
+          },
+          "baseUrl" : {
+            "type" : "string"
+          },
+          "hostName" : {
+            "type" : "string"
+          },
+          "profile" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "destinations" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "$ref" : "urn:jsonschema:TestSysAttributes"
+      }
+    },
+    "statusCounts" : {
+      "type" : "object",
+      "id" : "urn:jsonschema:StatusCounts",
+      "properties" : {
+        "numberOfTests" : {
+          "type" : "integer"
+        },
+        "numberOfTestsNotStarted" : {
+          "type" : "integer"
+        },
+        "numberOfTestsRunning" : {
+          "type" : "integer"
+        },
+        "numberOfTestsStopped" : {
+          "type" : "integer"
+        },
+        "numberOfTestPasses" : {
+          "type" : "integer"
+        },
+        "numberOfTestPassesWarn" : {
+          "type" : "integer"
+        },
+        "numberOfTestFailures" : {
+          "type" : "integer"
+        },
+        "numberOfTestsSkipped" : {
+          "type" : "integer"
+        },
+        "numberOfTestsWaiting" : {
+          "type" : "integer"
+        },
+        "successRate" : {
+          "type" : "string"
+        }
+      }
+    },
+    "testExecURL" : {
+      "type" : "string"
+    },
+    "testExecId" : {
+      "type" : "string"
+    },
+    "user" : {
+      "type" : "string"
+    },
+    "organization" : {
+      "type" : "string"
+    },
+    "domain" : {
+      "type" : "string"
+    },
+    "numberOfScripts" : {
+      "type" : "integer"
+    },
+    "oauth2AuthzUrl" : {
+      "type" : "string"
+    }
+  }
+}

@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptExecDetailResponse xmlns="http://touchstone.aegis.net/api">
+    <status>Passed</status>
+    <startTime>11/21/2025 06:36:55PM</startTime>
+    <endTime>11/21/2025 06:36:58PM</endTime>
+    <duration>2.922s</duration>
+    <testScript>/FHIR3-0-2-Basic/P-R/Patient/Client Assigned Id/Patient-client-id-xml</testScript>
+    <description>FHIR Server Patient Basic Operation Tests - XML - Client Assigned Resource Id - Create, Delete, History, Read, Search, Update, Vread. Support for referenced resource type Organization Update, Delete and Search is also required.</description>
+    <version>1</version>
+    <specification>FHIR 3.0.2</specification>
+    <statusCounts>
+        <numberOfTests>7</numberOfTests>
+        <numberOfTestPasses>7</numberOfTestPasses>
+        <successRate>100%</successRate>
+    </statusCounts>
+    <testExecURL>https://fhirci.aegis.net:8443/touchstone/execution?exec=202511211836554344165862</testExecURL>
+    <scriptExecURL>https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211836554344165862&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml</scriptExecURL>
+    <testExecId>202511211836554344165862</testExecId>
+    <user>ta0002First ta0002Last</user>
+    <organization>Organization0002</organization>
+    <domain>HL7_FHIR</domain>
+    <destinations>
+        <destination>
+            <testSystem>DEV WildFHIR FHIR-3-0-2</testSystem>
+            <organization>AEGIS.net, Inc.</organization>
+            <baseUrl>http://devfhir3.aegis.net:8080/fhir3-0-2</baseUrl>
+        </destination>
+    </destinations>
+    <numberOfTests>7</numberOfTests>
+    <setup>
+        <status>Passed</status>
+        <startTime>11/21/2025 06:36:56.012PM</startTime>
+        <endTime>11/21/2025 06:36:56.168PM</endTime>
+        <duration>0.156s</duration>
+        <operationExecution>
+            <startTime>06:36:56.043PM</startTime>
+            <endTime>06:36:56.075PM</endTime>
+            <duration>0.032s</duration>
+            <type>delete</type>
+            <resource>Patient</resource>
+            <operationRequest>
+                <method>DELETE</method>
+                <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899</path>
+                <headers>
+                    <header>
+                        <name>Accept</name>
+                        <value>application/fhir+xml;charset=UTF-8</value>
+                    </header>
+                </headers>
+            </operationRequest>
+            <operationResponse>
+                <headers>
+                    <header>
+                        <name>Date</name>
+                        <value>Fri, 21 Nov 2025 23:36:56 GMT</value>
+                    </header>
+                </headers>
+                <statusLine>HTTP/1.1 204 No Content</statusLine>
+                <statusCode>204</statusCode>
+            </operationResponse>
+            <assertionExecution>
+                <status>Passed</status>
+                <duration>0s</duration>
+                <summary>Response code is one of 200,204,404</summary>
+                <description>Confirm that the returned HTTP status is either 200(OK), 204(No Content) or 404(Not Found).</description>
+            </assertionExecution>
+        </operationExecution>
+        <operationExecution>
+            <startTime>06:36:56.090PM</startTime>
+            <endTime>06:36:56.122PM</endTime>
+            <duration>0.032s</duration>
+            <type>delete</type>
+            <resource>Organization</resource>
+            <operationRequest>
+                <method>DELETE</method>
+                <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/E8Is0Kxanvzx-762899-zS1Rr</path>
+                <headers>
+                    <header>
+                        <name>Accept</name>
+                        <value>application/fhir+xml;charset=UTF-8</value>
+                    </header>
+                </headers>
+            </operationRequest>
+            <operationResponse>
+                <headers>
+                    <header>
+                        <name>Date</name>
+                        <value>Fri, 21 Nov 2025 23:36:56 GMT</value>
+                    </header>
+                </headers>
+                <statusLine>HTTP/1.1 204 No Content</statusLine>
+                <statusCode>204</statusCode>
+            </operationResponse>
+            <assertionExecution>
+                <status>Passed</status>
+                <duration>0s</duration>
+                <summary>Response code is one of 200,204,404</summary>
+                <description>Confirm that the returned HTTP status is either 200(OK), 204(No Content) or 404(Not Found).</description>
+            </assertionExecution>
+        </operationExecution>
+        <operationExecution>
+            <startTime>06:36:56.137PM</startTime>
+            <endTime>06:36:56.153PM</endTime>
+            <duration>0.016s</duration>
+            <type>updateCreate</type>
+            <resource>Organization</resource>
+            <operationRequest>
+                <method>PUT</method>
+                <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/E8Is0Kxanvzx-762899-zS1Rr</path>
+                <headers>
+                    <header>
+                        <name>Accept</name>
+                        <value>application/fhir+xml;charset=UTF-8</value>
+                    </header>
+                    <header>
+                        <name>Content-Type</name>
+                        <value>application/fhir+xml;charset=UTF-8</value>
+                    </header>
+                </headers>
+            </operationRequest>
+            <operationResponse>
+                <headers>
+                    <header>
+                        <name>Connection</name>
+                        <value>keep-alive</value>
+                    </header>
+                    <header>
+                        <name>Content-Length</name>
+                        <value>1041</value>
+                    </header>
+                    <header>
+                        <name>Content-Location</name>
+                        <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/E8Is0Kxanvzx-762899-zS1Rr/_history/1</value>
+                    </header>
+                    <header>
+                        <name>Content-Type</name>
+                        <value>application/fhir+xml;fhirversion=3.0;charset=utf-8</value>
+                    </header>
+                    <header>
+                        <name>Date</name>
+                        <value>Fri, 21 Nov 2025 23:36:56 GMT</value>
+                    </header>
+                    <header>
+                        <name>ETag</name>
+                        <value>W/"1"</value>
+                    </header>
+                    <header>
+                        <name>Last-Modified</name>
+                        <value>Fri, 21 Nov 2025 23:36:56GMT-00:00</value>
+                    </header>
+                    <header>
+                        <name>Location</name>
+                        <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/E8Is0Kxanvzx-762899-zS1Rr/_history/1</value>
+                    </header>
+                </headers>
+                <statusLine>HTTP/1.1 201 Created</statusLine>
+                <statusCode>201</statusCode>
+            </operationResponse>
+            <assertionExecution>
+                <status>Passed</status>
+                <duration>0s</duration>
+                <summary>Response code is one of 200,201</summary>
+                <description>Confirm that the returned HTTP status is 200(OK) or 201(Created).</description>
+            </assertionExecution>
+        </operationExecution>
+    </setup>
+    <tests>
+        <test>
+            <status>Passed</status>
+            <startTime>11/21/2025 06:36:56.215PM</startTime>
+            <endTime>11/21/2025 06:36:56.465PM</endTime>
+            <duration>0.250s</duration>
+            <name>Step1-CreateNewPatient</name>
+            <description>Create a new Patient in XML format where the client assigns the resource id. The expected response code is 201 (Created) with a content of either the created Patient resource in XML format, an OperationOutcome resource in XML format or an empty payload.</description>
+            <operationExecution>
+                <startTime>06:36:56.247PM</startTime>
+                <endTime>06:36:56.309PM</endTime>
+                <duration>0.062s</duration>
+                <type>updateCreate</type>
+                <resource>Patient</resource>
+                <operationRequest>
+                    <method>PUT</method>
+                    <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899</path>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                    </headers>
+                </operationRequest>
+                <operationResponse>
+                    <headers>
+                        <header>
+                            <name>Connection</name>
+                            <value>keep-alive</value>
+                        </header>
+                        <header>
+                            <name>Content-Length</name>
+                            <value>2651</value>
+                        </header>
+                        <header>
+                            <name>Content-Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/1</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;fhirversion=3.0;charset=utf-8</value>
+                        </header>
+                        <header>
+                            <name>Date</name>
+                            <value>Fri, 21 Nov 2025 23:36:56 GMT</value>
+                        </header>
+                        <header>
+                            <name>ETag</name>
+                            <value>W/"1"</value>
+                        </header>
+                        <header>
+                            <name>Last-Modified</name>
+                            <value>Fri, 21 Nov 2025 23:36:56GMT-00:00</value>
+                        </header>
+                        <header>
+                            <name>Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/1</value>
+                        </header>
+                    </headers>
+                    <statusLine>HTTP/1.1 201 Created</statusLine>
+                    <statusCode>201</statusCode>
+                </operationResponse>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response is '201 Created'</summary>
+                    <description>Confirm that the returned HTTP status is 201(Created).</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'ETag' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected versioning HTTP Headers.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Last-Modified' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected versioning HTTP Headers.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header is present if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header contains application/fhir+xml if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header contains charset=utf-8 if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response body resource type is one of Patient,OperationOutcome if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Profile assertion skipped. The actual value "Patient" did not match the expected value "OperationOutcome" for resource type in response.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response body conforms to the FHIR resource profile represented by test script profile id 'operationoutcome-profile' if resource is OperationOutcome in response body.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.062s</duration>
+                    <summary>Response body conforms to the FHIR resource profile represented by test script profile id 'resource-profile' if resource is Patient in response body.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body.</description>
+                </assertionExecution>
+            </operationExecution>
+        </test>
+        <test>
+            <status>Passed</status>
+            <startTime>11/21/2025 06:36:56.497PM</startTime>
+            <endTime>11/21/2025 06:36:56.668PM</endTime>
+            <duration>0.171s</duration>
+            <name>Step2-ReadPatient</name>
+            <description>Read the Patient in XML format created in step 1. The expected response code is 200 (OK) with a content of the found Patient resource in XML format.</description>
+            <operationExecution>
+                <startTime>06:36:56.543PM</startTime>
+                <endTime>06:36:56.575PM</endTime>
+                <duration>0.032s</duration>
+                <type>read</type>
+                <resource>Patient</resource>
+                <operationRequest>
+                    <method>GET</method>
+                    <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899</path>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                    </headers>
+                </operationRequest>
+                <operationResponse>
+                    <headers>
+                        <header>
+                            <name>Connection</name>
+                            <value>keep-alive</value>
+                        </header>
+                        <header>
+                            <name>Content-Length</name>
+                            <value>2651</value>
+                        </header>
+                        <header>
+                            <name>Content-Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/1</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;fhirversion=3.0;charset=utf-8</value>
+                        </header>
+                        <header>
+                            <name>Date</name>
+                            <value>Fri, 21 Nov 2025 23:36:56 GMT</value>
+                        </header>
+                        <header>
+                            <name>ETag</name>
+                            <value>W/"1"</value>
+                        </header>
+                        <header>
+                            <name>Last-Modified</name>
+                            <value>Fri, 21 Nov 2025 23:36:56GMT-00:00</value>
+                        </header>
+                        <header>
+                            <name>Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/1</value>
+                        </header>
+                    </headers>
+                    <statusLine>HTTP/1.1 200 OK</statusLine>
+                    <statusCode>200</statusCode>
+                </operationResponse>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response is '200 OK'</summary>
+                    <description>Confirm that the returned HTTP status is 200(OK).</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response header 'Content-Type' is present</summary>
+                    <description>Confirm that the returned HTTP Header Content-Type is present.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'ETag' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected versioning HTTP Headers.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Last-Modified' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected versioning HTTP Headers.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response Resource type is 'Patient'</summary>
+                    <description>Confirm that the returned resource type is Patient.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.062s</duration>
+                    <summary>Response validates against the profile id 'resource-profile'</summary>
+                    <description>Validate that the returned resource conforms to the corresponding FHIR resource profile.</description>
+                </assertionExecution>
+            </operationExecution>
+        </test>
+        <test>
+            <status>Passed</status>
+            <startTime>11/21/2025 06:36:56.715PM</startTime>
+            <endTime>11/21/2025 06:36:57.153PM</endTime>
+            <duration>0.438s</duration>
+            <name>Step3-UpdatePatient</name>
+            <description>Update the Patient created in step 1 in XML format. The expected response code is 200 (OK) with a content of either the updated Patient resource in XML format, an OperationOutcome resource in XML format or an empty payload.</description>
+            <operationExecution>
+                <startTime>06:36:56.762PM</startTime>
+                <endTime>06:36:56.840PM</endTime>
+                <duration>0.078s</duration>
+                <type>update</type>
+                <resource>Patient</resource>
+                <operationRequest>
+                    <method>PUT</method>
+                    <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899</path>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                    </headers>
+                </operationRequest>
+                <operationResponse>
+                    <headers>
+                        <header>
+                            <name>Connection</name>
+                            <value>keep-alive</value>
+                        </header>
+                        <header>
+                            <name>Content-Length</name>
+                            <value>2653</value>
+                        </header>
+                        <header>
+                            <name>Content-Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/2</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;fhirversion=3.0;charset=utf-8</value>
+                        </header>
+                        <header>
+                            <name>Date</name>
+                            <value>Fri, 21 Nov 2025 23:36:56 GMT</value>
+                        </header>
+                        <header>
+                            <name>ETag</name>
+                            <value>W/"2"</value>
+                        </header>
+                        <header>
+                            <name>Last-Modified</name>
+                            <value>Fri, 21 Nov 2025 23:36:56GMT-00:00</value>
+                        </header>
+                        <header>
+                            <name>Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/2</value>
+                        </header>
+                    </headers>
+                    <statusLine>HTTP/1.1 200 OK</statusLine>
+                    <statusCode>200</statusCode>
+                </operationResponse>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response code is 200</summary>
+                    <description>Confirm that the returned HTTP status is 200(OK).</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'ETag' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected versioning HTTP Headers.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Last-Modified' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected versioning HTTP Headers.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header is present if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header contains application/fhir+xml if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header contains charset=utf-8 if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response body resource type is one of Patient,OperationOutcome if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Profile assertion skipped. The actual value "Patient" did not match the expected value "OperationOutcome" for resource type in response.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response body conforms to the FHIR resource profile represented by test script profile id 'operationoutcome-profile' if resource is OperationOutcome in response body.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.063s</duration>
+                    <summary>Response body conforms to the FHIR resource profile represented by test script profile id 'resource-profile' if resource is Patient in response body.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.078s</duration>
+                    <summary>Path "meta/versionId" value is present in response body if resource is Patient in response body and versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body.</description>
+                </assertionExecution>
+            </operationExecution>
+            <operationExecution>
+                <startTime>06:36:57.059PM</startTime>
+                <endTime>06:36:57.075PM</endTime>
+                <duration>0.016s</duration>
+                <type>read</type>
+                <resource>Patient</resource>
+                <operationRequest>
+                    <method>GET</method>
+                    <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899</path>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                    </headers>
+                </operationRequest>
+                <operationResponse>
+                    <headers>
+                        <header>
+                            <name>Connection</name>
+                            <value>keep-alive</value>
+                        </header>
+                        <header>
+                            <name>Content-Length</name>
+                            <value>2653</value>
+                        </header>
+                        <header>
+                            <name>Content-Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/2</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;fhirversion=3.0;charset=utf-8</value>
+                        </header>
+                        <header>
+                            <name>Date</name>
+                            <value>Fri, 21 Nov 2025 23:36:57 GMT</value>
+                        </header>
+                        <header>
+                            <name>ETag</name>
+                            <value>W/"2"</value>
+                        </header>
+                        <header>
+                            <name>Last-Modified</name>
+                            <value>Fri, 21 Nov 2025 23:36:57GMT-00:00</value>
+                        </header>
+                        <header>
+                            <name>Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/2</value>
+                        </header>
+                    </headers>
+                    <statusLine>HTTP/1.1 200 OK</statusLine>
+                    <statusCode>200</statusCode>
+                </operationResponse>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response code is 200</summary>
+                    <description>Confirm that the returned HTTP status is 200(OK).</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header is 'xml'</summary>
+                    <description>Confirm that the returned content format is XML ('application/fhir+xml').</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.062s</duration>
+                    <summary>Response validates against the profile id 'resource-profile'</summary>
+                    <description>Validate that the returned resource conforms to the corresponding FHIR resource profile.</description>
+                </assertionExecution>
+            </operationExecution>
+        </test>
+        <test>
+            <status>Passed</status>
+            <startTime>11/21/2025 06:36:57.184PM</startTime>
+            <endTime>11/21/2025 06:36:57.450PM</endTime>
+            <duration>0.266s</duration>
+            <name>Step4-PatientHistoryInstance</name>
+            <description>Retrieve the updated Patient instance's history in XML format. The expected response code is 200 (OK) with a Bundle resource in XML format of type history containing the created and updated versions of the Patient.</description>
+            <operationExecution>
+                <startTime>06:36:57.231PM</startTime>
+                <endTime>06:36:57.278PM</endTime>
+                <duration>0.047s</duration>
+                <type>history</type>
+                <resource>Patient</resource>
+                <operationRequest>
+                    <method>GET</method>
+                    <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history</path>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                    </headers>
+                </operationRequest>
+                <operationResponse>
+                    <headers>
+                        <header>
+                            <name>Connection</name>
+                            <value>keep-alive</value>
+                        </header>
+                        <header>
+                            <name>Content-Length</name>
+                            <value>7373</value>
+                        </header>
+                        <header>
+                            <name>Content-Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;fhirversion=3.0;charset=utf-8</value>
+                        </header>
+                        <header>
+                            <name>Date</name>
+                            <value>Fri, 21 Nov 2025 23:36:57 GMT</value>
+                        </header>
+                    </headers>
+                    <statusLine>HTTP/1.1 200 OK</statusLine>
+                    <statusCode>200</statusCode>
+                </operationResponse>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response code is 200</summary>
+                    <description>Confirm that the returned HTTP status is 200(OK).</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header is 'xml'</summary>
+                    <description>Confirm that the returned content format is XML ('application/fhir+xml').</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response Resource type is 'Bundle'</summary>
+                    <description>Confirm that the response payload contains the Bundle resource type.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.078s</duration>
+                    <summary>Response validates against the profile id 'bundle-profile'</summary>
+                    <description>Validate that the returned resource conforms to the corresponding FHIR bundle profile.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response "/Bundle/type" value is 'history'</summary>
+                    <description>Confirm that the Bundle type is 'history'.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.047s</duration>
+                    <summary>Response "Bundle.entry.count()" value is greater than '1'</summary>
+                    <description>Confirm that there is more than one resource instance returned. There should be at least two from the create and update operations.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.031s</duration>
+                    <summary>Response Bundle.total.toInteger() &gt;= entry.count()</summary>
+                    <description>Confirm that the Bundle total value matches or is greater than the number of entries in the Bundle</description>
+                </assertionExecution>
+            </operationExecution>
+        </test>
+        <test>
+            <status>Passed</status>
+            <startTime>11/21/2025 06:36:57.497PM</startTime>
+            <endTime>11/21/2025 06:36:57.872PM</endTime>
+            <duration>0.375s</duration>
+            <name>Step5-PatientVersionRead</name>
+            <description>Retrieve a initially created version of a Patient instance in XML format. The expected response code, if versioning is supported, is 200 (OK) with a content of the updated Patient resource in XML format; if versioning is not supported, a 404 (Not Found) with an OperationOutcome resource in XML format or an empty payload.</description>
+            <operationExecution>
+                <startTime>06:36:57.543PM</startTime>
+                <endTime>06:36:57.559PM</endTime>
+                <duration>0.016s</duration>
+                <type>vread</type>
+                <resource>Patient</resource>
+                <operationRequest>
+                    <method>GET</method>
+                    <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/1</path>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                    </headers>
+                </operationRequest>
+                <operationResponse>
+                    <headers>
+                        <header>
+                            <name>Connection</name>
+                            <value>keep-alive</value>
+                        </header>
+                        <header>
+                            <name>Content-Length</name>
+                            <value>2651</value>
+                        </header>
+                        <header>
+                            <name>Content-Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/1</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;fhirversion=3.0;charset=utf-8</value>
+                        </header>
+                        <header>
+                            <name>Date</name>
+                            <value>Fri, 21 Nov 2025 23:36:57 GMT</value>
+                        </header>
+                        <header>
+                            <name>ETag</name>
+                            <value>W/"1"</value>
+                        </header>
+                        <header>
+                            <name>Last-Modified</name>
+                            <value>Fri, 21 Nov 2025 23:36:56GMT-00:00</value>
+                        </header>
+                        <header>
+                            <name>Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/1</value>
+                        </header>
+                    </headers>
+                    <statusLine>HTTP/1.1 200 OK</statusLine>
+                    <statusCode>200</statusCode>
+                </operationResponse>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.015s</duration>
+                    <summary>Response status code is 200 if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Response status code assertion skipped. Expected no versioning to be supported by server capability statement.</warning>
+                    <status>Skipped</status>
+                    <duration>0.188s</duration>
+                    <summary>Response status code is 404 if no versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'ETag' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Last-Modified' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header is present if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header contains application/fhir+xml if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header contains charset=utf-8 if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response body resource type is one of Patient,OperationOutcome if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Profile assertion skipped. The actual value "Patient" did not match the expected value "OperationOutcome" for resource type in response.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response body conforms to the FHIR resource profile represented by test script profile id 'operationoutcome-profile' if resource is OperationOutcome in response body.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.063s</duration>
+                    <summary>Response body conforms to the FHIR resource profile represented by test script profile id 'resource-profile' if resource is Patient in response body.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body.</description>
+                </assertionExecution>
+            </operationExecution>
+        </test>
+        <test>
+            <status>Passed</status>
+            <startTime>11/21/2025 06:36:57.918PM</startTime>
+            <endTime>11/21/2025 06:36:58.122PM</endTime>
+            <duration>0.204s</duration>
+            <name>Step6-PatientSearchType</name>
+            <description>Search for Patient resources in XML format with an identifier equal to ${searchParamIdentifier}. The expected response code is 200 (OK) with a Bundle resource in XML format of type history containing the found instances of the Patient.</description>
+            <operationExecution>
+                <startTime>06:36:57.965PM</startTime>
+                <endTime>06:36:57.981PM</endTime>
+                <duration>0.016s</duration>
+                <type>search</type>
+                <resource>Patient</resource>
+                <operationRequest>
+                    <method>GET</method>
+                    <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient?identifier=E8Is0Kxanvzx762899</path>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                    </headers>
+                </operationRequest>
+                <operationResponse>
+                    <headers>
+                        <header>
+                            <name>Connection</name>
+                            <value>keep-alive</value>
+                        </header>
+                        <header>
+                            <name>Content-Length</name>
+                            <value>3891</value>
+                        </header>
+                        <header>
+                            <name>Content-Location</name>
+                            <value>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient?identifier=E8Is0Kxanvzx762899</value>
+                        </header>
+                        <header>
+                            <name>Content-Type</name>
+                            <value>application/fhir+xml;fhirversion=3.0;charset=utf-8</value>
+                        </header>
+                        <header>
+                            <name>Date</name>
+                            <value>Fri, 21 Nov 2025 23:36:58 GMT</value>
+                        </header>
+                    </headers>
+                    <statusLine>HTTP/1.1 200 OK</statusLine>
+                    <statusCode>200</statusCode>
+                </operationResponse>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response code is 200</summary>
+                    <description>Confirm that the returned HTTP status is 200(OK).</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header is 'xml'</summary>
+                    <description>Confirm that the returned content format is XML ('application/fhir+xml').</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response Resource type is 'Bundle'</summary>
+                    <description>Confirm that the response payload contains the Bundle resource type.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.078s</duration>
+                    <summary>Response validates against the profile id 'bundle-profile'</summary>
+                    <description>Validate that the returned resource conforms to the corresponding FHIR bundle profile.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response "/Bundle/type" value is 'searchset'</summary>
+                    <description>Confirm that the Bundle type is 'searchset'.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.016s</duration>
+                    <summary>Response "Bundle.entry.count()" value is greater than '0'</summary>
+                    <description>Confirm that there is at least one record returned. There could be other Patient records returned.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0.031s</duration>
+                    <summary>Response Bundle.total.toInteger() &gt;= entry.count()</summary>
+                    <description>Confirm that the Bundle total value matches or is greater than the number of entries in the Bundle</description>
+                </assertionExecution>
+            </operationExecution>
+        </test>
+        <test>
+            <status>Passed</status>
+            <startTime>11/21/2025 06:36:58.168PM</startTime>
+            <endTime>11/21/2025 06:36:58.309PM</endTime>
+            <duration>0.141s</duration>
+            <name>Step7-PatientDelete</name>
+            <description>Delete a Patient instance in XML format. The expected response is either a 200 (OK) with an optional OperationOutcome in XML format or 204 (No Content) and the content is empty; i.e. no content.</description>
+            <operationExecution>
+                <startTime>06:36:58.215PM</startTime>
+                <endTime>06:36:58.262PM</endTime>
+                <duration>0.047s</duration>
+                <type>delete</type>
+                <resource>Patient</resource>
+                <operationRequest>
+                    <method>DELETE</method>
+                    <path>http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899</path>
+                    <headers>
+                        <header>
+                            <name>Accept</name>
+                            <value>application/fhir+xml;charset=UTF-8</value>
+                        </header>
+                    </headers>
+                </operationRequest>
+                <operationResponse>
+                    <headers>
+                        <header>
+                            <name>Date</name>
+                            <value>Fri, 21 Nov 2025 23:36:58 GMT</value>
+                        </header>
+                        <header>
+                            <name>ETag</name>
+                            <value>W/"2"</value>
+                        </header>
+                    </headers>
+                    <statusLine>HTTP/1.1 204 No Content</statusLine>
+                    <statusCode>204</statusCode>
+                </operationResponse>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response code is one of 200,204,404</summary>
+                    <description>Confirm that the returned HTTP status is either 200(OK), 204(No Content) or 404(Not Found).</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Response status code assertion skipped. Expected message body but did not find it in response.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response status code is 200 if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response status code is one of 204,404 if response body is absent.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <status>Passed</status>
+                    <duration>0s</duration>
+                    <summary>Response 'ETag' header is present if versioning is supported by server conformance statement.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Header assertion skipped. Expected message body but did not find it in response.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header is present if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Header assertion skipped. Expected message body but did not find it in response.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header contains application/fhir+xml if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Header assertion skipped. Expected message body but did not find it in response.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response 'Content-Type' header contains charset=utf-8 if response body is present.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Resource assertion skipped. Expected response code to be greater than 399 but was 204 in response.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response body resource type is OperationOutcome if response status code is greater than 399.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body.</description>
+                </assertionExecution>
+                <assertionExecution>
+                    <warning>Profile assertion skipped. Expected XML or JSON in response body but was empty.</warning>
+                    <status>Skipped</status>
+                    <duration>0s</duration>
+                    <summary>Response body conforms to the FHIR resource profile represented by test script profile id 'operationoutcome-profile' if resource is OperationOutcome in response body.</summary>
+                    <description>Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body.</description>
+                </assertionExecution>
+            </operationExecution>
+        </test>
+    </tests>
+</scriptExecDetailResponse>

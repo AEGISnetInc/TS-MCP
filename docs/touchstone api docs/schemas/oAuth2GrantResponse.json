@@ -1,0 +1,21 @@
+{
+  "type" : "object",
+  "id" : "urn:jsonschema:OAuth2GrantResponse",
+  "properties" : {
+    "error" : {
+      "type" : "string"
+    },
+    "warning" : {
+      "type" : "string"
+    },
+    "info" : {
+      "type" : "string"
+    },
+    "testExecURL" : {
+      "type" : "string"
+    },
+    "testExecId" : {
+      "type" : "string"
+    }
+  }
+}

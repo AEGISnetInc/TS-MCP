@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://touchstone.aegis.net/api" xmlns="http://touchstone.aegis.net/api" xmlns:tns="http://touchstone.aegis.net/api" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="scriptExecDetailResponse" type="scriptExecDetailResponse"/>
+
+  <xs:complexType name="scriptExecDetailResponse">
+    <xs:complexContent>
+      <xs:extension base="scriptExecDetail">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="scriptExecDetail">
+    <xs:complexContent>
+      <xs:extension base="execution">
+        <xs:sequence>
+          <xs:element name="testScript" type="xs:string" minOccurs="0"/>
+          <xs:element name="description" type="xs:string" minOccurs="0"/>
+          <xs:element name="version" type="xs:long" minOccurs="0"/>
+          <xs:element name="specification" type="xs:string" minOccurs="0"/>
+          <xs:element name="statusCounts" type="statusCounts" minOccurs="0"/>
+          <xs:element name="testExecURL" type="xs:string" minOccurs="0"/>
+          <xs:element name="scriptExecURL" type="xs:string" minOccurs="0"/>
+          <xs:element name="testExecId" type="xs:string" minOccurs="0"/>
+          <xs:element name="user" type="xs:string" minOccurs="0"/>
+          <xs:element name="organization" type="xs:string" minOccurs="0"/>
+          <xs:element name="domain" type="xs:string" minOccurs="0"/>
+          <xs:element name="origins" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="origin" type="testSystemAttributes" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="destinations" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="destination" type="testSystemAttributes" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="numberOfTests" type="xs:int" minOccurs="0"/>
+          <xs:element name="oauth2AuthzUrl" type="xs:string" minOccurs="0"/>
+          <xs:element name="setup" type="sectionExecution" minOccurs="0"/>
+          <xs:element name="tests" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="test" type="sectionExecution" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="teardown" type="sectionExecution" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="execution">
+    <xs:complexContent>
+      <xs:extension base="tsRestResponse">
+        <xs:sequence>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element name="startTime" type="xs:string" minOccurs="0"/>
+          <xs:element name="endTime" type="xs:string" minOccurs="0"/>
+          <xs:element name="duration" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="tsRestResponse">
+    <xs:sequence>
+      <xs:element name="error" type="xs:string" minOccurs="0"/>
+      <xs:element name="warning" type="xs:string" minOccurs="0"/>
+      <xs:element name="info" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="statusCounts">
+    <xs:sequence>
+      <xs:element name="numberOfTests" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsNotStarted" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsRunning" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsStopped" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestPasses" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestPassesWarn" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestFailures" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsSkipped" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsWaiting" type="xs:int" minOccurs="0"/>
+      <xs:element name="successRate" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="testSystemAttributes">
+    <xs:sequence>
+      <xs:element name="testSystem" type="xs:string" minOccurs="0"/>
+      <xs:element name="organization" type="xs:string" minOccurs="0"/>
+      <xs:element name="baseUrl" type="xs:string" minOccurs="0"/>
+      <xs:element name="hostName" type="xs:string" minOccurs="0"/>
+      <xs:element name="profile" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sectionExecution">
+    <xs:complexContent>
+      <xs:extension base="execution">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" minOccurs="0"/>
+          <xs:element name="description" type="xs:string" minOccurs="0"/>
+          <xs:element name="operationExecution" type="operationExecution" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="operationExecution">
+    <xs:complexContent>
+      <xs:extension base="execution">
+        <xs:sequence>
+          <xs:element name="type" type="xs:string" minOccurs="0"/>
+          <xs:element name="resource" type="xs:string" minOccurs="0"/>
+          <xs:element name="origin" type="testSystemAttributes" minOccurs="0"/>
+          <xs:element name="destination" type="testSystemAttributes" minOccurs="0"/>
+          <xs:element name="operationRequest" type="operationRequest" minOccurs="0"/>
+          <xs:element name="operationResponse" type="operationResponse" minOccurs="0"/>
+          <xs:element name="assertionExecution" type="assertionExecution" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="operationRequest">
+    <xs:sequence>
+      <xs:element name="method" type="xs:string" minOccurs="0"/>
+      <xs:element name="path" type="xs:string" minOccurs="0"/>
+      <xs:element name="headers" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="header" type="header" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="header">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="operationResponse">
+    <xs:sequence>
+      <xs:element name="headers" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="header" type="header" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="statusLine" type="xs:string" minOccurs="0"/>
+      <xs:element name="statusCode" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assertionExecution">
+    <xs:complexContent>
+      <xs:extension base="execution">
+        <xs:sequence>
+          <xs:element name="summary" type="xs:string" minOccurs="0"/>
+          <xs:element name="description" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+

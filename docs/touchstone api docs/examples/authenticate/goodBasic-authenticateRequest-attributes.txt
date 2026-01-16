@@ -1,0 +1,6 @@
+Method: POST
+Path: https://touchstone.aegis.net/touchstone/api/authenticate
+Headers:
+		Authorization=Basic dGVzdE9yZ0NJVXNlckB0ZXN0T3JnLmNvbTpQYXNzd29yZCMx
+		Accept=application/json;charset=UTF-8
+		Content-Type=application/json;charset=UTF-8

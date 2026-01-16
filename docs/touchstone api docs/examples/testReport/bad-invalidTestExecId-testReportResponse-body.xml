@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OperationOutcome xmlns="http://hl7.org/fhir">
+    <issue>
+        <severity value="error"/>
+        <code value="processing"/>
+        <details>
+            <text value="The value for 'Test Exec Id' must be at least 17 characters wide."/>
+        </details>
+    </issue>
+</OperationOutcome>

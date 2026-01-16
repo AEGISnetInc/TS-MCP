@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecDetailResponse xmlns="http://touchstone.aegis.net/api">
+    <error>The API-Key value of 'adsfasdgadfgdfg' is invalid.</error>
+</testExecDetailResponse>

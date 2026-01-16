@@ -1,0 +1,27 @@
+{
+  "type" : "object",
+  "id" : "urn:jsonschema:ExecuteTestRequest",
+  "properties" : {
+    "testSetup" : {
+      "type" : "string"
+    },
+    "oauth2AuthzApiRedirected" : {
+      "type" : "boolean"
+    },
+    "destOAuth2Tokens" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "id" : "urn:jsonschema:DestAccessToken",
+        "properties" : {
+          "dest" : {
+            "type" : "string"
+          },
+          "token" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}

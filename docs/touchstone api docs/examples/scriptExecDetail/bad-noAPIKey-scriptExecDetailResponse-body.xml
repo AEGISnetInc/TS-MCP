@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptExecDetailResponse xmlns="http://touchstone.aegis.net/api">
+    <error>Value for 'API-Key' not provided in the request header.</error>
+</scriptExecDetailResponse>

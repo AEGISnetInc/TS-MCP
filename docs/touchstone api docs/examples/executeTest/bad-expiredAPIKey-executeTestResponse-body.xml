@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executeTestResponse xmlns="http://touchstone.aegis.net/api">
+    <error>Your API-Key has expired. Please authenticate via '/api/authenticate' again.</error>
+</executeTestResponse>

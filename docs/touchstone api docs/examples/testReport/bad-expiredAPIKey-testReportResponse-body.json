@@ -1,0 +1,12 @@
+{
+  "resourceType" : "OperationOutcome",
+  "issue" : [
+    {
+      "severity" : "error",
+      "code" : "security",
+      "details" : {
+        "text" : "Your API-Key has expired. Please authenticate via '/api/authenticate' again."
+      }
+    }
+  ]
+}

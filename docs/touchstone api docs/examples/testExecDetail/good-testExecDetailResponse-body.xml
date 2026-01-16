@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecDetailResponse xmlns="http://touchstone.aegis.net/api">
+    <info>Test Execution Detail retrieved successfully.</info>
+    <status>Passed</status>
+    <startTime>11/21/2025 06:36:11PM</startTime>
+    <endTime>11/21/2025 06:36:14PM</endTime>
+    <duration>3.016s</duration>
+    <testSetupName>Patient-client-id-xml</testSetupName>
+    <destinations>
+        <destination>
+            <testSystem>DEV WildFHIR FHIR-3-0-2</testSystem>
+            <organization>AEGIS.net, Inc.</organization>
+            <baseUrl>http://devfhir3.aegis.net:8080/fhir3-0-2</baseUrl>
+        </destination>
+    </destinations>
+    <statusCounts>
+        <numberOfTests>7</numberOfTests>
+        <numberOfTestPasses>7</numberOfTestPasses>
+        <successRate>100%</successRate>
+    </statusCounts>
+    <testExecURL>https://fhirci.aegis.net:8443/touchstone/execution?exec=202511211836117835407651</testExecURL>
+    <testExecId>202511211836117835407651</testExecId>
+    <user>ta0002First ta0002Last</user>
+    <organization>Organization0002</organization>
+    <domain>HL7_FHIR</domain>
+    <numberOfScripts>1</numberOfScripts>
+    <testScriptExecutions>
+        <testScriptExecution>
+            <status>Passed</status>
+            <startTime>11/21/2025 06:36:11PM</startTime>
+            <endTime>11/21/2025 06:36:14PM</endTime>
+            <duration>2.906s</duration>
+            <testScript>/FHIR3-0-2-Basic/P-R/Patient/Client Assigned Id/Patient-client-id-xml</testScript>
+            <description>FHIR Server Patient Basic Operation Tests - XML - Client Assigned Resource Id - Create, Delete, History, Read, Search, Update, Vread. Support for referenced resource type Organization Update, Delete and Search is also required.</description>
+            <version>1</version>
+            <specification>FHIR 3.0.2</specification>
+            <statusCounts>
+                <numberOfTests>7</numberOfTests>
+                <numberOfTestPasses>7</numberOfTestPasses>
+                <successRate>100%</successRate>
+            </statusCounts>
+            <scriptExecURL>https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211836117835407651&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml</scriptExecURL>
+            <domain>HL7_FHIR</domain>
+            <numberOfTests>7</numberOfTests>
+        </testScriptExecution>
+    </testScriptExecutions>
+</testExecDetailResponse>

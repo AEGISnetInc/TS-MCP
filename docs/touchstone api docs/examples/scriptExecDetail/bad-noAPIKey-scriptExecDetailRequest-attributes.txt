@@ -1,0 +1,4 @@
+Method: GET
+Path: https://touchstone.aegis.net/touchstone/api/scriptExecDetail/202511211838182343926574?testscript=/FHIR3-0-2-Basic/P-R/Patient/Client Assigned Id/Patient-client-id-xml
+Headers:
+		Accept=application/xml;charset=UTF-8

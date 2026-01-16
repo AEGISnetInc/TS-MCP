@@ -18,7 +18,7 @@ This document captures proposed enhancements for discussion with the AEGIS Touch
 
 | Gap | Current Behavior | Impact |
 |-----|------------------|--------|
-| No list setups endpoint | Users must know Test Setup names from UI | Cannot browse available setups programmatically |
+| No list test setups endpoint | Users must know Test Setup names from UI | Cannot browse available setups programmatically |
 | No dynamic endpoint specification | Test systems must be pre-configured in UI | Cannot specify FHIR server URL at runtime |
 | No test script search | Must browse UI to find tests | Cannot discover relevant tests programmatically |
 | Polling-only status | Must poll every 4+ seconds | Inefficient; no real-time updates |
@@ -71,7 +71,10 @@ This document captures proposed enhancements for discussion with the AEGIS Touch
   "targetEndpoint": "https://my-fhir-server.com/fhir"
 }
 ```
-
+Ideally, if `trargetEndpoint` is not yet found as a TestSytem, we create it (populating Org Name from the authenticated user's profile).
+- We may need to return a prompt for some of the TestSystem info required.
+- Need the proxy URL returned
+ 
 **Value:** Enables testing against dynamic environments (dev, staging, PR previews) without pre-configuration.
 
 ---

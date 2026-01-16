@@ -1,0 +1,9 @@
+{
+  "type" : "object",
+  "id" : "urn:jsonschema:OAuth2GrantRequest",
+  "properties" : {
+    "oauth2RedirectUrl" : {
+      "type" : "string"
+    }
+  }
+}

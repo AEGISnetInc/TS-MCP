@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scriptExecDetailResponse xmlns="http://touchstone.aegis.net/api">
+    <error>Value for 'testscript' not provided in the request.</error>
+</scriptExecDetailResponse>

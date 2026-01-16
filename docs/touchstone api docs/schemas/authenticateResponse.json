@@ -1,0 +1,18 @@
+{
+  "type" : "object",
+  "id" : "urn:jsonschema:AuthenticateResponse",
+  "properties" : {
+    "error" : {
+      "type" : "string"
+    },
+    "warning" : {
+      "type" : "string"
+    },
+    "info" : {
+      "type" : "string"
+    },
+    "API-Key" : {
+      "type" : "string"
+    }
+  }
+}

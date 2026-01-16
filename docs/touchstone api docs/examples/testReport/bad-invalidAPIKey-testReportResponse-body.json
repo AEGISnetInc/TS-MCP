@@ -1,0 +1,12 @@
+{
+  "resourceType" : "OperationOutcome",
+  "issue" : [
+    {
+      "severity" : "error",
+      "code" : "security",
+      "details" : {
+        "text" : "The API-Key value of 'adsfasdgadfgdfg' is invalid."
+      }
+    }
+  ]
+}

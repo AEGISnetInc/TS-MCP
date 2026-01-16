@@ -1,0 +1,12 @@
+{
+  "resourceType" : "OperationOutcome",
+  "issue" : [
+    {
+      "severity" : "error",
+      "code" : "security",
+      "details" : {
+        "text" : "Value for 'API-Key' not provided in the request header."
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://touchstone.aegis.net/api" xmlns="http://touchstone.aegis.net/api" xmlns:tns="http://touchstone.aegis.net/api" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="testExecStatusResponse" type="testExecStatusResponse"/>
+
+  <xs:complexType name="testExecStatusResponse">
+    <xs:complexContent>
+      <xs:extension base="testExecStatus">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="testExecStatus">
+    <xs:complexContent>
+      <xs:extension base="execution">
+        <xs:sequence>
+          <xs:element name="testSetupName" type="xs:string" minOccurs="0"/>
+          <xs:element name="origins" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="origin" type="testSystemAttributes" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="destinations" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="destination" type="testSystemAttributes" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="statusCounts" type="statusCounts" minOccurs="0"/>
+          <xs:element name="testExecURL" type="xs:string" minOccurs="0"/>
+          <xs:element name="testExecId" type="xs:string" minOccurs="0"/>
+          <xs:element name="user" type="xs:string" minOccurs="0"/>
+          <xs:element name="organization" type="xs:string" minOccurs="0"/>
+          <xs:element name="domain" type="xs:string" minOccurs="0"/>
+          <xs:element name="numberOfScripts" type="xs:int" minOccurs="0"/>
+          <xs:element name="oauth2AuthzUrl" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="execution">
+    <xs:complexContent>
+      <xs:extension base="tsRestResponse">
+        <xs:sequence>
+          <xs:element name="status" type="xs:string" minOccurs="0"/>
+          <xs:element name="startTime" type="xs:string" minOccurs="0"/>
+          <xs:element name="endTime" type="xs:string" minOccurs="0"/>
+          <xs:element name="duration" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="tsRestResponse">
+    <xs:sequence>
+      <xs:element name="error" type="xs:string" minOccurs="0"/>
+      <xs:element name="warning" type="xs:string" minOccurs="0"/>
+      <xs:element name="info" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="testSystemAttributes">
+    <xs:sequence>
+      <xs:element name="testSystem" type="xs:string" minOccurs="0"/>
+      <xs:element name="organization" type="xs:string" minOccurs="0"/>
+      <xs:element name="baseUrl" type="xs:string" minOccurs="0"/>
+      <xs:element name="hostName" type="xs:string" minOccurs="0"/>
+      <xs:element name="profile" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="statusCounts">
+    <xs:sequence>
+      <xs:element name="numberOfTests" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsNotStarted" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsRunning" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsStopped" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestPasses" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestPassesWarn" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestFailures" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsSkipped" type="xs:int" minOccurs="0"/>
+      <xs:element name="numberOfTestsWaiting" type="xs:int" minOccurs="0"/>
+      <xs:element name="successRate" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

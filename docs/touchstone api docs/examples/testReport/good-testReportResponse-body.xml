@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestReport xmlns="http://hl7.org/fhir">
+    <name value="/FHIR3-0-2-Basic/P-R/Patient/Client Assigned Id/Patient-client-id-xml"/>
+    <status value="completed"/>
+    <testScript>
+        <reference value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+    </testScript>
+    <result value="pass"/>
+    <score value="100.0"/>
+    <tester value="Organization0002-ta0002First ta0002Last"/>
+    <issued value="2025-11-21T18:39:13Z"/>
+    <participant>
+        <type value="test-engine"/>
+        <uri value="https://fhirci.aegis.net:8443/touchstone"/>
+        <display value="Touchstone"/>
+    </participant>
+    <participant>
+        <type value="server"/>
+        <uri value="https://fhirci.aegis.net:8443/touchstone/testsystem?name=DEV%20WildFHIR%20FHIR-3-0-2&amp;org=AEGIS.net,%20Inc."/>
+        <display value="DEV WildFHIR FHIR-3-0-2"/>
+    </participant>
+    <setup>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="delete - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response code is one of 200,204,404"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="delete - Organization - http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/t8hxMsPb9Y6X-613383-DRs3C"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response code is one of 200,204,404"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="updateCreate - Organization - http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/t8hxMsPb9Y6X-613383-DRs3C"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response code is one of 200,201"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+    </setup>
+    <test>
+        <name value="Step1-CreateNewPatient"/>
+        <description value="Create a new Patient in XML format where the client assigns the resource id. The expected response code is 201 (Created) with a content of either the created Patient resource in XML format, an OperationOutcome resource in XML format or an empty payload."/>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="updateCreate - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response is '201 Created'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="Step2-ReadPatient"/>
+        <description value="Read the Patient in XML format created in step 1. The expected response code is 200 (OK) with a content of the found Patient resource in XML format."/>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="read - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response is '200 OK'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response header 'Content-Type' is present"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response Resource type is 'Patient'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response validates against the profile id 'resource-profile'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="Step3-UpdatePatient"/>
+        <description value="Update the Patient created in step 1 in XML format. The expected response code is 200 (OK) with a content of either the updated Patient resource in XML format, an OperationOutcome resource in XML format or an empty payload."/>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="update - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response code is 200"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="read - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response code is 200"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response 'Content-Type' header is 'xml'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response validates against the profile id 'resource-profile'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="Step4-PatientHistoryInstance"/>
+        <description value="Retrieve the updated Patient instance's history in XML format. The expected response code is 200 (OK) with a Bundle resource in XML format of type history containing the created and updated versions of the Patient."/>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="history-instance - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383/_history"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response code is 200"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response 'Content-Type' header is 'xml'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response Resource type is 'Bundle'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response validates against the profile id 'bundle-profile'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response &quot;/Bundle/type&quot; value is 'history'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response &quot;Bundle.entry.count()&quot; value is greater than '1'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response Bundle.total.toInteger() &gt;= entry.count()"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="Step5-PatientVersionRead"/>
+        <description value="Retrieve a initially created version of a Patient instance in XML format. The expected response code, if versioning is supported, is 200 (OK) with a content of the updated Patient resource in XML format; if versioning is not supported, a 404 (Not Found) with an OperationOutcome resource in XML format or an empty payload."/>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="vread - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383/_history/1"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="Step6-PatientSearchType"/>
+        <description value="Search for Patient resources in XML format with an identifier equal to ${searchParamIdentifier}. The expected response code is 200 (OK) with a Bundle resource in XML format of type history containing the found instances of the Patient."/>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="search-type - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient?identifier=t8hxMsPb9Y6X613383"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response code is 200"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response 'Content-Type' header is 'xml'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response Resource type is 'Bundle'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response validates against the profile id 'bundle-profile'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response &quot;/Bundle/type&quot; value is 'searchset'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response &quot;Bundle.entry.count()&quot; value is greater than '0'"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response Bundle.total.toInteger() &gt;= entry.count()"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+    </test>
+    <test>
+        <name value="Step7-PatientDelete"/>
+        <description value="Delete a Patient instance in XML format. The expected response is either a 200 (OK) with an optional OperationOutcome in XML format or 204 (No Content) and the content is empty; i.e. no content."/>
+        <action>
+            <operation>
+                <result value="pass"/>
+                <message value="delete - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </operation>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="Response code is one of 200,204,404"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="pass"/>
+                <message value="pass"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+        <action>
+            <assert>
+                <result value="skip"/>
+                <message value="skip"/>
+                <detail value="https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839136083917455&amp;qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"/>
+            </assert>
+        </action>
+    </test>
+</TestReport>

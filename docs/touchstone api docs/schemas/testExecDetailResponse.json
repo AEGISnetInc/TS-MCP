@@ -1,0 +1,372 @@
+{
+  "type" : "object",
+  "id" : "urn:jsonschema:TestExecDetailResponse",
+  "properties" : {
+    "error" : {
+      "type" : "string"
+    },
+    "warning" : {
+      "type" : "string"
+    },
+    "info" : {
+      "type" : "string"
+    },
+    "status" : {
+      "type" : "string"
+    },
+    "startTime" : {
+      "type" : "string"
+    },
+    "endTime" : {
+      "type" : "string"
+    },
+    "duration" : {
+      "type" : "string"
+    },
+    "testSetupName" : {
+      "type" : "string"
+    },
+    "origins" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "id" : "urn:jsonschema:TestSysAttributes",
+        "properties" : {
+          "testSystem" : {
+            "type" : "string"
+          },
+          "organization" : {
+            "type" : "string"
+          },
+          "baseUrl" : {
+            "type" : "string"
+          },
+          "hostName" : {
+            "type" : "string"
+          },
+          "profile" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "destinations" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "$ref" : "urn:jsonschema:TestSysAttributes"
+      }
+    },
+    "statusCounts" : {
+      "type" : "object",
+      "id" : "urn:jsonschema:StatusCounts",
+      "properties" : {
+        "numberOfTests" : {
+          "type" : "integer"
+        },
+        "numberOfTestsNotStarted" : {
+          "type" : "integer"
+        },
+        "numberOfTestsRunning" : {
+          "type" : "integer"
+        },
+        "numberOfTestsStopped" : {
+          "type" : "integer"
+        },
+        "numberOfTestPasses" : {
+          "type" : "integer"
+        },
+        "numberOfTestPassesWarn" : {
+          "type" : "integer"
+        },
+        "numberOfTestFailures" : {
+          "type" : "integer"
+        },
+        "numberOfTestsSkipped" : {
+          "type" : "integer"
+        },
+        "numberOfTestsWaiting" : {
+          "type" : "integer"
+        },
+        "successRate" : {
+          "type" : "string"
+        }
+      }
+    },
+    "testExecURL" : {
+      "type" : "string"
+    },
+    "testExecId" : {
+      "type" : "string"
+    },
+    "user" : {
+      "type" : "string"
+    },
+    "organization" : {
+      "type" : "string"
+    },
+    "domain" : {
+      "type" : "string"
+    },
+    "numberOfScripts" : {
+      "type" : "integer"
+    },
+    "oauth2AuthzUrl" : {
+      "type" : "string"
+    },
+    "testScriptExecutions" : {
+      "type" : "array",
+      "items" : {
+        "type" : "object",
+        "id" : "urn:jsonschema:ScriptExecDetail",
+        "properties" : {
+          "error" : {
+            "type" : "string"
+          },
+          "warning" : {
+            "type" : "string"
+          },
+          "info" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "startTime" : {
+            "type" : "string"
+          },
+          "endTime" : {
+            "type" : "string"
+          },
+          "duration" : {
+            "type" : "string"
+          },
+          "testScript" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "version" : {
+            "type" : "integer"
+          },
+          "specification" : {
+            "type" : "string"
+          },
+          "statusCounts" : {
+            "type" : "object",
+            "$ref" : "urn:jsonschema:StatusCounts"
+          },
+          "testExecURL" : {
+            "type" : "string"
+          },
+          "scriptExecURL" : {
+            "type" : "string"
+          },
+          "testExecId" : {
+            "type" : "string"
+          },
+          "user" : {
+            "type" : "string"
+          },
+          "organization" : {
+            "type" : "string"
+          },
+          "domain" : {
+            "type" : "string"
+          },
+          "origins" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "urn:jsonschema:TestSysAttributes"
+            }
+          },
+          "destinations" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "urn:jsonschema:TestSysAttributes"
+            }
+          },
+          "numberOfTests" : {
+            "type" : "integer"
+          },
+          "oauth2AuthzUrl" : {
+            "type" : "string"
+          },
+          "setupExecution" : {
+            "type" : "object",
+            "id" : "urn:jsonschema:SectionExecDetail",
+            "properties" : {
+              "error" : {
+                "type" : "string"
+              },
+              "warning" : {
+                "type" : "string"
+              },
+              "info" : {
+                "type" : "string"
+              },
+              "status" : {
+                "type" : "string"
+              },
+              "startTime" : {
+                "type" : "string"
+              },
+              "endTime" : {
+                "type" : "string"
+              },
+              "duration" : {
+                "type" : "string"
+              },
+              "name" : {
+                "type" : "string"
+              },
+              "description" : {
+                "type" : "string"
+              },
+              "operationExecutions" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "id" : "urn:jsonschema:OperationExecDetail",
+                  "properties" : {
+                    "error" : {
+                      "type" : "string"
+                    },
+                    "warning" : {
+                      "type" : "string"
+                    },
+                    "info" : {
+                      "type" : "string"
+                    },
+                    "status" : {
+                      "type" : "string"
+                    },
+                    "startTime" : {
+                      "type" : "string"
+                    },
+                    "endTime" : {
+                      "type" : "string"
+                    },
+                    "duration" : {
+                      "type" : "string"
+                    },
+                    "type" : {
+                      "type" : "string"
+                    },
+                    "resource" : {
+                      "type" : "string"
+                    },
+                    "origin" : {
+                      "type" : "object",
+                      "$ref" : "urn:jsonschema:TestSysAttributes"
+                    },
+                    "destination" : {
+                      "type" : "object",
+                      "$ref" : "urn:jsonschema:TestSysAttributes"
+                    },
+                    "request" : {
+                      "type" : "object",
+                      "id" : "urn:jsonschema:OperRequest",
+                      "properties" : {
+                        "method" : {
+                          "type" : "string"
+                        },
+                        "path" : {
+                          "type" : "string"
+                        },
+                        "headers" : {
+                          "type" : "array",
+                          "items" : {
+                            "type" : "object",
+                            "id" : "urn:jsonschema:Header",
+                            "properties" : {
+                              "name" : {
+                                "type" : "string"
+                              },
+                              "value" : {
+                                "type" : "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "response" : {
+                      "type" : "object",
+                      "id" : "urn:jsonschema:OperResponse",
+                      "properties" : {
+                        "headers" : {
+                          "type" : "array",
+                          "items" : {
+                            "type" : "object",
+                            "$ref" : "urn:jsonschema:Header"
+                          }
+                        },
+                        "statusLine" : {
+                          "type" : "string"
+                        },
+                        "statusCode" : {
+                          "type" : "integer"
+                        }
+                      }
+                    },
+                    "assertionExecutions" : {
+                      "type" : "array",
+                      "items" : {
+                        "type" : "object",
+                        "id" : "urn:jsonschema:AssertionExecDetail",
+                        "properties" : {
+                          "error" : {
+                            "type" : "string"
+                          },
+                          "warning" : {
+                            "type" : "string"
+                          },
+                          "info" : {
+                            "type" : "string"
+                          },
+                          "status" : {
+                            "type" : "string"
+                          },
+                          "startTime" : {
+                            "type" : "string"
+                          },
+                          "endTime" : {
+                            "type" : "string"
+                          },
+                          "duration" : {
+                            "type" : "string"
+                          },
+                          "summary" : {
+                            "type" : "string"
+                          },
+                          "description" : {
+                            "type" : "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "testItemExecutions" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "$ref" : "urn:jsonschema:SectionExecDetail"
+            }
+          },
+          "teardownExecution" : {
+            "type" : "object",
+            "$ref" : "urn:jsonschema:SectionExecDetail"
+          }
+        }
+      }
+    }
+  }
+}

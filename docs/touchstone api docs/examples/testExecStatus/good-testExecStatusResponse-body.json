@@ -1,0 +1,26 @@
+{
+  "info" : "Test Execution Status retrieved successfully.",
+  "status" : "Passed",
+  "startTime" : "11/21/2025 06:33:12PM",
+  "endTime" : "11/21/2025 06:33:15PM",
+  "duration" : "3s",
+  "testSetupName" : "FHIR3-0-2-Basic--Patient-server-id-json",
+  "destinations" : [
+    {
+      "testSystem" : "DEV WildFHIR FHIR-3-0-2",
+      "organization" : "AEGIS.net, Inc.",
+      "baseUrl" : "http://devfhir3.aegis.net:8080/fhir3-0-2"
+    }
+  ],
+  "statusCounts" : {
+    "numberOfTests" : 7,
+    "numberOfTestPasses" : 7,
+    "successRate" : "100%"
+  },
+  "testExecURL" : "https://fhirci.aegis.net:8443/touchstone/execution?exec=202511211833121154440853",
+  "testExecId" : "202511211833121154440853",
+  "user" : "ta0002First ta0002Last",
+  "organization" : "Organization0002",
+  "domain" : "HL7_FHIR",
+  "numberOfScripts" : 1
+}

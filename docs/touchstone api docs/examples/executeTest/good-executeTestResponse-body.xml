@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executeTestResponse xmlns="http://touchstone.aegis.net/api">
+    <info>Test Execution created successfully.</info>
+    <testExecURL>https://fhirci.aegis.net:8443/touchstone/execution?exec=202511211828477937757899</testExecURL>
+    <testExecId>202511211828477937757899</testExecId>
+</executeTestResponse>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecDetailResponse xmlns="http://touchstone.aegis.net/api">
+    <error>You must wait at least 5000 milliseconds before calling '/api/testExecDetail' again.</error>
+</testExecDetailResponse>

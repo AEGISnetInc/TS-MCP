@@ -1,0 +1,12 @@
+{
+  "resourceType" : "OperationOutcome",
+  "issue" : [
+    {
+      "severity" : "error",
+      "code" : "processing",
+      "details" : {
+        "text" : "Value for 'testscript' not provided in the request."
+      }
+    }
+  ]
+}

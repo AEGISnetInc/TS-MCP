@@ -1,0 +1,5 @@
+Method: GET
+Path: https://touchstone.aegis.net/touchstone/api/testExecution
+Headers:
+		API-Key=HU2QPHDDujT6djI62821342506113614e552e7ffbb0159a620ec845f4a6e3168cf74cf
+		Accept=application/json;charset=UTF-8

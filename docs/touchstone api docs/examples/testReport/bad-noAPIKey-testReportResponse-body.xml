@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OperationOutcome xmlns="http://hl7.org/fhir">
+    <issue>
+        <severity value="error"/>
+        <code value="security"/>
+        <details>
+            <text value="Value for 'API-Key' not provided in the request header."/>
+        </details>
+    </issue>
+</OperationOutcome>

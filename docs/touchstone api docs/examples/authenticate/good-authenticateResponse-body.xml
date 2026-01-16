@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<authenticateResponse xmlns="http://touchstone.aegis.net/api">
+    <info>Authentication succeeded.</info>
+    <API-Key>CNpB2tGZrLZvWlw466211725061105d6655f6cdbb831c983fdcbac2b25c18023ae8ed0</API-Key>
+</authenticateResponse>

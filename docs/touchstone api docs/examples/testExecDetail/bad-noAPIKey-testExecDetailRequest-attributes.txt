@@ -1,0 +1,4 @@
+Method: GET
+Path: https://touchstone.aegis.net/touchstone/api/testExecDetail/202511211835289954952152
+Headers:
+		Accept=application/json;charset=UTF-8

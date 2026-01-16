@@ -1,0 +1,597 @@
+{
+  "resourceType" : "TestReport",
+  "name" : "/FHIR3-0-2-Basic/P-R/Patient/Client Assigned Id/Patient-client-id-xml",
+  "status" : "completed",
+  "testScript" : {
+    "reference" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+  },
+  "result" : "pass",
+  "score" : 100.0,
+  "tester" : "Organization0002-ta0002First ta0002Last",
+  "issued" : "2025-11-21T18:39:56Z",
+  "setup" : {
+    "action" : [
+      {
+        "operation" : {
+          "result" : "pass",
+          "message" : "delete - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383",
+          "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+        }
+      },
+      {
+        "assert" : {
+          "result" : "pass",
+          "message" : "Response code is one of 200,204,404",
+          "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+        }
+      },
+      {
+        "operation" : {
+          "result" : "pass",
+          "message" : "delete - Organization - http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/t8hxMsPb9Y6X-613383-DRs3C",
+          "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+        }
+      },
+      {
+        "assert" : {
+          "result" : "pass",
+          "message" : "Response code is one of 200,204,404",
+          "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+        }
+      },
+      {
+        "operation" : {
+          "result" : "pass",
+          "message" : "updateCreate - Organization - http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/t8hxMsPb9Y6X-613383-DRs3C",
+          "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+        }
+      },
+      {
+        "assert" : {
+          "result" : "pass",
+          "message" : "Response code is one of 200,201",
+          "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+        }
+      }
+    ]
+  },
+  "participant" : [
+    {
+      "type" : "test-engine",
+      "uri" : "https://fhirci.aegis.net:8443/touchstone",
+      "display" : "Touchstone"
+    },
+    {
+      "type" : "server",
+      "uri" : "https://fhirci.aegis.net:8443/touchstone/testsystem?name=DEV%20WildFHIR%20FHIR-3-0-2&org=AEGIS.net,%20Inc.",
+      "display" : "DEV WildFHIR FHIR-3-0-2"
+    }
+  ],
+  "test" : [
+    {
+      "name" : "Step1-CreateNewPatient",
+      "description" : "Create a new Patient in XML format where the client assigns the resource id. The expected response code is 201 (Created) with a content of either the created Patient resource in XML format, an OperationOutcome resource in XML format or an empty payload.",
+      "action" : [
+        {
+          "operation" : {
+            "result" : "pass",
+            "message" : "updateCreate - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response is '201 Created'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "Step2-ReadPatient",
+      "description" : "Read the Patient in XML format created in step 1. The expected response code is 200 (OK) with a content of the found Patient resource in XML format.",
+      "action" : [
+        {
+          "operation" : {
+            "result" : "pass",
+            "message" : "read - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response is '200 OK'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response header 'Content-Type' is present",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response Resource type is 'Patient'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response validates against the profile id 'resource-profile'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "Step3-UpdatePatient",
+      "description" : "Update the Patient created in step 1 in XML format. The expected response code is 200 (OK) with a content of either the updated Patient resource in XML format, an OperationOutcome resource in XML format or an empty payload.",
+      "action" : [
+        {
+          "operation" : {
+            "result" : "pass",
+            "message" : "update - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response code is 200",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "operation" : {
+            "result" : "pass",
+            "message" : "read - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response code is 200",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response 'Content-Type' header is 'xml'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response validates against the profile id 'resource-profile'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "Step4-PatientHistoryInstance",
+      "description" : "Retrieve the updated Patient instance's history in XML format. The expected response code is 200 (OK) with a Bundle resource in XML format of type history containing the created and updated versions of the Patient.",
+      "action" : [
+        {
+          "operation" : {
+            "result" : "pass",
+            "message" : "history-instance - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383/_history",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response code is 200",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response 'Content-Type' header is 'xml'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response Resource type is 'Bundle'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response validates against the profile id 'bundle-profile'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response \"/Bundle/type\" value is 'history'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response \"Bundle.entry.count()\" value is greater than '1'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response Bundle.total.toInteger() >= entry.count()",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "Step5-PatientVersionRead",
+      "description" : "Retrieve a initially created version of a Patient instance in XML format. The expected response code, if versioning is supported, is 200 (OK) with a content of the updated Patient resource in XML format; if versioning is not supported, a 404 (Not Found) with an OperationOutcome resource in XML format or an empty payload.",
+      "action" : [
+        {
+          "operation" : {
+            "result" : "pass",
+            "message" : "vread - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383/_history/4",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "Step6-PatientSearchType",
+      "description" : "Search for Patient resources in XML format with an identifier equal to ${searchParamIdentifier}. The expected response code is 200 (OK) with a Bundle resource in XML format of type history containing the found instances of the Patient.",
+      "action" : [
+        {
+          "operation" : {
+            "result" : "pass",
+            "message" : "search-type - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient?identifier=t8hxMsPb9Y6X613383",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response code is 200",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response 'Content-Type' header is 'xml'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response Resource type is 'Bundle'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response validates against the profile id 'bundle-profile'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response \"/Bundle/type\" value is 'searchset'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response \"Bundle.entry.count()\" value is greater than '0'",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response Bundle.total.toInteger() >= entry.count()",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        }
+      ]
+    },
+    {
+      "name" : "Step7-PatientDelete",
+      "description" : "Delete a Patient instance in XML format. The expected response is either a 200 (OK) with an optional OperationOutcome in XML format or 204 (No Content) and the content is empty; i.e. no content.",
+      "action" : [
+        {
+          "operation" : {
+            "result" : "pass",
+            "message" : "delete - Patient - http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/t8hxMsPb9Y6X-613383",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "Response code is one of 200,204,404",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "pass",
+            "message" : "pass",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        },
+        {
+          "assert" : {
+            "result" : "skip",
+            "message" : "skip",
+            "detail" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211839566623414086&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml"
+          }
+        }
+      ]
+    }
+  ]
+}

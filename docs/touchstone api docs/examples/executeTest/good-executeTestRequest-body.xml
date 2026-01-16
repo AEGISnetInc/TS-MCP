@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<executeTestRequest xmlns="http://touchstone.aegis.net/api">
+    <testSetup>FHIR3-0-2-Basic-P-R-Patient-Client Assigned Id--All</testSetup>
+</executeTestRequest>

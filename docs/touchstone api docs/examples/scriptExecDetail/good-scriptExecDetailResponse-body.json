@@ -1,0 +1,1058 @@
+{
+  "status" : "Passed",
+  "startTime" : "11/21/2025 06:37:02PM",
+  "endTime" : "11/21/2025 06:37:06PM",
+  "duration" : "3.984s",
+  "testScript" : "/FHIR3-0-2-Basic/P-R/Patient/Client Assigned Id/Patient-client-id-xml",
+  "description" : "FHIR Server Patient Basic Operation Tests - XML - Client Assigned Resource Id - Create, Delete, History, Read, Search, Update, Vread. Support for referenced resource type Organization Update, Delete and Search is also required.",
+  "version" : 1,
+  "specification" : "FHIR 3.0.2",
+  "statusCounts" : {
+    "numberOfTests" : 7,
+    "numberOfTestPasses" : 7,
+    "successRate" : "100%"
+  },
+  "testExecURL" : "https://fhirci.aegis.net:8443/touchstone/execution?exec=202511211837026550624311",
+  "scriptExecURL" : "https://fhirci.aegis.net:8443/touchstone/scriptexecution?exec=202511211837026550624311&qn=%2FFHIR3-0-2-Basic%2FP-R%2FPatient%2FClient%20Assigned%20Id%2FPatient-client-id-xml",
+  "testExecId" : "202511211837026550624311",
+  "user" : "ta0002First ta0002Last",
+  "organization" : "Organization0002",
+  "domain" : "HL7_FHIR",
+  "destinations" : [
+    {
+      "testSystem" : "DEV WildFHIR FHIR-3-0-2",
+      "organization" : "AEGIS.net, Inc.",
+      "baseUrl" : "http://devfhir3.aegis.net:8080/fhir3-0-2"
+    }
+  ],
+  "numberOfTests" : 7,
+  "setupExecution" : {
+    "status" : "Passed",
+    "startTime" : "11/21/2025 06:37:03.233PM",
+    "endTime" : "11/21/2025 06:37:03.827PM",
+    "duration" : "0.594s",
+    "operationExecutions" : [
+      {
+        "startTime" : "06:37:03.265PM",
+        "endTime" : "06:37:03.483PM",
+        "duration" : "0.218s",
+        "type" : "delete",
+        "resource" : "Patient",
+        "request" : {
+          "method" : "DELETE",
+          "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899",
+          "headers" : [
+            {
+              "name" : "Accept",
+              "value" : "application/fhir+xml;charset=UTF-8"
+            }
+          ]
+        },
+        "response" : {
+          "headers" : [
+            {
+              "name" : "Connection",
+              "value" : "keep-alive"
+            },
+            {
+              "name" : "Content-Length",
+              "value" : "1034"
+            },
+            {
+              "name" : "Content-Type",
+              "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+            },
+            {
+              "name" : "Date",
+              "value" : "Fri, 21 Nov 2025 23:37:03 GMT"
+            },
+            {
+              "name" : "ETag",
+              "value" : "W/\"3\""
+            }
+          ],
+          "statusLine" : "HTTP/1.1 200 OK",
+          "statusCode" : 200
+        },
+        "assertionExecutions" : [
+          {
+            "status" : "Passed",
+            "duration" : "0s",
+            "summary" : "Response code is one of 200,204,404",
+            "description" : "Confirm that the returned HTTP status is either 200(OK), 204(No Content) or 404(Not Found)."
+          }
+        ]
+      },
+      {
+        "startTime" : "06:37:03.499PM",
+        "endTime" : "06:37:03.624PM",
+        "duration" : "0.125s",
+        "type" : "delete",
+        "resource" : "Organization",
+        "request" : {
+          "method" : "DELETE",
+          "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/E8Is0Kxanvzx-762899-zS1Rr",
+          "headers" : [
+            {
+              "name" : "Accept",
+              "value" : "application/fhir+xml;charset=UTF-8"
+            }
+          ]
+        },
+        "response" : {
+          "headers" : [
+            {
+              "name" : "Date",
+              "value" : "Fri, 21 Nov 2025 23:37:03 GMT"
+            },
+            {
+              "name" : "ETag",
+              "value" : "W/\"1\""
+            }
+          ],
+          "statusLine" : "HTTP/1.1 204 No Content",
+          "statusCode" : 204
+        },
+        "assertionExecutions" : [
+          {
+            "status" : "Passed",
+            "duration" : "0s",
+            "summary" : "Response code is one of 200,204,404",
+            "description" : "Confirm that the returned HTTP status is either 200(OK), 204(No Content) or 404(Not Found)."
+          }
+        ]
+      },
+      {
+        "startTime" : "06:37:03.640PM",
+        "endTime" : "06:37:03.796PM",
+        "duration" : "0.156s",
+        "type" : "updateCreate",
+        "resource" : "Organization",
+        "request" : {
+          "method" : "PUT",
+          "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/E8Is0Kxanvzx-762899-zS1Rr",
+          "headers" : [
+            {
+              "name" : "Accept",
+              "value" : "application/fhir+xml;charset=UTF-8"
+            },
+            {
+              "name" : "Content-Type",
+              "value" : "application/fhir+xml;charset=UTF-8"
+            }
+          ]
+        },
+        "response" : {
+          "headers" : [
+            {
+              "name" : "Connection",
+              "value" : "keep-alive"
+            },
+            {
+              "name" : "Content-Length",
+              "value" : "1041"
+            },
+            {
+              "name" : "Content-Location",
+              "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/E8Is0Kxanvzx-762899-zS1Rr/_history/3"
+            },
+            {
+              "name" : "Content-Type",
+              "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+            },
+            {
+              "name" : "Date",
+              "value" : "Fri, 21 Nov 2025 23:37:03 GMT"
+            },
+            {
+              "name" : "ETag",
+              "value" : "W/\"3\""
+            },
+            {
+              "name" : "Last-Modified",
+              "value" : "Fri, 21 Nov 2025 23:37:03GMT-00:00"
+            },
+            {
+              "name" : "Location",
+              "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Organization/E8Is0Kxanvzx-762899-zS1Rr/_history/3"
+            }
+          ],
+          "statusLine" : "HTTP/1.1 201 Created",
+          "statusCode" : 201
+        },
+        "assertionExecutions" : [
+          {
+            "status" : "Passed",
+            "duration" : "0s",
+            "summary" : "Response code is one of 200,201",
+            "description" : "Confirm that the returned HTTP status is 200(OK) or 201(Created)."
+          }
+        ]
+      }
+    ]
+  },
+  "testItemExecutions" : [
+    {
+      "status" : "Passed",
+      "startTime" : "11/21/2025 06:37:03.858PM",
+      "endTime" : "11/21/2025 06:37:04.327PM",
+      "duration" : "0.469s",
+      "name" : "Step1-CreateNewPatient",
+      "description" : "Create a new Patient in XML format where the client assigns the resource id. The expected response code is 201 (Created) with a content of either the created Patient resource in XML format, an OperationOutcome resource in XML format or an empty payload.",
+      "operationExecutions" : [
+        {
+          "startTime" : "06:37:03.890PM",
+          "endTime" : "06:37:04.155PM",
+          "duration" : "0.265s",
+          "type" : "updateCreate",
+          "resource" : "Patient",
+          "request" : {
+            "method" : "PUT",
+            "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899",
+            "headers" : [
+              {
+                "name" : "Accept",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              }
+            ]
+          },
+          "response" : {
+            "headers" : [
+              {
+                "name" : "Connection",
+                "value" : "keep-alive"
+              },
+              {
+                "name" : "Content-Length",
+                "value" : "2651"
+              },
+              {
+                "name" : "Content-Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/4"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+              },
+              {
+                "name" : "Date",
+                "value" : "Fri, 21 Nov 2025 23:37:04 GMT"
+              },
+              {
+                "name" : "ETag",
+                "value" : "W/\"4\""
+              },
+              {
+                "name" : "Last-Modified",
+                "value" : "Fri, 21 Nov 2025 23:37:03GMT-00:00"
+              },
+              {
+                "name" : "Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/4"
+              }
+            ],
+            "statusLine" : "HTTP/1.1 201 Created",
+            "statusCode" : 201
+          },
+          "assertionExecutions" : [
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response is '201 Created'",
+              "description" : "Confirm that the returned HTTP status is 201(Created)."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'ETag' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected versioning HTTP Headers."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Last-Modified' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected versioning HTTP Headers."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header is present if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.015s",
+              "summary" : "Response 'Content-Type' header contains application/fhir+xml if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header contains charset=utf-8 if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response body resource type is one of Patient,OperationOutcome if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body."
+            },
+            {
+              "warning" : "Profile assertion skipped. The actual value \"Patient\" did not match the expected value \"OperationOutcome\" for resource type in response.",
+              "status" : "Skipped",
+              "duration" : "0s",
+              "summary" : "Response body conforms to the FHIR resource profile represented by test script profile id 'operationoutcome-profile' if resource is OperationOutcome in response body.",
+              "description" : "Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.079s",
+              "summary" : "Response body conforms to the FHIR resource profile represented by test script profile id 'resource-profile' if resource is Patient in response body.",
+              "description" : "Complex ruleset assertion to conditionally validate expected create ok response HTTP Headers and body."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status" : "Passed",
+      "startTime" : "11/21/2025 06:37:04.374PM",
+      "endTime" : "11/21/2025 06:37:04.858PM",
+      "duration" : "0.484s",
+      "name" : "Step2-ReadPatient",
+      "description" : "Read the Patient in XML format created in step 1. The expected response code is 200 (OK) with a content of the found Patient resource in XML format.",
+      "operationExecutions" : [
+        {
+          "startTime" : "06:37:04.437PM",
+          "endTime" : "06:37:04.733PM",
+          "duration" : "0.296s",
+          "type" : "read",
+          "resource" : "Patient",
+          "request" : {
+            "method" : "GET",
+            "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899",
+            "headers" : [
+              {
+                "name" : "Accept",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              }
+            ]
+          },
+          "response" : {
+            "headers" : [
+              {
+                "name" : "Connection",
+                "value" : "keep-alive"
+              },
+              {
+                "name" : "Content-Length",
+                "value" : "2651"
+              },
+              {
+                "name" : "Content-Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/4"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+              },
+              {
+                "name" : "Date",
+                "value" : "Fri, 21 Nov 2025 23:37:04 GMT"
+              },
+              {
+                "name" : "ETag",
+                "value" : "W/\"4\""
+              },
+              {
+                "name" : "Last-Modified",
+                "value" : "Fri, 21 Nov 2025 23:37:04GMT-00:00"
+              },
+              {
+                "name" : "Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/4"
+              }
+            ],
+            "statusLine" : "HTTP/1.1 200 OK",
+            "statusCode" : 200
+          },
+          "assertionExecutions" : [
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response is '200 OK'",
+              "description" : "Confirm that the returned HTTP status is 200(OK)."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response header 'Content-Type' is present",
+              "description" : "Confirm that the returned HTTP Header Content-Type is present."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'ETag' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected versioning HTTP Headers."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Last-Modified' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected versioning HTTP Headers."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response Resource type is 'Patient'",
+              "description" : "Confirm that the returned resource type is Patient."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.063s",
+              "summary" : "Response validates against the profile id 'resource-profile'",
+              "description" : "Validate that the returned resource conforms to the corresponding FHIR resource profile."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status" : "Passed",
+      "startTime" : "11/21/2025 06:37:04.921PM",
+      "endTime" : "11/21/2025 06:37:05.390PM",
+      "duration" : "0.469s",
+      "name" : "Step3-UpdatePatient",
+      "description" : "Update the Patient created in step 1 in XML format. The expected response code is 200 (OK) with a content of either the updated Patient resource in XML format, an OperationOutcome resource in XML format or an empty payload.",
+      "operationExecutions" : [
+        {
+          "startTime" : "06:37:04.968PM",
+          "endTime" : "06:37:05.093PM",
+          "duration" : "0.125s",
+          "type" : "update",
+          "resource" : "Patient",
+          "request" : {
+            "method" : "PUT",
+            "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899",
+            "headers" : [
+              {
+                "name" : "Accept",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              }
+            ]
+          },
+          "response" : {
+            "headers" : [
+              {
+                "name" : "Connection",
+                "value" : "keep-alive"
+              },
+              {
+                "name" : "Content-Length",
+                "value" : "2653"
+              },
+              {
+                "name" : "Content-Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/5"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+              },
+              {
+                "name" : "Date",
+                "value" : "Fri, 21 Nov 2025 23:37:05 GMT"
+              },
+              {
+                "name" : "ETag",
+                "value" : "W/\"5\""
+              },
+              {
+                "name" : "Last-Modified",
+                "value" : "Fri, 21 Nov 2025 23:37:05GMT-00:00"
+              },
+              {
+                "name" : "Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/5"
+              }
+            ],
+            "statusLine" : "HTTP/1.1 200 OK",
+            "statusCode" : 200
+          },
+          "assertionExecutions" : [
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response code is 200",
+              "description" : "Confirm that the returned HTTP status is 200(OK)."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'ETag' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected versioning HTTP Headers."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Last-Modified' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected versioning HTTP Headers."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header is present if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header contains application/fhir+xml if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header contains charset=utf-8 if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response body resource type is one of Patient,OperationOutcome if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body."
+            },
+            {
+              "warning" : "Profile assertion skipped. The actual value \"Patient\" did not match the expected value \"OperationOutcome\" for resource type in response.",
+              "status" : "Skipped",
+              "duration" : "0s",
+              "summary" : "Response body conforms to the FHIR resource profile represented by test script profile id 'operationoutcome-profile' if resource is OperationOutcome in response body.",
+              "description" : "Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.062s",
+              "summary" : "Response body conforms to the FHIR resource profile represented by test script profile id 'resource-profile' if resource is Patient in response body.",
+              "description" : "Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.078s",
+              "summary" : "Path \"meta/versionId\" value is present in response body if resource is Patient in response body and versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected update ok response HTTP Headers and body."
+            }
+          ]
+        },
+        {
+          "startTime" : "06:37:05.296PM",
+          "endTime" : "06:37:05.312PM",
+          "duration" : "0.016s",
+          "type" : "read",
+          "resource" : "Patient",
+          "request" : {
+            "method" : "GET",
+            "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899",
+            "headers" : [
+              {
+                "name" : "Accept",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              }
+            ]
+          },
+          "response" : {
+            "headers" : [
+              {
+                "name" : "Connection",
+                "value" : "keep-alive"
+              },
+              {
+                "name" : "Content-Length",
+                "value" : "2653"
+              },
+              {
+                "name" : "Content-Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/5"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+              },
+              {
+                "name" : "Date",
+                "value" : "Fri, 21 Nov 2025 23:37:05 GMT"
+              },
+              {
+                "name" : "ETag",
+                "value" : "W/\"5\""
+              },
+              {
+                "name" : "Last-Modified",
+                "value" : "Fri, 21 Nov 2025 23:37:05GMT-00:00"
+              },
+              {
+                "name" : "Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/5"
+              }
+            ],
+            "statusLine" : "HTTP/1.1 200 OK",
+            "statusCode" : 200
+          },
+          "assertionExecutions" : [
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response code is 200",
+              "description" : "Confirm that the returned HTTP status is 200(OK)."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header is 'xml'",
+              "description" : "Confirm that the returned content format is XML ('application/fhir+xml')."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.063s",
+              "summary" : "Response validates against the profile id 'resource-profile'",
+              "description" : "Validate that the returned resource conforms to the corresponding FHIR resource profile."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status" : "Passed",
+      "startTime" : "11/21/2025 06:37:05.437PM",
+      "endTime" : "11/21/2025 06:37:05.655PM",
+      "duration" : "0.218s",
+      "name" : "Step4-PatientHistoryInstance",
+      "description" : "Retrieve the updated Patient instance's history in XML format. The expected response code is 200 (OK) with a Bundle resource in XML format of type history containing the created and updated versions of the Patient.",
+      "operationExecutions" : [
+        {
+          "startTime" : "06:37:05.483PM",
+          "endTime" : "06:37:05.499PM",
+          "duration" : "0.016s",
+          "type" : "history",
+          "resource" : "Patient",
+          "request" : {
+            "method" : "GET",
+            "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history",
+            "headers" : [
+              {
+                "name" : "Accept",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              }
+            ]
+          },
+          "response" : {
+            "headers" : [
+              {
+                "name" : "Connection",
+                "value" : "keep-alive"
+              },
+              {
+                "name" : "Content-Length",
+                "value" : "14553"
+              },
+              {
+                "name" : "Content-Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+              },
+              {
+                "name" : "Date",
+                "value" : "Fri, 21 Nov 2025 23:37:05 GMT"
+              }
+            ],
+            "statusLine" : "HTTP/1.1 200 OK",
+            "statusCode" : 200
+          },
+          "assertionExecutions" : [
+            {
+              "status" : "Passed",
+              "duration" : "0.016s",
+              "summary" : "Response code is 200",
+              "description" : "Confirm that the returned HTTP status is 200(OK)."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header is 'xml'",
+              "description" : "Confirm that the returned content format is XML ('application/fhir+xml')."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response Resource type is 'Bundle'",
+              "description" : "Confirm that the response payload contains the Bundle resource type."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.078s",
+              "summary" : "Response validates against the profile id 'bundle-profile'",
+              "description" : "Validate that the returned resource conforms to the corresponding FHIR bundle profile."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response \"/Bundle/type\" value is 'history'",
+              "description" : "Confirm that the Bundle type is 'history'."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.031s",
+              "summary" : "Response \"Bundle.entry.count()\" value is greater than '1'",
+              "description" : "Confirm that there is more than one resource instance returned. There should be at least two from the create and update operations."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.031s",
+              "summary" : "Response Bundle.total.toInteger() >= entry.count()",
+              "description" : "Confirm that the Bundle total value matches or is greater than the number of entries in the Bundle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status" : "Passed",
+      "startTime" : "11/21/2025 06:37:05.702PM",
+      "endTime" : "11/21/2025 06:37:06.093PM",
+      "duration" : "0.391s",
+      "name" : "Step5-PatientVersionRead",
+      "description" : "Retrieve a initially created version of a Patient instance in XML format. The expected response code, if versioning is supported, is 200 (OK) with a content of the updated Patient resource in XML format; if versioning is not supported, a 404 (Not Found) with an OperationOutcome resource in XML format or an empty payload.",
+      "operationExecutions" : [
+        {
+          "startTime" : "06:37:05.749PM",
+          "endTime" : "06:37:05.765PM",
+          "duration" : "0.016s",
+          "type" : "vread",
+          "resource" : "Patient",
+          "request" : {
+            "method" : "GET",
+            "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/4",
+            "headers" : [
+              {
+                "name" : "Accept",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              }
+            ]
+          },
+          "response" : {
+            "headers" : [
+              {
+                "name" : "Connection",
+                "value" : "keep-alive"
+              },
+              {
+                "name" : "Content-Length",
+                "value" : "2651"
+              },
+              {
+                "name" : "Content-Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/4"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+              },
+              {
+                "name" : "Date",
+                "value" : "Fri, 21 Nov 2025 23:37:05 GMT"
+              },
+              {
+                "name" : "ETag",
+                "value" : "W/\"4\""
+              },
+              {
+                "name" : "Last-Modified",
+                "value" : "Fri, 21 Nov 2025 23:37:04GMT-00:00"
+              },
+              {
+                "name" : "Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899/_history/4"
+              }
+            ],
+            "statusLine" : "HTTP/1.1 200 OK",
+            "statusCode" : 200
+          },
+          "assertionExecutions" : [
+            {
+              "status" : "Passed",
+              "duration" : "0.016s",
+              "summary" : "Response status code is 200 if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "warning" : "Response status code assertion skipped. Expected no versioning to be supported by server capability statement.",
+              "status" : "Skipped",
+              "duration" : "0.187s",
+              "summary" : "Response status code is 404 if no versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'ETag' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Last-Modified' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header is present if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header contains application/fhir+xml if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header contains charset=utf-8 if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response body resource type is one of Patient,OperationOutcome if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "warning" : "Profile assertion skipped. The actual value \"Patient\" did not match the expected value \"OperationOutcome\" for resource type in response.",
+              "status" : "Skipped",
+              "duration" : "0s",
+              "summary" : "Response body conforms to the FHIR resource profile represented by test script profile id 'operationoutcome-profile' if resource is OperationOutcome in response body.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.047s",
+              "summary" : "Response body conforms to the FHIR resource profile represented by test script profile id 'resource-profile' if resource is Patient in response body.",
+              "description" : "Complex ruleset assertion to conditionally validate expected vread ok response code, HTTP Headers and body."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status" : "Passed",
+      "startTime" : "11/21/2025 06:37:06.140PM",
+      "endTime" : "11/21/2025 06:37:06.374PM",
+      "duration" : "0.234s",
+      "name" : "Step6-PatientSearchType",
+      "description" : "Search for Patient resources in XML format with an identifier equal to ${searchParamIdentifier}. The expected response code is 200 (OK) with a Bundle resource in XML format of type history containing the found instances of the Patient.",
+      "operationExecutions" : [
+        {
+          "startTime" : "06:37:06.187PM",
+          "endTime" : "06:37:06.233PM",
+          "duration" : "0.046s",
+          "type" : "search",
+          "resource" : "Patient",
+          "request" : {
+            "method" : "GET",
+            "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient?identifier=E8Is0Kxanvzx762899",
+            "headers" : [
+              {
+                "name" : "Accept",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              }
+            ]
+          },
+          "response" : {
+            "headers" : [
+              {
+                "name" : "Connection",
+                "value" : "keep-alive"
+              },
+              {
+                "name" : "Content-Length",
+                "value" : "3891"
+              },
+              {
+                "name" : "Content-Location",
+                "value" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient?identifier=E8Is0Kxanvzx762899"
+              },
+              {
+                "name" : "Content-Type",
+                "value" : "application/fhir+xml;fhirversion=3.0;charset=utf-8"
+              },
+              {
+                "name" : "Date",
+                "value" : "Fri, 21 Nov 2025 23:37:06 GMT"
+              }
+            ],
+            "statusLine" : "HTTP/1.1 200 OK",
+            "statusCode" : 200
+          },
+          "assertionExecutions" : [
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response code is 200",
+              "description" : "Confirm that the returned HTTP status is 200(OK)."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header is 'xml'",
+              "description" : "Confirm that the returned content format is XML ('application/fhir+xml')."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response Resource type is 'Bundle'",
+              "description" : "Confirm that the response payload contains the Bundle resource type."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.063s",
+              "summary" : "Response validates against the profile id 'bundle-profile'",
+              "description" : "Validate that the returned resource conforms to the corresponding FHIR bundle profile."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response \"/Bundle/type\" value is 'searchset'",
+              "description" : "Confirm that the Bundle type is 'searchset'."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.031s",
+              "summary" : "Response \"Bundle.entry.count()\" value is greater than '0'",
+              "description" : "Confirm that there is at least one record returned. There could be other Patient records returned."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0.015s",
+              "summary" : "Response Bundle.total.toInteger() >= entry.count()",
+              "description" : "Confirm that the Bundle total value matches or is greater than the number of entries in the Bundle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status" : "Passed",
+      "startTime" : "11/21/2025 06:37:06.421PM",
+      "endTime" : "11/21/2025 06:37:06.562PM",
+      "duration" : "0.141s",
+      "name" : "Step7-PatientDelete",
+      "description" : "Delete a Patient instance in XML format. The expected response is either a 200 (OK) with an optional OperationOutcome in XML format or 204 (No Content) and the content is empty; i.e. no content.",
+      "operationExecutions" : [
+        {
+          "startTime" : "06:37:06.468PM",
+          "endTime" : "06:37:06.515PM",
+          "duration" : "0.047s",
+          "type" : "delete",
+          "resource" : "Patient",
+          "request" : {
+            "method" : "DELETE",
+            "path" : "http://devfhir3.aegis.net:8080/fhir3-0-2/Patient/E8Is0Kxanvzx-762899",
+            "headers" : [
+              {
+                "name" : "Accept",
+                "value" : "application/fhir+xml;charset=UTF-8"
+              }
+            ]
+          },
+          "response" : {
+            "headers" : [
+              {
+                "name" : "Date",
+                "value" : "Fri, 21 Nov 2025 23:37:06 GMT"
+              },
+              {
+                "name" : "ETag",
+                "value" : "W/\"5\""
+              }
+            ],
+            "statusLine" : "HTTP/1.1 204 No Content",
+            "statusCode" : 204
+          },
+          "assertionExecutions" : [
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response code is one of 200,204,404",
+              "description" : "Confirm that the returned HTTP status is either 200(OK), 204(No Content) or 404(Not Found)."
+            },
+            {
+              "warning" : "Response status code assertion skipped. Expected message body but did not find it in response.",
+              "status" : "Skipped",
+              "duration" : "0.016s",
+              "summary" : "Response status code is 200 if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response status code is one of 204,404 if response body is absent.",
+              "description" : "Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body."
+            },
+            {
+              "status" : "Passed",
+              "duration" : "0s",
+              "summary" : "Response 'ETag' header is present if versioning is supported by server conformance statement.",
+              "description" : "Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body."
+            },
+            {
+              "warning" : "Header assertion skipped. Expected message body but did not find it in response.",
+              "status" : "Skipped",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header is present if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body."
+            },
+            {
+              "warning" : "Header assertion skipped. Expected message body but did not find it in response.",
+              "status" : "Skipped",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header contains application/fhir+xml if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body."
+            },
+            {
+              "warning" : "Header assertion skipped. Expected message body but did not find it in response.",
+              "status" : "Skipped",
+              "duration" : "0s",
+              "summary" : "Response 'Content-Type' header contains charset=utf-8 if response body is present.",
+              "description" : "Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body."
+            },
+            {
+              "warning" : "Resource assertion skipped. Expected response code to be greater than 399 but was 204 in response.",
+              "status" : "Skipped",
+              "duration" : "0s",
+              "summary" : "Response body resource type is OperationOutcome if response status code is greater than 399.",
+              "description" : "Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body."
+            },
+            {
+              "warning" : "Profile assertion skipped. Expected XML or JSON in response body but was empty.",
+              "status" : "Skipped",
+              "duration" : "0s",
+              "summary" : "Response body conforms to the FHIR resource profile represented by test script profile id 'operationoutcome-profile' if resource is OperationOutcome in response body.",
+              "description" : "Complex ruleset assertion to conditionally validate expected delete ok response HTTP Headers and body."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

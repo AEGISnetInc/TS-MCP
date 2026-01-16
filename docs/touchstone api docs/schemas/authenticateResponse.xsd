@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://touchstone.aegis.net/api" xmlns="http://touchstone.aegis.net/api" xmlns:tns="http://touchstone.aegis.net/api" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="authenticateResponse" type="authenticateResponse"/>
+
+  <xs:complexType name="authenticateResponse">
+    <xs:complexContent>
+      <xs:extension base="authenticateResponseBase">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="authenticateResponseBase">
+    <xs:complexContent>
+      <xs:extension base="tsRestResponse">
+        <xs:sequence>
+          <xs:element name="API-Key" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="tsRestResponse">
+    <xs:sequence>
+      <xs:element name="error" type="xs:string" minOccurs="0"/>
+      <xs:element name="warning" type="xs:string" minOccurs="0"/>
+      <xs:element name="info" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
