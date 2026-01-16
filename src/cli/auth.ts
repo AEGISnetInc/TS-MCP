@@ -37,37 +37,40 @@ function questionHidden(prompt: string): Promise<string> {
 
     let password = '';
 
-    const onData = (char: Buffer) => {
-      const c = char.toString();
+    const onData = (data: Buffer) => {
+      const str = data.toString();
 
-      switch (c) {
-        case '\n':
-        case '\r':
-        case '\u0004': // Ctrl+D
-          if (isTTY) {
-            stdin.setRawMode(false);
-          }
-          stdin.removeListener('data', onData);
-          rl.close();
-          process.stdout.write('\n');
-          resolve(password);
-          break;
-        case '\u0003': // Ctrl+C
-          if (isTTY) {
-            stdin.setRawMode(false);
-          }
-          process.exit(1);
-          break;
-        case '\u007F': // Backspace
-          if (password.length > 0) {
-            password = password.slice(0, -1);
-            process.stdout.write('\b \b'); // Erase character
-          }
-          break;
-        default:
-          password += c;
-          process.stdout.write('*'); // Show asterisk for each character
-          break;
+      // Process each character individually (handles paste)
+      for (const c of str) {
+        switch (c) {
+          case '\n':
+          case '\r':
+          case '\u0004': // Ctrl+D
+            if (isTTY) {
+              stdin.setRawMode(false);
+            }
+            stdin.removeListener('data', onData);
+            rl.close();
+            process.stdout.write('\n');
+            resolve(password);
+            return; // Exit handler after submit
+          case '\u0003': // Ctrl+C
+            if (isTTY) {
+              stdin.setRawMode(false);
+            }
+            process.exit(1);
+            return;
+          case '\u007F': // Backspace
+            if (password.length > 0) {
+              password = password.slice(0, -1);
+              process.stdout.write('\b \b'); // Erase character
+            }
+            break;
+          default:
+            password += c;
+            process.stdout.write('*'); // Show asterisk for each character
+            break;
+        }
       }
     };
 

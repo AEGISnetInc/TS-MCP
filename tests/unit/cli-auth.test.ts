@@ -232,6 +232,31 @@ describe('CLI Auth', () => {
       expect(asteriskCalls).toHaveLength(3);
     });
 
+    it('handles pasted password (multiple chars in single buffer)', async () => {
+      mockRlQuestion.mockImplementation((_prompt: string, callback: (answer: string) => void) => {
+        callback('user@example.com');
+      });
+
+      mockAuthenticate.mockResolvedValue('test-api-key');
+      mockSetApiKey.mockResolvedValue();
+
+      const authPromise = runAuthCli();
+
+      await new Promise(resolve => setImmediate(resolve));
+
+      // Simulate paste - entire password comes in one buffer
+      mockStdin.emit('data', Buffer.from('pastedpassword\r'));
+
+      await authPromise;
+
+      // Verify password was captured correctly
+      expect(mockAuthenticate).toHaveBeenCalledWith('user@example.com', 'pastedpassword');
+
+      // Verify an asterisk was written for each character (14 chars)
+      const asteriskCalls = mockStdoutWrite.mock.calls.filter(call => call[0] === '*');
+      expect(asteriskCalls).toHaveLength(14);
+    });
+
     it('handles backspace in password', async () => {
       mockRlQuestion.mockImplementation((_prompt: string, callback: (answer: string) => void) => {
         callback('user@example.com');
