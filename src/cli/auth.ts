@@ -19,12 +19,6 @@ function question(rl: readline.Interface, prompt: string): Promise<string> {
  */
 function questionHidden(prompt: string): Promise<string> {
   return new Promise((resolve) => {
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
-
-    // Mute the output stream to hide password
     const stdin = process.stdin;
     const isTTY = stdin.isTTY;
 
@@ -50,7 +44,7 @@ function questionHidden(prompt: string): Promise<string> {
               stdin.setRawMode(false);
             }
             stdin.removeListener('data', onData);
-            rl.close();
+            stdin.pause();
             process.stdout.write('\n');
             resolve(password);
             return; // Exit handler after submit

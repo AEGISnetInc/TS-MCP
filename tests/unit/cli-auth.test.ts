@@ -36,7 +36,7 @@ jest.unstable_mockModule('../../src/utils/config.js', () => ({
 const { runAuthCli } = await import('../../src/cli/auth.js');
 
 describe('CLI Auth', () => {
-  let mockStdin: EventEmitter & { isTTY?: boolean; setRawMode?: jest.Mock; resume?: jest.Mock };
+  let mockStdin: EventEmitter & { isTTY?: boolean; setRawMode?: jest.Mock; resume?: jest.Mock; pause?: jest.Mock };
   let mockStdoutWrite: jest.SpiedFunction<typeof process.stdout.write>;
   let mockConsoleLog: jest.SpiedFunction<typeof console.log>;
   let mockConsoleError: jest.SpiedFunction<typeof console.error>;
@@ -51,6 +51,7 @@ describe('CLI Auth', () => {
     mockStdin.isTTY = true;
     mockStdin.setRawMode = jest.fn();
     mockStdin.resume = jest.fn();
+    mockStdin.pause = jest.fn();
 
     // Store original stdin and replace
     originalStdin = process.stdin;
