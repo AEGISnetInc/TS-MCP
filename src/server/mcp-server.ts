@@ -7,8 +7,7 @@ import {
   GetPromptRequestSchema
 } from '@modelcontextprotocol/sdk/types.js';
 
-import { LocalAuthProvider } from '../auth/local-auth-provider.js';
-import { KeychainService } from '../auth/keychain.js';
+import { AuthProvider } from '../auth/auth-provider.js';
 import { TouchstoneClient } from '../touchstone/client.js';
 import { RateLimiter, RATE_LIMITS } from '../touchstone/rate-limiter.js';
 import { AnalyticsClient } from '../analytics/posthog-client.js';
@@ -30,20 +29,20 @@ import {
 
 export class TSMCPServer {
   private server: Server;
-  private authProvider: LocalAuthProvider;
+  private authProvider: AuthProvider;
   private touchstoneClient: TouchstoneClient;
   private rateLimiter: RateLimiter;
   private analytics: AnalyticsClient;
   private config = getConfig();
 
-  constructor() {
+  constructor(authProvider: AuthProvider) {
     this.server = new Server(
       { name: 'ts-mcp', version: '0.1.0' },
       { capabilities: { tools: {}, prompts: {} } }
     );
 
     this.touchstoneClient = new TouchstoneClient(this.config.touchstoneBaseUrl);
-    this.authProvider = new LocalAuthProvider(new KeychainService());
+    this.authProvider = authProvider;
     this.rateLimiter = new RateLimiter();
     this.analytics = new AnalyticsClient(this.config.telemetryEnabled);
 

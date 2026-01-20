@@ -1,5 +1,8 @@
 import { jest } from '@jest/globals';
 
+// Import auth types for server construction (needed when tests instantiate server directly)
+// These are imported after mocks are set up below
+
 // Mock external dependencies BEFORE importing modules that use them
 const mockGetPassword = jest.fn<() => Promise<string | null>>();
 const mockSetPassword = jest.fn<() => Promise<void>>();
@@ -25,6 +28,9 @@ jest.unstable_mockModule('posthog-node', () => ({
 // Import after mocks are set up
 const { TOOL_DEFINITIONS } = await import('../../src/server/tools.js');
 const { PROMPT_DEFINITIONS, getRunTestsPromptContent, getCheckResultsPromptContent } = await import('../../src/server/prompts.js');
+const { LocalAuthProvider } = await import('../../src/auth/local-auth-provider.js');
+const { KeychainService } = await import('../../src/auth/keychain.js');
+const { TSMCPServer } = await import('../../src/server/mcp-server.js');
 
 describe('MCP Server Integration', () => {
   beforeEach(() => {
@@ -89,6 +95,15 @@ describe('MCP Server Integration', () => {
       expect(content).toContain('12345');
       expect(content).toContain('get_test_status');
       expect(content).toContain('get_test_results');
+    });
+  });
+
+  describe('Server Construction', () => {
+    it('can be constructed with LocalAuthProvider', () => {
+      const keychain = new KeychainService();
+      const authProvider = new LocalAuthProvider(keychain);
+      const server = new TSMCPServer(authProvider);
+      expect(server).toBeDefined();
     });
   });
 

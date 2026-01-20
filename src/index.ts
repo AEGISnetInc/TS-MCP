@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import { TSMCPServer } from './server/mcp-server.js';
+import { LocalAuthProvider } from './auth/local-auth-provider.js';
+import { KeychainService } from './auth/keychain.js';
 import { runAuthCli } from './cli/auth.js';
 
 async function main() {
@@ -38,7 +40,9 @@ async function main() {
   }
 
   // Default: run MCP server
-  const server = new TSMCPServer();
+  const keychain = new KeychainService();
+  const authProvider = new LocalAuthProvider(keychain);
+  const server = new TSMCPServer(authProvider);
 
   // Handle graceful shutdown
   process.on('SIGINT', async () => {
