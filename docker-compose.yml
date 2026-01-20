@@ -1,0 +1,58 @@
+# Docker Compose for TS-MCP local development with PostgreSQL
+# Usage: docker compose up -d
+#
+# Required environment variables (set in .env or shell):
+#   TS_MCP_ENCRYPTION_KEY - 32-byte base64-encoded key for API key encryption
+#                          Generate with: openssl rand -base64 32
+
+version: '3.8'
+
+services:
+  ts-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ts-mcp-server
+    environment:
+      TS_MCP_MODE: cloud
+      TS_MCP_ENCRYPTION_KEY: ${TS_MCP_ENCRYPTION_KEY:?TS_MCP_ENCRYPTION_KEY is required}
+      DATABASE_URL: postgres://tsmcp:tsmcp@postgres:5432/tsmcp
+      TOUCHSTONE_BASE_URL: ${TOUCHSTONE_BASE_URL:-https://touchstone.aegis.net}
+      TS_MCP_SESSION_TTL_DAYS: ${TS_MCP_SESSION_TTL_DAYS:-30}
+      TS_MCP_TELEMETRY: ${TS_MCP_TELEMETRY:-true}
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - ts-mcp-network
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: ts-mcp-postgres
+    environment:
+      POSTGRES_USER: tsmcp
+      POSTGRES_PASSWORD: tsmcp
+      POSTGRES_DB: tsmcp
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tsmcp -d tsmcp"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - ts-mcp-network
+    restart: unless-stopped
+
+networks:
+  ts-mcp-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local

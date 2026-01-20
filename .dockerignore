@@ -1,0 +1,53 @@
+# .dockerignore - Exclude files from Docker build context
+
+# Dependencies (will be installed fresh in container)
+node_modules/
+
+# Build output (will be built fresh in container)
+dist/
+
+# Version control
+.git/
+.gitignore
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment files (secrets should not be in image)
+.env
+.env.*
+!.env.example
+
+# Test files (not needed in production)
+tests/
+coverage/
+.vitest/
+jest.config.cjs
+
+# Documentation (not needed in production)
+docs/
+*.md
+!README.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude Code files
+.claude/
+
+# Docker files (avoid recursive context)
+Dockerfile
+docker-compose.yml
+docker-compose*.yml
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript config (only needed for build stage, which copies it explicitly)
+# tsconfig.json is copied explicitly in Dockerfile
