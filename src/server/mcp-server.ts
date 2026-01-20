@@ -1,5 +1,6 @@
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { Transport } from '@modelcontextprotocol/sdk/shared/transport.js';
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
@@ -218,6 +219,14 @@ export class TSMCPServer {
     return {
       content: [{ type: 'text' as const, text: JSON.stringify(results, null, 2) }]
     };
+  }
+
+  /**
+   * Connects the MCP server to an external transport.
+   * Used for HTTP/cloud mode where the transport is managed externally.
+   */
+  connectTransport(transport: Transport): void {
+    this.server.connect(transport);
   }
 
   async run(): Promise<void> {
