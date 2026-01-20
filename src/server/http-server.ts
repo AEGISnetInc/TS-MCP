@@ -1,6 +1,7 @@
 // src/server/http-server.ts
 import express, { Request, Response } from 'express';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
+import { AuthInfo } from '@modelcontextprotocol/sdk/server/auth/types.js';
 import { randomUUID } from 'crypto';
 
 import { DatabaseClient } from '../db/client.js';
@@ -113,6 +114,18 @@ export function createHttpServer(deps: HttpServerDependencies) {
   mcpServer.connectTransport(transport);
 
   app.all('/mcp', async (req: Request, res: Response) => {
+    // Extract session token and attach as AuthInfo for MCP SDK
+    const sessionToken = extractSessionToken(req);
+    if (sessionToken) {
+      const authInfo: AuthInfo = {
+        token: sessionToken,
+        clientId: 'ts-mcp-session',  // Required by AuthInfo interface
+        scopes: []                    // Required by AuthInfo interface
+      };
+      // Attach to request for transport to pass to handlers
+      (req as Request & { auth?: AuthInfo }).auth = authInfo;
+    }
+
     await transport.handleRequest(req, res, req.body);
   });
 

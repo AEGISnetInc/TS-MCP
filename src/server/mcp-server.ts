@@ -8,7 +8,7 @@ import {
   GetPromptRequestSchema
 } from '@modelcontextprotocol/sdk/types.js';
 
-import { AuthProvider } from '../auth/auth-provider.js';
+import { AuthProvider, AuthContext } from '../auth/auth-provider.js';
 import { TouchstoneClient } from '../touchstone/client.js';
 import { RateLimiter, RATE_LIMITS } from '../touchstone/rate-limiter.js';
 import { AnalyticsClient } from '../analytics/posthog-client.js';
@@ -93,17 +93,22 @@ export class TSMCPServer {
     });
 
     // Call tool
-    this.server.setRequestHandler(CallToolRequestSchema, async (request) => {
+    this.server.setRequestHandler(CallToolRequestSchema, async (request, extra) => {
       const { name, arguments: args } = request.params;
+
+      // Build auth context from the SDK's authInfo (passed from HTTP transport)
+      const authContext: AuthContext | undefined = extra.authInfo?.token
+        ? { sessionToken: extra.authInfo.token }
+        : undefined;
 
       try {
         switch (name) {
           case 'launch_test_execution':
-            return await this.handleLaunchExecution(args);
+            return await this.handleLaunchExecution(args, authContext);
           case 'get_test_status':
-            return await this.handleGetStatus(args);
+            return await this.handleGetStatus(args, authContext);
           case 'get_test_results':
-            return await this.handleGetResults(args);
+            return await this.handleGetResults(args, authContext);
           default:
             throw new Error(`Unknown tool: ${name}`);
         }
@@ -123,9 +128,9 @@ export class TSMCPServer {
     });
   }
 
-  private async handleLaunchExecution(args: unknown) {
+  private async handleLaunchExecution(args: unknown, authContext?: AuthContext) {
     const { testSetupName } = LaunchTestExecutionInputSchema.parse(args);
-    const apiKey = await this.authProvider.getApiKey();
+    const apiKey = await this.authProvider.getApiKey(authContext);
     const executionId = await this.touchstoneClient.launchExecution(apiKey, testSetupName);
 
     this.analytics.track(AnalyticsEvents.TEST_LAUNCHED, {
@@ -140,9 +145,9 @@ export class TSMCPServer {
     };
   }
 
-  private async handleGetStatus(args: unknown) {
+  private async handleGetStatus(args: unknown, authContext?: AuthContext) {
     const { executionId } = GetTestStatusInputSchema.parse(args);
-    const apiKey = await this.authProvider.getApiKey();
+    const apiKey = await this.authProvider.getApiKey(authContext);
 
     await this.rateLimiter.throttle('status', RATE_LIMITS.STATUS_ENDPOINT);
     const status = await this.touchstoneClient.getExecutionStatus(apiKey, executionId);
@@ -181,9 +186,9 @@ export class TSMCPServer {
     };
   }
 
-  private async handleGetResults(args: unknown) {
+  private async handleGetResults(args: unknown, authContext?: AuthContext) {
     const { executionId } = GetTestResultsInputSchema.parse(args);
-    const apiKey = await this.authProvider.getApiKey();
+    const apiKey = await this.authProvider.getApiKey(authContext);
 
     // Fetch execution detail (summary of all scripts)
     await this.rateLimiter.throttle('detail', RATE_LIMITS.DETAIL_ENDPOINT);
