@@ -16,24 +16,24 @@ jest.unstable_mockModule('../../src/auth/keychain.js', () => ({
 }));
 
 // Import after mocks are set up
-const { AuthManager } = await import('../../src/auth/auth-manager.js');
+const { LocalAuthProvider } = await import('../../src/auth/local-auth-provider.js');
 const { KeychainService } = await import('../../src/auth/keychain.js');
 const { NotAuthenticatedError } = await import('../../src/utils/errors.js');
 
-describe('AuthManager', () => {
-  let authManager: InstanceType<typeof AuthManager>;
+describe('LocalAuthProvider', () => {
+  let authProvider: InstanceType<typeof LocalAuthProvider>;
 
   beforeEach(() => {
     jest.clearAllMocks();
     const mockKeychain = new KeychainService();
-    authManager = new AuthManager(mockKeychain);
+    authProvider = new LocalAuthProvider(mockKeychain);
   });
 
   describe('getApiKey', () => {
     it('returns API key when authenticated', async () => {
       mockGetApiKey.mockResolvedValue('stored-key');
 
-      const result = await authManager.getApiKey();
+      const result = await authProvider.getApiKey();
 
       expect(result).toBe('stored-key');
     });
@@ -41,7 +41,7 @@ describe('AuthManager', () => {
     it('throws NotAuthenticatedError when no key', async () => {
       mockGetApiKey.mockResolvedValue(null);
 
-      await expect(authManager.getApiKey()).rejects.toThrow(NotAuthenticatedError);
+      await expect(authProvider.getApiKey()).rejects.toThrow(NotAuthenticatedError);
     });
   });
 
@@ -49,7 +49,7 @@ describe('AuthManager', () => {
     it('returns true when key exists', async () => {
       mockHasApiKey.mockResolvedValue(true);
 
-      const result = await authManager.isAuthenticated();
+      const result = await authProvider.isAuthenticated();
 
       expect(result).toBe(true);
     });
@@ -57,7 +57,7 @@ describe('AuthManager', () => {
     it('returns false when no key', async () => {
       mockHasApiKey.mockResolvedValue(false);
 
-      const result = await authManager.isAuthenticated();
+      const result = await authProvider.isAuthenticated();
 
       expect(result).toBe(false);
     });
@@ -67,7 +67,7 @@ describe('AuthManager', () => {
     it('removes API key from keychain', async () => {
       mockDeleteApiKey.mockResolvedValue(true);
 
-      await authManager.logout();
+      await authProvider.logout();
 
       expect(mockDeleteApiKey).toHaveBeenCalled();
     });

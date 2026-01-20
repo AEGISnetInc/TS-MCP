@@ -7,7 +7,7 @@ import {
   GetPromptRequestSchema
 } from '@modelcontextprotocol/sdk/types.js';
 
-import { AuthManager } from '../auth/auth-manager.js';
+import { LocalAuthProvider } from '../auth/local-auth-provider.js';
 import { KeychainService } from '../auth/keychain.js';
 import { TouchstoneClient } from '../touchstone/client.js';
 import { RateLimiter, RATE_LIMITS } from '../touchstone/rate-limiter.js';
@@ -30,7 +30,7 @@ import {
 
 export class TSMCPServer {
   private server: Server;
-  private authManager: AuthManager;
+  private authProvider: LocalAuthProvider;
   private touchstoneClient: TouchstoneClient;
   private rateLimiter: RateLimiter;
   private analytics: AnalyticsClient;
@@ -43,7 +43,7 @@ export class TSMCPServer {
     );
 
     this.touchstoneClient = new TouchstoneClient(this.config.touchstoneBaseUrl);
-    this.authManager = new AuthManager(new KeychainService());
+    this.authProvider = new LocalAuthProvider(new KeychainService());
     this.rateLimiter = new RateLimiter();
     this.analytics = new AnalyticsClient(this.config.telemetryEnabled);
 
@@ -125,7 +125,7 @@ export class TSMCPServer {
 
   private async handleLaunchExecution(args: unknown) {
     const { testSetupName } = LaunchTestExecutionInputSchema.parse(args);
-    const apiKey = await this.authManager.getApiKey();
+    const apiKey = await this.authProvider.getApiKey();
     const executionId = await this.touchstoneClient.launchExecution(apiKey, testSetupName);
 
     this.analytics.track(AnalyticsEvents.TEST_LAUNCHED, {
@@ -142,7 +142,7 @@ export class TSMCPServer {
 
   private async handleGetStatus(args: unknown) {
     const { executionId } = GetTestStatusInputSchema.parse(args);
-    const apiKey = await this.authManager.getApiKey();
+    const apiKey = await this.authProvider.getApiKey();
 
     await this.rateLimiter.throttle('status', RATE_LIMITS.STATUS_ENDPOINT);
     const status = await this.touchstoneClient.getExecutionStatus(apiKey, executionId);
@@ -183,7 +183,7 @@ export class TSMCPServer {
 
   private async handleGetResults(args: unknown) {
     const { executionId } = GetTestResultsInputSchema.parse(args);
-    const apiKey = await this.authManager.getApiKey();
+    const apiKey = await this.authProvider.getApiKey();
 
     // Fetch execution detail (summary of all scripts)
     await this.rateLimiter.throttle('detail', RATE_LIMITS.DETAIL_ENDPOINT);

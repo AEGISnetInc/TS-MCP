@@ -1,18 +1,14 @@
 import { KeychainService } from './keychain.js';
 import { NotAuthenticatedError } from '../utils/errors.js';
+import { AuthProvider, AuthContext } from './auth-provider.js';
 
 /**
- * Manages API key retrieval from the system keychain.
- * Authentication is handled separately via CLI (`npx ts-mcp auth`).
+ * Auth provider for local mode - retrieves API key from system keychain.
  */
-export class AuthManager {
+export class LocalAuthProvider implements AuthProvider {
   constructor(private readonly keychain: KeychainService) {}
 
-  /**
-   * Retrieves the API key from the keychain.
-   * @throws NotAuthenticatedError if no API key is stored.
-   */
-  async getApiKey(): Promise<string> {
+  async getApiKey(_context?: AuthContext): Promise<string> {
     const apiKey = await this.keychain.getApiKey();
     if (!apiKey) {
       throw new NotAuthenticatedError();
@@ -20,10 +16,7 @@ export class AuthManager {
     return apiKey;
   }
 
-  /**
-   * Checks if an API key is stored in the keychain.
-   */
-  async isAuthenticated(): Promise<boolean> {
+  async isAuthenticated(_context?: AuthContext): Promise<boolean> {
     return this.keychain.hasApiKey();
   }
 
