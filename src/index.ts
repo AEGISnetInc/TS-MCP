@@ -4,42 +4,15 @@ import { TSMCPServer } from './server/mcp-server.js';
 import { LocalAuthProvider } from './auth/local-auth-provider.js';
 import { KeychainService } from './auth/keychain.js';
 import { runAuthCli } from './cli/auth.js';
+import { runLoginCli } from './cli/login.js';
+import { runLogoutCli } from './cli/logout.js';
+import { runStatusCli } from './cli/status.js';
+import { getConfig } from './utils/config.js';
 
-async function main() {
-  const args = process.argv.slice(2);
-
-  // Handle CLI commands
-  if (args[0] === 'auth') {
-    await runAuthCli();
-    return;
-  }
-
-  // Show help for unknown commands
-  if (args.length > 0 && args[0] !== '--help' && args[0] !== '-h') {
-    console.error(`Unknown command: ${args[0]}`);
-    console.error('Usage: ts-mcp [command]');
-    console.error('Commands:');
-    console.error('  auth    Authenticate with Touchstone (stores API key in keychain)');
-    console.error('  (none)  Start the MCP server');
-    process.exit(1);
-  }
-
-  if (args[0] === '--help' || args[0] === '-h') {
-    console.log('TS-MCP - Touchstone MCP Server for Claude Code');
-    console.log('');
-    console.log('Usage: ts-mcp [command]');
-    console.log('');
-    console.log('Commands:');
-    console.log('  auth    Authenticate with Touchstone (stores API key in keychain)');
-    console.log('  (none)  Start the MCP server (used by Claude Code)');
-    console.log('');
-    console.log('Examples:');
-    console.log('  npx ts-mcp auth     # Authenticate before using Claude Code');
-    console.log('  npx ts-mcp          # Start server (called by Claude Code)');
-    return;
-  }
-
-  // Default: run MCP server
+/**
+ * Start the MCP server in local mode (STDIO transport).
+ */
+export async function runLocalServer(): Promise<void> {
   const keychain = new KeychainService();
   const authProvider = new LocalAuthProvider(keychain);
   const server = new TSMCPServer(authProvider);
@@ -58,7 +31,129 @@ async function main() {
   await server.run();
 }
 
-main().catch((error) => {
-  console.error('Failed to start TS-MCP server:', error);
-  process.exit(1);
-});
+/**
+ * Start the MCP server in cloud mode (HTTP transport with database).
+ */
+export async function runCloudServer(): Promise<void> {
+  // Dynamic imports to avoid loading DB deps in local mode
+  const { createHttpServer } = await import('./server/http-server.js');
+  const { DatabaseClient } = await import('./db/client.js');
+  const { runMigrations } = await import('./db/migrate.js');
+  const { TouchstoneClient } = await import('./touchstone/client.js');
+
+  const config = getConfig();
+  const db = new DatabaseClient();
+
+  // Run database migrations
+  await runMigrations(db);
+
+  const touchstoneClient = new TouchstoneClient(config.touchstoneBaseUrl);
+  const { app, close } = createHttpServer({ db, touchstoneClient });
+
+  const server = app.listen(config.port, () => {
+    console.log(`TS-MCP cloud server running on port ${config.port}`);
+  });
+
+  // Handle graceful shutdown
+  process.on('SIGINT', async () => {
+    await close();
+    await db.close();
+    server.close();
+    process.exit(0);
+  });
+
+  process.on('SIGTERM', async () => {
+    await close();
+    await db.close();
+    server.close();
+    process.exit(0);
+  });
+}
+
+/**
+ * Print help message.
+ */
+export function printHelp(): void {
+  console.log('TS-MCP - Touchstone MCP Server for Claude Code');
+  console.log('');
+  console.log('Usage: ts-mcp [command]');
+  console.log('');
+  console.log('Commands:');
+  console.log('  auth           Authenticate for local mode (stores API key in keychain)');
+  console.log('  login [name]   Authenticate with cloud server');
+  console.log('  logout [name]  Log out from cloud server');
+  console.log('  status         Show authentication status');
+  console.log('  (none)         Start MCP server (mode determined by TS_MCP_MODE)');
+  console.log('');
+  console.log('Environment:');
+  console.log('  TS_MCP_MODE=local|cloud  Server mode (default: local)');
+  console.log('');
+  console.log('Examples:');
+  console.log('  ts-mcp auth              # Authenticate for local mode');
+  console.log('  ts-mcp login             # Authenticate with cloud server');
+  console.log('  ts-mcp login touchstone  # Authenticate with specific server');
+  console.log('  ts-mcp status            # Show auth status');
+}
+
+/**
+ * Parse command and route to appropriate handler.
+ */
+export async function handleCommand(args: string[]): Promise<void> {
+  const command = args[0];
+
+  switch (command) {
+    case 'auth':
+      await runAuthCli();
+      break;
+
+    case 'login':
+      await runLoginCli(args[1]);
+      break;
+
+    case 'logout':
+      await runLogoutCli(args[1]);
+      break;
+
+    case 'status':
+      await runStatusCli();
+      break;
+
+    case '--help':
+    case '-h':
+      printHelp();
+      break;
+
+    case undefined:
+      // No command - run server based on mode
+      const config = getConfig();
+      if (config.mode === 'cloud') {
+        await runCloudServer();
+      } else {
+        await runLocalServer();
+      }
+      break;
+
+    default:
+      console.error(`Unknown command: ${command}`);
+      console.error('Run "ts-mcp --help" for usage.');
+      process.exit(1);
+  }
+}
+
+/**
+ * Main entry point.
+ */
+export async function main(): Promise<void> {
+  const args = process.argv.slice(2);
+  await handleCommand(args);
+}
+
+// Only run main() if this is the entry point (not being imported)
+// Use a special check that works in ESM
+const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+if (isMainModule) {
+  main().catch((error) => {
+    console.error('Fatal error:', error);
+    process.exit(1);
+  });
+}
