@@ -4,6 +4,9 @@
 # Stage 1: Build
 FROM node:20-alpine AS builder
 
+# Install build dependencies for native modules (keytar requires libsecret)
+RUN apk add --no-cache python3 make g++ libsecret-dev
+
 WORKDIR /app
 
 # Copy package files for dependency installation
@@ -22,13 +25,18 @@ RUN npm run build
 # Stage 2: Production Runtime
 FROM node:20-alpine AS runtime
 
+# Install runtime dependencies for native modules (keytar requires libsecret)
+RUN apk add --no-cache libsecret
+
 WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
 
-# Install production dependencies only
-RUN npm ci --only=production
+# Install production dependencies only (with build tools for native modules)
+RUN apk add --no-cache python3 make g++ libsecret-dev && \
+    npm ci --only=production && \
+    apk del python3 make g++ libsecret-dev
 
 # Copy built files from builder stage
 COPY --from=builder /app/dist ./dist
