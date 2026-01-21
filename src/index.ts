@@ -1,18 +1,16 @@
 #!/usr/bin/env node
 
-import { TSMCPServer } from './server/mcp-server.js';
-import { LocalAuthProvider } from './auth/local-auth-provider.js';
-import { KeychainService } from './auth/keychain.js';
-import { runAuthCli } from './cli/auth.js';
-import { runLoginCli } from './cli/login.js';
-import { runLogoutCli } from './cli/logout.js';
-import { runStatusCli } from './cli/status.js';
 import { getConfig } from './utils/config.js';
 
 /**
  * Start the MCP server in local mode (STDIO transport).
+ * Uses dynamic imports to avoid loading keytar in cloud mode.
  */
 export async function runLocalServer(): Promise<void> {
+  const { TSMCPServer } = await import('./server/mcp-server.js');
+  const { LocalAuthProvider } = await import('./auth/local-auth-provider.js');
+  const { KeychainService } = await import('./auth/keychain.js');
+
   const keychain = new KeychainService();
   const authProvider = new LocalAuthProvider(keychain);
   const server = new TSMCPServer(authProvider);
@@ -97,26 +95,35 @@ export function printHelp(): void {
 
 /**
  * Parse command and route to appropriate handler.
+ * Uses dynamic imports to avoid loading keytar in cloud server mode.
  */
 export async function handleCommand(args: string[]): Promise<void> {
   const command = args[0];
 
   switch (command) {
-    case 'auth':
+    case 'auth': {
+      const { runAuthCli } = await import('./cli/auth.js');
       await runAuthCli();
       break;
+    }
 
-    case 'login':
+    case 'login': {
+      const { runLoginCli } = await import('./cli/login.js');
       await runLoginCli(args[1]);
       break;
+    }
 
-    case 'logout':
+    case 'logout': {
+      const { runLogoutCli } = await import('./cli/logout.js');
       await runLogoutCli(args[1]);
       break;
+    }
 
-    case 'status':
+    case 'status': {
+      const { runStatusCli } = await import('./cli/status.js');
       await runStatusCli();
       break;
+    }
 
     case '--help':
     case '-h':
