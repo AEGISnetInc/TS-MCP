@@ -161,7 +161,7 @@ npm install -g ts-mcp
 Then log in to the cloud server:
 
 ```bash
-ts-mcp login
+npx ts-mcp login
 ```
 
 You'll be prompted for your Touchstone credentials:
@@ -191,21 +191,21 @@ The TS-MCP CLI provides several commands for managing your cloud session:
 #### Login
 
 ```bash
-ts-mcp login              # Login to the first configured cloud server
-ts-mcp login touchstone   # Login to a specific server by name
+npx ts-mcp login              # Login to the first configured cloud server
+npx ts-mcp login touchstone   # Login to a specific server by name
 ```
 
 #### Logout
 
 ```bash
-ts-mcp logout             # Logout from the first configured cloud server
-ts-mcp logout touchstone  # Logout from a specific server by name
+npx ts-mcp logout             # Logout from the first configured cloud server
+npx ts-mcp logout touchstone  # Logout from a specific server by name
 ```
 
 #### Check Status
 
 ```bash
-ts-mcp status
+npx ts-mcp status
 ```
 
 Shows authentication status for both local and cloud modes:
@@ -315,8 +315,8 @@ npx ts-mcp auth
 **Cloud mode:** Your session may have expired or been invalidated. Check your status and re-login:
 
 ```bash
-ts-mcp status
-ts-mcp login
+npx ts-mcp status
+npx ts-mcp login
 ```
 
 ### "Test Setup not found" Error
@@ -339,7 +339,7 @@ Verify the exact Test Setup name in the Touchstone UI. Names are case-sensitive.
 1. Verify your `~/.claude/mcp.json` configuration is correct
 2. Restart Claude Code to reload MCP servers
 3. **Local mode:** Check that `npx ts-mcp` runs without errors
-4. **Cloud mode:** Check that `ts-mcp status` shows you're authenticated
+4. **Cloud mode:** Check that `npx ts-mcp status` shows you're authenticated
 
 ## Security Notes
 
