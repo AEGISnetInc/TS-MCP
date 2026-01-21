@@ -41,6 +41,9 @@ RUN apk add --no-cache python3 make g++ libsecret-dev && \
 # Copy built files from builder stage
 COPY --from=builder /app/dist ./dist
 
+# Copy SQL migration files (not compiled by TypeScript)
+COPY src/db/migrations ./dist/db/migrations
+
 # Set environment variables
 ENV NODE_ENV=production
 ENV TS_MCP_MODE=cloud
