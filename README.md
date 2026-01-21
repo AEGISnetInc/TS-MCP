@@ -16,7 +16,11 @@ npx ts-mcp
 
 ## Configuration
 
-Add to your Claude Code CLI MCP configuration (`~/.claude/mcp.json`):
+TS-MCP supports two modes: **local** (default) and **cloud**.
+
+### Local Mode
+
+For individual developers running TS-MCP on their own machine:
 
 ```json
 {
@@ -29,12 +33,29 @@ Add to your Claude Code CLI MCP configuration (`~/.claude/mcp.json`):
 }
 ```
 
+### Cloud Mode
+
+For teams using a shared TS-MCP server:
+
+```json
+{
+  "mcpServers": {
+    "touchstone": {
+      "url": "https://your-ts-mcp-server.example.com/mcp"
+    }
+  }
+}
+```
+
 ### Environment Variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `TOUCHSTONE_BASE_URL` | `https://touchstone.aegis.net` | Touchstone API URL |
 | `TS_MCP_TELEMETRY` | `true` | Enable/disable anonymous usage tracking |
+| `TS_MCP_MODE` | `local` | Server mode: `local` or `cloud` |
+| `DATABASE_URL` | - | PostgreSQL connection string (cloud mode) |
+| `TS_MCP_ENCRYPTION_KEY` | - | 32-byte base64 key for API key encryption (cloud mode) |
 
 ## Prerequisites
 
@@ -98,9 +119,12 @@ npx ts-mcp auth
 
 | Command | Description |
 |---------|-------------|
-| `npx ts-mcp auth` | Authenticate with Touchstone (stores API key in keychain) |
+| `npx ts-mcp auth` | Authenticate for local mode (stores API key in keychain) |
+| `npx ts-mcp login [name]` | Authenticate with cloud server |
+| `npx ts-mcp logout [name]` | Log out from cloud server |
+| `npx ts-mcp status` | Show authentication status (local and cloud) |
 | `npx ts-mcp --help` | Show help |
-| `npx ts-mcp` | Start MCP server (used by Claude Code) |
+| `npx ts-mcp` | Start MCP server (mode determined by TS_MCP_MODE) |
 
 ## MCP Tools
 
@@ -137,27 +161,42 @@ npm run dev
 
 ```
 src/
-├── index.ts                 # Entry point (CLI routing)
+├── index.ts                    # Entry point (CLI routing, mode detection)
 ├── cli/
-│   └── auth.ts              # CLI authentication command
+│   ├── auth.ts                 # Local authentication command
+│   ├── login.ts                # Cloud login command
+│   ├── logout.ts               # Cloud logout command
+│   └── status.ts               # Auth status command
 ├── server/
-│   ├── mcp-server.ts        # MCP server implementation
-│   ├── tools.ts             # Tool definitions
-│   └── prompts.ts           # Prompt definitions
+│   ├── mcp-server.ts           # MCP server implementation
+│   ├── http-server.ts          # Express server (cloud mode)
+│   ├── auth-service.ts         # Login/logout/status service (cloud mode)
+│   ├── tools.ts                # Tool definitions
+│   └── prompts.ts              # Prompt definitions
 ├── touchstone/
-│   ├── client.ts            # Touchstone API client
-│   ├── types.ts             # Zod schemas
-│   └── rate-limiter.ts      # Rate limiting
+│   ├── client.ts               # Touchstone API client
+│   ├── types.ts                # Zod schemas
+│   └── rate-limiter.ts         # Rate limiting
 ├── auth/
-│   ├── auth-manager.ts      # API key retrieval from keychain
-│   └── keychain.ts          # Secure credential storage
+│   ├── auth-provider.ts        # AuthProvider interface
+│   ├── local-auth-provider.ts  # Keychain-based auth (local mode)
+│   ├── cloud-auth-provider.ts  # Session-based auth (cloud mode)
+│   └── keychain.ts             # Secure credential storage
+├── db/                         # Database layer (cloud mode)
+│   ├── client.ts               # PostgreSQL connection
+│   ├── users.ts                # User repository
+│   ├── sessions.ts             # Session repository
+│   ├── migrate.ts              # Migration runner
+│   └── migrations/             # SQL migrations
+├── crypto/
+│   └── encryption.ts           # AES-256-GCM encryption
 ├── analytics/
-│   ├── posthog-client.ts    # PostHog wrapper
-│   └── events.ts            # Event definitions
+│   ├── posthog-client.ts       # PostHog wrapper
+│   └── events.ts               # Event definitions
 └── utils/
-    ├── config.ts            # Configuration
-    ├── errors.ts            # Error types
-    └── result-transformer.ts # Result formatting
+    ├── config.ts               # Configuration
+    ├── errors.ts               # Error types
+    └── result-transformer.ts   # Result formatting
 ```
 
 ## License
