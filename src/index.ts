@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { realpathSync } from 'fs';
+import { fileURLToPath } from 'url';
 import { getConfig } from './utils/config.js';
 
 /**
@@ -156,8 +158,10 @@ export async function main(): Promise<void> {
 }
 
 // Only run main() if this is the entry point (not being imported)
-// Use a special check that works in ESM
-const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+// Resolve symlinks to handle globally linked packages
+const currentFile = fileURLToPath(import.meta.url);
+const entryFile = realpathSync(process.argv[1]);
+const isMainModule = currentFile === entryFile;
 if (isMainModule) {
   main().catch((error) => {
     console.error('Fatal error:', error);
