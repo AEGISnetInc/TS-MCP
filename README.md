@@ -69,17 +69,21 @@ Before using TS-MCP, you need:
 
 ### 1. Configure TS-MCP in Claude Code
 
-Add to `~/.claude/mcp.json` (see Configuration section above).
+Add to `~/.claude/mcp.json` (see Configuration section above for local vs cloud mode).
 
-### 2. Authenticate with Touchstone
+### 2. Authenticate
 
-In your terminal (outside Claude Code), run:
-
+**Local mode:**
 ```bash
 npx ts-mcp auth
 ```
 
-You'll be prompted for your Touchstone username and password. The password is entered securely (not echoed to screen). Your credentials are exchanged for an API key, which is stored in your system keychain (macOS Keychain, Windows Credential Manager, or Linux Secret Service).
+**Cloud mode:**
+```bash
+npx ts-mcp login
+```
+
+You'll be prompted for your Touchstone username and password. The password is entered securely (not echoed to screen). Your credentials are stored securely in your system keychain.
 
 You only need to authenticate once per machine (or when your session expires).
 
@@ -103,7 +107,8 @@ Review the test results, fix any conformance issues in your FHIR implementation,
 
 **Authenticate (in terminal, before using Claude Code):**
 ```bash
-npx ts-mcp auth
+npx ts-mcp auth    # Local mode
+npx ts-mcp login   # Cloud mode
 ```
 
 **Run tests (in Claude Code):**
