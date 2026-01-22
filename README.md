@@ -16,6 +16,8 @@ npx ts-mcp
 
 ## Configuration
 
+Add TS-MCP to your Claude Code MCP configuration file at `~/.claude/mcp.json`.
+
 TS-MCP supports two modes: **local** (default) and **cloud**.
 
 ### Local Mode
