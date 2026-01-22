@@ -1,0 +1,46 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all commits to check messages
+
+      - name: Check for [run ci] in commit messages
+        id: check_ci
+        run: |
+          # Get commit messages from this push
+          COMMIT_MESSAGES=$(git log --format=%s ${{ github.event.before }}..${{ github.sha }} 2>/dev/null || git log --format=%s -1)
+          echo "Commit messages:"
+          echo "$COMMIT_MESSAGES"
+
+          if echo "$COMMIT_MESSAGES" | grep -q '\[run ci\]'; then
+            echo "Found [run ci] in commit messages"
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+          else
+            echo "No [run ci] found in commit messages, skipping deployment"
+            echo "should_deploy=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install Railway CLI
+        if: steps.check_ci.outputs.should_deploy == 'true'
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway
+        if: steps.check_ci.outputs.should_deploy == 'true'
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up --detach
+
+      - name: Deployment skipped
+        if: steps.check_ci.outputs.should_deploy == 'false'
+        run: echo "Deployment skipped - no [run ci] in commit messages"
