@@ -4,14 +4,10 @@ MCP server for conversational FHIR testing with [Touchstone](https://touchstone.
 
 ## Installation
 
-```bash
-npm install -g ts-mcp
-```
-
-Or run directly with npx:
+Run directly with npx (no installation required):
 
 ```bash
-npx ts-mcp
+npx github:AEGISnetinc/TS-MCP --help
 ```
 
 ## Configuration
@@ -25,31 +21,29 @@ TS-MCP supports two modes: **local** (default) and **cloud**.
 For individual developers running TS-MCP on their own machine:
 
 ```bash
-claude mcp add ts-mcp -- npx ts-mcp
+claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP serve
 ```
 
 ### Cloud Mode
 
-For teams using a shared TS-MCP server:
+For teams using a shared TS-MCP server. The cloud proxy reads auth from your keychain on each request, so re-authentication takes effect immediately without config changes.
 
-1. **Authenticate first** to get a session token:
+1. **Authenticate first:**
 ```bash
-npx ts-mcp login
+npx github:AEGISnetinc/TS-MCP login
 ```
 
-2. **Get your session token** from the keychain:
+2. **Add the MCP server** in cloud proxy mode:
 ```bash
-# macOS
-security find-generic-password -s ts-mcp -a 'session:https://your-server.example.com' -w
+claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP serve --cloud
 ```
 
-3. **Add the MCP server** with the Authorization header:
-```bash
-claude mcp add --transport http ts-mcp https://your-server.example.com/mcp \
-  --header "Authorization: Bearer <session-token>"
-```
+When your session expires (check with `npx github:AEGISnetinc/TS-MCP status`), simply re-run `npx github:AEGISnetinc/TS-MCP login` - no config update needed.
 
-When your session expires (check with `npx ts-mcp status`), re-run `npx ts-mcp login` and update the MCP configuration with the new token.
+**Custom cloud server URL:**
+```bash
+claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP serve --cloud-url https://your-server.example.com/mcp
+```
 
 ### Verification
 
@@ -88,12 +82,12 @@ Run the appropriate `claude mcp add` command (see Configuration section above).
 
 **Local mode:**
 ```bash
-npx ts-mcp auth
+npx github:AEGISnetinc/TS-MCP auth
 ```
 
 **Cloud mode:**
 ```bash
-npx ts-mcp login
+npx github:AEGISnetinc/TS-MCP login
 ```
 
 You'll be prompted for your Touchstone username and password. The password is entered securely (not echoed to screen). Your credentials are stored securely in your system keychain.
@@ -120,8 +114,8 @@ Review the test results, fix any conformance issues in your FHIR implementation,
 
 **Authenticate (in terminal, before using Claude Code):**
 ```bash
-npx ts-mcp auth    # Local mode
-npx ts-mcp login   # Cloud mode
+npx github:AEGISnetinc/TS-MCP auth    # Local mode
+npx github:AEGISnetinc/TS-MCP login   # Cloud mode
 ```
 
 **Run tests (in Claude Code):**
@@ -137,12 +131,14 @@ npx ts-mcp login   # Cloud mode
 
 | Command | Description |
 |---------|-------------|
-| `npx ts-mcp auth` | Authenticate for local mode (stores API key in keychain) |
-| `npx ts-mcp login [name]` | Authenticate with cloud server |
-| `npx ts-mcp logout [name]` | Log out from cloud server |
-| `npx ts-mcp status` | Show authentication status (local and cloud) |
-| `npx ts-mcp --help` | Show help |
-| `npx ts-mcp` | Start MCP server (mode determined by TS_MCP_MODE) |
+| `npx github:AEGISnetinc/TS-MCP serve` | Start local MCP server (recommended) |
+| `npx github:AEGISnetinc/TS-MCP serve --cloud` | Start cloud proxy (reads auth from keychain) |
+| `npx github:AEGISnetinc/TS-MCP serve --cloud-url URL` | Use custom cloud server |
+| `npx github:AEGISnetinc/TS-MCP auth` | Authenticate for local mode |
+| `npx github:AEGISnetinc/TS-MCP login` | Authenticate with cloud server |
+| `npx github:AEGISnetinc/TS-MCP logout` | Log out from cloud server |
+| `npx github:AEGISnetinc/TS-MCP status` | Show authentication status |
+| `npx github:AEGISnetinc/TS-MCP --help` | Show help |
 
 ## MCP Tools
 
@@ -184,9 +180,11 @@ src/
 │   ├── auth.ts                 # Local authentication command
 │   ├── login.ts                # Cloud login command
 │   ├── logout.ts               # Cloud logout command
+│   ├── serve.ts                # Serve command (local or cloud proxy)
 │   └── status.ts               # Auth status command
 ├── server/
 │   ├── mcp-server.ts           # MCP server implementation
+│   ├── proxy-server.ts         # Cloud proxy (STDIO to HTTP with dynamic auth)
 │   ├── http-server.ts          # Express server (cloud mode)
 │   ├── auth-service.ts         # Login/logout/status service (cloud mode)
 │   ├── tools.ts                # Tool definitions

@@ -60,6 +60,7 @@ const { MyClass } = await import('./my-module.js');
 
 ### Core Server
 - `src/server/mcp-server.ts` - Main MCP server implementation
+- `src/server/proxy-server.ts` - Cloud proxy (STDIO to HTTP with dynamic auth from keychain)
 - `src/server/http-server.ts` - Express server with Streamable HTTP transport (cloud mode)
 - `src/server/auth-service.ts` - Login/logout/status operations (cloud mode)
 - `src/server/tools.ts` - MCP tool definitions
@@ -79,6 +80,7 @@ const { MyClass } = await import('./my-module.js');
 - `src/db/migrations/001_initial.sql` - Schema
 
 ### CLI Commands
+- `src/cli/serve.ts` - Serve command (`ts-mcp serve [--cloud]`)
 - `src/cli/auth.ts` - Local authentication (`ts-mcp auth`)
 - `src/cli/login.ts` - Cloud login (`ts-mcp login`)
 - `src/cli/logout.ts` - Cloud logout (`ts-mcp logout`)
@@ -94,6 +96,7 @@ const { MyClass } = await import('./my-module.js');
 - `docs/plans/2026-01-15-ts-mcp-implementation.md` - Implementation plan
 - `docs/plans/2026-01-19-cloud-deployment-design.md` - Cloud deployment design
 - `docs/plans/2026-01-19-cloud-deployment-implementation.md` - Cloud deployment implementation plan
+- `docs/plans/2026-01-22-dynamic-auth-proxy.md` - Dynamic auth proxy design
 
 ## MCP Configuration
 
@@ -101,19 +104,19 @@ Configure TS-MCP as an MCP server for Claude Code:
 
 ```bash
 # Local mode (STDIO)
-claude mcp add ts-mcp -- npx ts-mcp
+claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP serve
 
-# Cloud mode (HTTP) - requires session token in Authorization header
-# 1. First authenticate: npx ts-mcp login
-# 2. Get token: security find-generic-password -s ts-mcp -a 'session:https://ts-mcp.fly.dev' -w
-# 3. Add with header:
-claude mcp add --transport http ts-mcp https://ts-mcp.fly.dev/mcp \
-  --header "Authorization: Bearer <session-token>"
+# Cloud mode (STDIO proxy with dynamic auth from keychain)
+npx github:AEGISnetinc/TS-MCP login  # Authenticate first
+claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP serve --cloud
+
+# Custom cloud server URL
+claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP serve --cloud-url https://your-server.example.com/mcp
 ```
 
 Verify with `claude mcp list`. Restart Claude Code after configuration changes.
 
-**Note:** Cloud session tokens expire. When `npx ts-mcp status` shows expiration is near, re-run `npx ts-mcp login` and update the MCP configuration with the new token.
+**Note:** The cloud proxy reads session tokens from keychain on each request. When your Touchstone API key expires, simply re-run `npx github:AEGISnetinc/TS-MCP login` - no config update needed.
 
 See `docs/rabbit-holes/global-vs-local-mcp-gyrations.md` for troubleshooting configuration issues.
 
