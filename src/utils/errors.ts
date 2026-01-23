@@ -21,18 +21,12 @@ export class AuthenticationFailedError extends TSMCPError {
   }
 }
 
-export class SessionExpiredError extends TSMCPError {
-  constructor() {
-    super('Session expired. Run "npx ts-mcp auth" to re-authenticate.', 'SESSION_EXPIRED');
-  }
-}
-
 export class TouchstoneApiKeyExpiredError extends TSMCPError {
   constructor() {
     super(
       'Touchstone API key expired',
       'TOUCHSTONE_API_KEY_EXPIRED',
-      { action: 'npx github:AEGISnetinc/TS-MCP login' }
+      { action: 'npx github:AEGISnetinc/TS-MCP auth' }
     );
   }
 }
