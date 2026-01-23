@@ -231,13 +231,7 @@ Cloud servers:
 
 ### Re-authentication After Expiration
 
-When your Touchstone API key expires, the MCP server will return an error with instructions. Simply run:
-
-```bash
-npx github:AEGISnetinc/TS-MCP login
-```
-
-The proxy automatically picks up the new session token on the next request - no MCP configuration changes needed!
+When your Touchstone API key expires, Claude will notify you and automatically run the login command. You'll be prompted for your Touchstone credentials, and then Claude will retry your request - no manual intervention or MCP configuration changes needed.
 
 ---
 
@@ -337,13 +331,7 @@ The cloud proxy automatically picks up the new token - no config changes needed.
 
 ### "Touchstone API key expired" Error
 
-Your Touchstone API key has expired. The error message includes the action to take:
-
-```
-Authentication required. Run: npx github:AEGISnetinc/TS-MCP login
-```
-
-Simply run the command and the proxy will use your new credentials on the next request.
+Your Touchstone API key has expired. Claude will automatically run the login command for you. After you enter your credentials, Claude will retry your request.
 
 ### "Test Setup not found" Error
 
