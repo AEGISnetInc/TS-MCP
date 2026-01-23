@@ -534,24 +534,114 @@ git commit -m "refactor: simplify CLI to local-only"
 - Modify: `src/cli/status.ts`
 - Modify: `tests/unit/cli-status.test.ts`
 
-**Step 1: Read current status.ts**
+**Step 1: Read current files**
 
-Read `src/cli/status.ts` to see current implementation.
+Read `src/cli/status.ts` and `tests/unit/cli-status.test.ts` to understand current implementation.
 
-**Step 2: Update status.ts**
+**Step 2: Write failing tests for new behavior**
 
-Remove:
-- Cloud server status checks
-- Multiple server iteration
+Update `tests/unit/cli-status.test.ts`:
+- Remove all cloud status tests
+- Add test: shows "Authenticated: Yes" when key exists
+- Add test: shows "Authenticated: No" when no key
+- Add test: prompts user and calls auth when user says yes
+- Add test: does not call auth when user says no
 
-Add:
-- Prompt to authenticate if not authenticated
-- Use readline for Y/n prompt
-- If user says yes, call auth flow
+```typescript
+import { jest, describe, it, expect, beforeEach, afterEach } from '@jest/globals';
+import * as readline from 'readline';
+
+// Mock keychain
+const mockHasApiKey = jest.fn<() => Promise<boolean>>();
+jest.unstable_mockModule('../../src/auth/keychain.js', () => ({
+  KeychainService: jest.fn().mockImplementation(() => ({
+    hasApiKey: mockHasApiKey
+  }))
+}));
+
+// Mock auth CLI
+const mockRunAuthCli = jest.fn<() => Promise<void>>();
+jest.unstable_mockModule('../../src/cli/auth.js', () => ({
+  runAuthCli: mockRunAuthCli
+}));
+
+// Mock readline
+const mockQuestion = jest.fn();
+const mockClose = jest.fn();
+jest.unstable_mockModule('readline', () => ({
+  createInterface: jest.fn().mockReturnValue({
+    question: mockQuestion,
+    close: mockClose
+  })
+}));
+
+describe('runStatusCli', () => {
+  let mockConsoleLog: jest.SpiedFunction<typeof console.log>;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+    mockRunAuthCli.mockResolvedValue(undefined);
+  });
+
+  afterEach(() => {
+    mockConsoleLog.mockRestore();
+  });
+
+  it('shows Authenticated: Yes when key exists', async () => {
+    mockHasApiKey.mockResolvedValue(true);
+
+    const { runStatusCli } = await import('../../src/cli/status.js');
+    await runStatusCli();
+
+    expect(mockConsoleLog).toHaveBeenCalledWith('Authenticated: Yes');
+    expect(mockQuestion).not.toHaveBeenCalled();
+  });
+
+  it('shows Authenticated: No when no key', async () => {
+    mockHasApiKey.mockResolvedValue(false);
+    mockQuestion.mockImplementation((q, cb) => cb('n'));
+
+    const { runStatusCli } = await import('../../src/cli/status.js');
+    await runStatusCli();
+
+    expect(mockConsoleLog).toHaveBeenCalledWith('Authenticated: No');
+  });
+
+  it('prompts and calls auth when user says yes', async () => {
+    mockHasApiKey.mockResolvedValue(false);
+    mockQuestion.mockImplementation((q, cb) => cb('y'));
+
+    const { runStatusCli } = await import('../../src/cli/status.js');
+    await runStatusCli();
+
+    expect(mockRunAuthCli).toHaveBeenCalled();
+  });
+
+  it('does not call auth when user says no', async () => {
+    mockHasApiKey.mockResolvedValue(false);
+    mockQuestion.mockImplementation((q, cb) => cb('n'));
+
+    const { runStatusCli } = await import('../../src/cli/status.js');
+    await runStatusCli();
+
+    expect(mockRunAuthCli).not.toHaveBeenCalled();
+  });
+});
+```
+
+**Step 3: Run tests to verify they fail**
+
+```bash
+npm test -- tests/unit/cli-status.test.ts
+```
+
+Expected: Tests FAIL (current implementation has cloud logic, not new behavior)
+
+**Step 4: Implement status.ts to make tests pass**
 
 ```typescript
 import * as readline from 'readline';
-import { runAuthCli } from './auth.js';
 
 export async function runStatusCli(): Promise<void> {
   const { KeychainService } = await import('../auth/keychain.js');
@@ -579,28 +669,22 @@ export async function runStatusCli(): Promise<void> {
 
     if (answer.toLowerCase() !== 'n') {
       console.log('');
+      const { runAuthCli } = await import('./auth.js');
       await runAuthCli();
     }
   }
 }
 ```
 
-**Step 3: Update cli-status.test.ts**
-
-Remove tests for cloud status. Add tests for:
-- Shows "Authenticated: Yes" when key exists
-- Shows "Authenticated: No" and prompts when no key
-- Mock readline for prompt testing
-
-**Step 4: Run tests**
+**Step 5: Run tests to verify they pass**
 
 ```bash
 npm test -- tests/unit/cli-status.test.ts
 ```
 
-Expected: All tests pass
+Expected: All tests PASS
 
-**Step 5: Commit**
+**Step 6: Commit**
 
 ```bash
 git add src/cli/status.ts tests/unit/cli-status.test.ts
