@@ -10,8 +10,19 @@ export class DatabaseClient {
     if (!config.databaseUrl) {
       throw new Error('DATABASE_URL environment variable is not set');
     }
+    // Determine SSL mode:
+    // - Fly internal (.flycast) doesn't use SSL
+    // - External connections (Railway, etc.) need SSL
+    const isInternalFly = config.databaseUrl.includes('.flycast');
+    const hasSSLInUrl = config.databaseUrl.includes('sslmode=');
+
+    const ssl = isInternalFly ? false :
+                hasSSLInUrl ? undefined :
+                { rejectUnauthorized: false };
+
     this.pool = new Pool({
-      connectionString: config.databaseUrl
+      connectionString: config.databaseUrl,
+      ssl
     });
   }
 
