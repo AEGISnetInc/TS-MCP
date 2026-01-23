@@ -1,6 +1,6 @@
 # Getting Started with TS-MCP
 
-TS-MCP enables conversational FHIR testing through Claude Code by connecting to the Touchstone API. This guide walks you through setup and usage.
+TS-MCP enables conversational FHIR testing from the **Claude Code** CLI by connecting to the Touchstone API. This guide walks you through setup and usage.
 
 ## Choose Your Mode
 
@@ -8,8 +8,8 @@ TS-MCP supports two deployment modes:
 
 | Mode | Description | Best For |
 |------|-------------|----------|
-| **Local Mode** | Runs on your machine, stores credentials in your system keychain | Individual developers |
-| **Cloud Mode** | Proxies to a shared cloud server with dynamic auth from keychain | Teams, shared environments |
+| **Local Mode** | Runs on your machine, stores credentials in your system's secure credential storage  | Individual developers |
+| **Cloud Mode** | Proxies to a shared cloud server with dynamic auth from your system's secure credential storage | Teams, shared environments |
 
 Choose the mode that fits your needs and follow the corresponding setup instructions below.
 

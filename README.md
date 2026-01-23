@@ -1,6 +1,7 @@
 # TS-MCP: Touchstone MCP Server
 
 MCP server for conversational FHIR testing with [Touchstone](https://touchstone.aegis.net).
+- First use case: **Claude Code** users.
 
 ## Installation
 
@@ -24,9 +25,11 @@ For individual developers running TS-MCP on their own machine:
 claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP serve
 ```
 
-### Cloud Mode
+### Cloud Mode (Most Users)
 
-For teams using a shared TS-MCP server. The cloud proxy reads auth from your keychain on each request, so re-authentication takes effect immediately without config changes.
+For using a shared TS-MCP server. AEGIS hosts a TS-MCP server in our cloud infrastructure. 
+
+A cloud proxy process reads your authentication token from your secure system credential store on each request to TS-MCP. When re-authentication is required (like when your Touchstone API key expires) you are prompted to login to Touchstone and that takes effect immediately without having to retart Claude. (Claude normally requires an exit/restart to know about changes to MCP configuration.)
 
 1. **Authenticate first:**
 ```bash
