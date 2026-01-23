@@ -7,7 +7,6 @@ export interface AuthContext {
 
 /**
  * Interface for authentication providers.
- * Implementations handle different auth strategies (local keychain, cloud sessions).
  */
 export interface AuthProvider {
   /**

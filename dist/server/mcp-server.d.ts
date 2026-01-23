@@ -14,7 +14,6 @@ export declare class TSMCPServer {
     private handleGetResults;
     /**
      * Connects the MCP server to an external transport.
-     * Used for HTTP/cloud mode where the transport is managed externally.
      */
     connectTransport(transport: Transport): void;
     run(): Promise<void>;

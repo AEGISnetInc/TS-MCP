@@ -228,7 +228,6 @@ export class TSMCPServer {
 
   /**
    * Connects the MCP server to an external transport.
-   * Used for HTTP/cloud mode where the transport is managed externally.
    */
   connectTransport(transport: Transport): void {
     this.server.connect(transport);
