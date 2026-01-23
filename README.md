@@ -32,9 +32,24 @@ claude mcp add ts-mcp -- npx ts-mcp
 
 For teams using a shared TS-MCP server:
 
+1. **Authenticate first** to get a session token:
 ```bash
-claude mcp add --transport http ts-mcp https://your-ts-mcp-server.example.com/mcp
+npx ts-mcp login
 ```
+
+2. **Get your session token** from the keychain:
+```bash
+# macOS
+security find-generic-password -s ts-mcp -a 'session:https://your-server.example.com' -w
+```
+
+3. **Add the MCP server** with the Authorization header:
+```bash
+claude mcp add --transport http ts-mcp https://your-server.example.com/mcp \
+  --header "Authorization: Bearer <session-token>"
+```
+
+When your session expires (check with `npx ts-mcp status`), re-run `npx ts-mcp login` and update the MCP configuration with the new token.
 
 ### Verification
 

@@ -103,11 +103,17 @@ Configure TS-MCP as an MCP server for Claude Code:
 # Local mode (STDIO)
 claude mcp add ts-mcp -- npx ts-mcp
 
-# Cloud mode (HTTP) - requires --transport http flag
-claude mcp add --transport http ts-mcp https://ts-mcp.fly.dev/mcp
+# Cloud mode (HTTP) - requires session token in Authorization header
+# 1. First authenticate: npx ts-mcp login
+# 2. Get token: security find-generic-password -s ts-mcp -a 'session:https://ts-mcp.fly.dev' -w
+# 3. Add with header:
+claude mcp add --transport http ts-mcp https://ts-mcp.fly.dev/mcp \
+  --header "Authorization: Bearer <session-token>"
 ```
 
 Verify with `claude mcp list`. Restart Claude Code after configuration changes.
+
+**Note:** Cloud session tokens expire. When `npx ts-mcp status` shows expiration is near, re-run `npx ts-mcp login` and update the MCP configuration with the new token.
 
 See `docs/rabbit-holes/global-vs-local-mcp-gyrations.md` for troubleshooting configuration issues.
 
