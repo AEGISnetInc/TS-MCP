@@ -150,7 +150,10 @@ describe('index.ts', () => {
         expect(mockConsoleLog).toHaveBeenCalledWith('TS-MCP - Touchstone MCP Server for Claude Code');
         expect(mockConsoleLog).toHaveBeenCalledWith('Usage: ts-mcp [command]');
         expect(mockConsoleLog).toHaveBeenCalledWith('Commands:');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  auth           Authenticate for local mode (stores API key in keychain)');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  serve              Start MCP server (recommended)');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  serve --cloud      Start MCP server in cloud proxy mode');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  serve --cloud-url  Use custom cloud server URL');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  auth               Authenticate for local mode (stores API key in keychain)');
         expect(mockConsoleLog).toHaveBeenCalledWith('  login [name]   Authenticate with cloud server');
         expect(mockConsoleLog).toHaveBeenCalledWith('  logout [name]  Log out from cloud server');
         expect(mockConsoleLog).toHaveBeenCalledWith('  status         Show authentication status');
@@ -174,9 +177,10 @@ describe('index.ts', () => {
         await indexModule.handleCommand(['--help']);
 
         expect(mockConsoleLog).toHaveBeenCalledWith('Examples:');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp serve             # Start local MCP server');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp serve --cloud     # Start cloud proxy (auth from keychain)');
         expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp auth              # Authenticate for local mode');
         expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp login             # Authenticate with cloud server');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp login touchstone  # Authenticate with specific server');
         expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp status            # Show auth status');
       });
     });

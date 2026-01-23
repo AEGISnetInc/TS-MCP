@@ -79,7 +79,10 @@ export function printHelp(): void {
   console.log('Usage: ts-mcp [command]');
   console.log('');
   console.log('Commands:');
-  console.log('  auth           Authenticate for local mode (stores API key in keychain)');
+  console.log('  serve              Start MCP server (recommended)');
+  console.log('  serve --cloud      Start MCP server in cloud proxy mode');
+  console.log('  serve --cloud-url  Use custom cloud server URL');
+  console.log('  auth               Authenticate for local mode (stores API key in keychain)');
   console.log('  login [name]   Authenticate with cloud server');
   console.log('  logout [name]  Log out from cloud server');
   console.log('  status         Show authentication status');
@@ -89,9 +92,10 @@ export function printHelp(): void {
   console.log('  TS_MCP_MODE=local|cloud  Server mode (default: local)');
   console.log('');
   console.log('Examples:');
+  console.log('  ts-mcp serve             # Start local MCP server');
+  console.log('  ts-mcp serve --cloud     # Start cloud proxy (auth from keychain)');
   console.log('  ts-mcp auth              # Authenticate for local mode');
   console.log('  ts-mcp login             # Authenticate with cloud server');
-  console.log('  ts-mcp login touchstone  # Authenticate with specific server');
   console.log('  ts-mcp status            # Show auth status');
 }
 
@@ -103,6 +107,21 @@ export async function handleCommand(args: string[]): Promise<void> {
   const command = args[0];
 
   switch (command) {
+    case 'serve': {
+      // Parse serve options
+      const options: { cloud?: boolean; cloudUrl?: string } = {};
+      for (let i = 1; i < args.length; i++) {
+        if (args[i] === '--cloud') {
+          options.cloud = true;
+        } else if (args[i] === '--cloud-url' && args[i + 1]) {
+          options.cloudUrl = args[++i];
+        }
+      }
+      const { runServeCli } = await import('./cli/serve.js');
+      await runServeCli(options);
+      break;
+    }
+
     case 'auth': {
       const { runAuthCli } = await import('./cli/auth.js');
       await runAuthCli();

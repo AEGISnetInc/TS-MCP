@@ -1,6 +1,6 @@
 import {
   AuthenticationFailedError,
-  SessionExpiredError,
+  TouchstoneApiKeyExpiredError,
   ExecutionNotFoundError,
   NetworkError,
   TouchstoneError
@@ -41,7 +41,7 @@ export class TouchstoneClient {
       if (endpoint === '/authenticate') {
         throw new AuthenticationFailedError();
       }
-      throw new SessionExpiredError();
+      throw new TouchstoneApiKeyExpiredError();
     }
     if (status === 404) {
       throw new ExecutionNotFoundError(endpoint);

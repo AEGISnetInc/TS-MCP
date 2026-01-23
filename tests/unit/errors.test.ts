@@ -3,6 +3,7 @@ import {
   NotAuthenticatedError,
   AuthenticationFailedError,
   SessionExpiredError,
+  TouchstoneApiKeyExpiredError,
   TestSetupNotFoundError,
   ExecutionNotFoundError,
   NetworkError,
@@ -45,6 +46,19 @@ describe('SessionExpiredError', () => {
     const error = new SessionExpiredError();
     expect(error.message).toBe('Session expired. Run "npx ts-mcp auth" to re-authenticate.');
     expect(error.code).toBe('SESSION_EXPIRED');
+  });
+});
+
+describe('TouchstoneApiKeyExpiredError', () => {
+  it('has correct message and code', () => {
+    const error = new TouchstoneApiKeyExpiredError();
+    expect(error.message).toBe('Touchstone API key expired');
+    expect(error.code).toBe('TOUCHSTONE_API_KEY_EXPIRED');
+  });
+
+  it('includes action in details', () => {
+    const error = new TouchstoneApiKeyExpiredError();
+    expect(error.details).toEqual({ action: 'npx github:AEGISnetinc/TS-MCP login' });
   });
 });
 
@@ -129,6 +143,30 @@ describe('formatErrorResponse', () => {
     expect(response).toEqual({
       error: 'An unknown error occurred',
       code: 'UNKNOWN_ERROR'
+    });
+  });
+
+  it('extracts action to top level from details', () => {
+    const error = new TouchstoneApiKeyExpiredError();
+    const response = formatErrorResponse(error);
+    expect(response).toEqual({
+      error: 'Touchstone API key expired',
+      code: 'TOUCHSTONE_API_KEY_EXPIRED',
+      action: 'npx github:AEGISnetinc/TS-MCP login'
+    });
+  });
+
+  it('includes both action and other details when present', () => {
+    const error = new TSMCPError('Custom error', 'CUSTOM', {
+      action: 'npx github:AEGISnetinc/TS-MCP login',
+      extra: 'info'
+    });
+    const response = formatErrorResponse(error);
+    expect(response).toEqual({
+      error: 'Custom error',
+      code: 'CUSTOM',
+      action: 'npx github:AEGISnetinc/TS-MCP login',
+      details: { extra: 'info' }
     });
   });
 });

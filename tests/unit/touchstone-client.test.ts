@@ -68,13 +68,13 @@ describe('TouchstoneClient', () => {
       expect(result).toBe('12345');
     });
 
-    it('throws SessionExpiredError on 401', async () => {
+    it('throws TouchstoneApiKeyExpiredError on 401', async () => {
       mockFetch.mockResolvedValueOnce({
         ok: false,
         status: 401
       } as Response);
 
-      await expect(client.launchExecution('expired-key', 'Test')).rejects.toThrow('Session expired');
+      await expect(client.launchExecution('expired-key', 'Test')).rejects.toThrow('Touchstone API key expired');
     });
   });
 

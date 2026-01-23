@@ -27,6 +27,16 @@ export class SessionExpiredError extends TSMCPError {
   }
 }
 
+export class TouchstoneApiKeyExpiredError extends TSMCPError {
+  constructor() {
+    super(
+      'Touchstone API key expired',
+      'TOUCHSTONE_API_KEY_EXPIRED',
+      { action: 'npx github:AEGISnetinc/TS-MCP login' }
+    );
+  }
+}
+
 export class TestSetupNotFoundError extends TSMCPError {
   constructor(setupName: string) {
     super(
@@ -58,15 +68,26 @@ export class TouchstoneError extends TSMCPError {
 export interface ErrorResponse {
   error: string;
   code: string;
+  action?: string;
   details?: Record<string, unknown>;
 }
 
 export function formatErrorResponse(error: unknown): ErrorResponse {
   if (error instanceof TSMCPError) {
+    // Extract action from details if present
+    const action = error.details?.action as string | undefined;
+    const otherDetails = error.details
+      ? Object.fromEntries(
+          Object.entries(error.details).filter(([key]) => key !== 'action')
+        )
+      : undefined;
+    const hasOtherDetails = otherDetails && Object.keys(otherDetails).length > 0;
+
     return {
       error: error.message,
       code: error.code,
-      ...(error.details && { details: error.details })
+      ...(action && { action }),
+      ...(hasOtherDetails && { details: otherDetails })
     };
   }
 

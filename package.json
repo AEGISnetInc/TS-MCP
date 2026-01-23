@@ -33,7 +33,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/AEGISnetInc/ts-mcp.git"
+    "url": "https://github.com/AEGISnetinc/TS-MCP.git"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -18,14 +18,15 @@ describe('DatabaseClient', () => {
     jest.resetModules();
   });
 
-  it('creates a pool with the database URL', async () => {
+  it('creates a pool with the database URL and SSL', async () => {
     const { Pool } = await import('pg');
     const { DatabaseClient } = await import('../../src/db/client.js');
 
     const client = new DatabaseClient();
 
     expect(Pool).toHaveBeenCalledWith({
-      connectionString: 'postgres://test:test@localhost/testdb'
+      connectionString: 'postgres://test:test@localhost/testdb',
+      ssl: { rejectUnauthorized: false }
     });
   });
 

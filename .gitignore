@@ -1,5 +1,5 @@
 node_modules/
-dist/
+# dist/ is committed for npx github:AEGISnetinc/TS-MCP support
 .env
 .env.local
 *.log
