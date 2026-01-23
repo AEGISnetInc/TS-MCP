@@ -21,39 +21,28 @@ describe('AnalyticsClient', () => {
     jest.clearAllMocks();
   });
 
-  describe('when telemetry is enabled', () => {
-    it('creates client without error', () => {
-      const client = new AnalyticsClient(true);
-      expect(client).toBeDefined();
-    });
-
-    it('can track events without throwing', () => {
-      const client = new AnalyticsClient(true);
-      expect(() => {
-        client.track(AnalyticsEvents.AUTH_SUCCESS, { base_url: 'https://example.com' });
-      }).not.toThrow();
-    });
+  it('creates client without error', () => {
+    const client = new AnalyticsClient();
+    expect(client).toBeDefined();
   });
 
-  describe('when telemetry is disabled', () => {
-    it('does not throw when tracking events', () => {
-      const client = new AnalyticsClient(false);
-      expect(() => {
-        client.track(AnalyticsEvents.AUTH_SUCCESS, { base_url: 'https://example.com' });
-      }).not.toThrow();
-    });
+  it('can track events without throwing', () => {
+    const client = new AnalyticsClient();
+    expect(() => {
+      client.track(AnalyticsEvents.AUTH_SUCCESS, { base_url: 'https://example.com' });
+    }).not.toThrow();
   });
 
   describe('getInstanceId', () => {
     it('returns consistent instance ID', () => {
-      const client = new AnalyticsClient(true);
+      const client = new AnalyticsClient();
       const id1 = client.getInstanceId();
       const id2 = client.getInstanceId();
       expect(id1).toBe(id2);
     });
 
     it('returns a valid UUID format', () => {
-      const client = new AnalyticsClient(true);
+      const client = new AnalyticsClient();
       const id = client.getInstanceId();
       // UUID v4 format regex
       const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -63,12 +52,7 @@ describe('AnalyticsClient', () => {
 
   describe('shutdown', () => {
     it('can shutdown without error', async () => {
-      const client = new AnalyticsClient(true);
-      await expect(client.shutdown()).resolves.not.toThrow();
-    });
-
-    it('can shutdown when disabled', async () => {
-      const client = new AnalyticsClient(false);
+      const client = new AnalyticsClient();
       await expect(client.shutdown()).resolves.not.toThrow();
     });
   });

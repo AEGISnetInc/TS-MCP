@@ -10,10 +10,10 @@ export class AnalyticsClient {
   private posthog: PostHog | null = null;
   private instanceId: string;
 
-  constructor(private readonly enabled: boolean) {
+  constructor() {
     this.instanceId = randomUUID();
 
-    if (enabled && POSTHOG_API_KEY !== '__POSTHOG_API_KEY__') {
+    if (POSTHOG_API_KEY !== '__POSTHOG_API_KEY__') {
       this.posthog = new PostHog(POSTHOG_API_KEY, {
         host: 'https://app.posthog.com'
       });
@@ -21,7 +21,7 @@ export class AnalyticsClient {
   }
 
   track(event: AnalyticsEvent, properties: Record<string, unknown>): void {
-    if (!this.enabled || !this.posthog) {
+    if (!this.posthog) {
       return;
     }
 
