@@ -95,6 +95,22 @@ const { MyClass } = await import('./my-module.js');
 - `docs/plans/2026-01-19-cloud-deployment-design.md` - Cloud deployment design
 - `docs/plans/2026-01-19-cloud-deployment-implementation.md` - Cloud deployment implementation plan
 
+## MCP Configuration
+
+Configure TS-MCP as an MCP server for Claude Code:
+
+```bash
+# Local mode (STDIO)
+claude mcp add ts-mcp -- npx ts-mcp
+
+# Cloud mode (HTTP) - requires --transport http flag
+claude mcp add --transport http ts-mcp https://ts-mcp.fly.dev/mcp
+```
+
+Verify with `claude mcp list`. Restart Claude Code after configuration changes.
+
+See `docs/rabbit-holes/global-vs-local-mcp-gyrations.md` for troubleshooting configuration issues.
+
 ## Known Limitations
 
 - Test Setup names must be provided manually (Touchstone API doesn't support listing)

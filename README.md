@@ -16,7 +16,7 @@ npx ts-mcp
 
 ## Configuration
 
-Add TS-MCP to your Claude Code MCP configuration file at `~/.claude/mcp.json`.
+Add TS-MCP to your Claude Code MCP configuration using the CLI.
 
 TS-MCP supports two modes: **local** (default) and **cloud**.
 
@@ -24,30 +24,26 @@ TS-MCP supports two modes: **local** (default) and **cloud**.
 
 For individual developers running TS-MCP on their own machine:
 
-```json
-{
-  "mcpServers": {
-    "touchstone": {
-      "command": "npx",
-      "args": ["ts-mcp"]
-    }
-  }
-}
+```bash
+claude mcp add ts-mcp -- npx ts-mcp
 ```
 
 ### Cloud Mode
 
 For teams using a shared TS-MCP server:
 
-```json
-{
-  "mcpServers": {
-    "touchstone": {
-      "url": "https://your-ts-mcp-server.example.com/mcp"
-    }
-  }
-}
+```bash
+claude mcp add --transport http ts-mcp https://your-ts-mcp-server.example.com/mcp
 ```
+
+### Verification
+
+```bash
+claude mcp list
+# Should show: ts-mcp: ... - ✓ Connected
+```
+
+**Restart Claude Code** after adding the server.
 
 ### Environment Variables
 
@@ -71,7 +67,7 @@ Before using TS-MCP, you need:
 
 ### 1. Configure TS-MCP in Claude Code
 
-Add to `~/.claude/mcp.json` (see Configuration section above for local vs cloud mode).
+Run the appropriate `claude mcp add` command (see Configuration section above).
 
 ### 2. Authenticate
 
