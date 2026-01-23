@@ -9,9 +9,6 @@ export declare class NotAuthenticatedError extends TSMCPError {
 export declare class AuthenticationFailedError extends TSMCPError {
     constructor();
 }
-export declare class SessionExpiredError extends TSMCPError {
-    constructor();
-}
 export declare class TouchstoneApiKeyExpiredError extends TSMCPError {
     constructor();
 }

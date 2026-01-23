@@ -2,10 +2,7 @@ import { jest, describe, it, expect, beforeEach, afterEach } from '@jest/globals
 
 // Mock all dependencies BEFORE importing
 const mockRunAuthCli = jest.fn<() => Promise<void>>();
-const mockRunLoginCli = jest.fn<(serverName?: string) => Promise<void>>();
-const mockRunLogoutCli = jest.fn<(serverName?: string) => Promise<void>>();
 const mockRunStatusCli = jest.fn<() => Promise<void>>();
-const mockGetConfig = jest.fn();
 const mockRun = jest.fn<() => Promise<void>>();
 const mockShutdown = jest.fn<() => Promise<void>>();
 
@@ -25,20 +22,8 @@ jest.unstable_mockModule('../../src/cli/auth.js', () => ({
   runAuthCli: mockRunAuthCli
 }));
 
-jest.unstable_mockModule('../../src/cli/login.js', () => ({
-  runLoginCli: mockRunLoginCli
-}));
-
-jest.unstable_mockModule('../../src/cli/logout.js', () => ({
-  runLogoutCli: mockRunLogoutCli
-}));
-
 jest.unstable_mockModule('../../src/cli/status.js', () => ({
   runStatusCli: mockRunStatusCli
-}));
-
-jest.unstable_mockModule('../../src/utils/config.js', () => ({
-  getConfig: mockGetConfig
 }));
 
 jest.unstable_mockModule('../../src/server/mcp-server.js', () => ({
@@ -65,13 +50,6 @@ describe('index.ts', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    // Default config for local mode
-    mockGetConfig.mockReturnValue({
-      mode: 'local',
-      touchstoneBaseUrl: 'https://touchstone.aegis.net',
-      port: 3000
-    });
-
     // Mock console and process
     mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
     mockConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -82,8 +60,6 @@ describe('index.ts', () => {
 
     // Default mock implementations
     mockRunAuthCli.mockResolvedValue(undefined);
-    mockRunLoginCli.mockResolvedValue(undefined);
-    mockRunLogoutCli.mockResolvedValue(undefined);
     mockRunStatusCli.mockResolvedValue(undefined);
     mockRun.mockResolvedValue(undefined);
   });
@@ -101,30 +77,6 @@ describe('index.ts', () => {
         await indexModule.handleCommand(['auth']);
 
         expect(mockRunAuthCli).toHaveBeenCalled();
-      });
-
-      it('routes "login" command to runLoginCli without server name', async () => {
-        await indexModule.handleCommand(['login']);
-
-        expect(mockRunLoginCli).toHaveBeenCalledWith(undefined);
-      });
-
-      it('routes "login <name>" command to runLoginCli with server name', async () => {
-        await indexModule.handleCommand(['login', 'touchstone-prod']);
-
-        expect(mockRunLoginCli).toHaveBeenCalledWith('touchstone-prod');
-      });
-
-      it('routes "logout" command to runLogoutCli without server name', async () => {
-        await indexModule.handleCommand(['logout']);
-
-        expect(mockRunLogoutCli).toHaveBeenCalledWith(undefined);
-      });
-
-      it('routes "logout <name>" command to runLogoutCli with server name', async () => {
-        await indexModule.handleCommand(['logout', 'touchstone-prod']);
-
-        expect(mockRunLogoutCli).toHaveBeenCalledWith('touchstone-prod');
       });
 
       it('routes "status" command to runStatusCli', async () => {
@@ -150,14 +102,10 @@ describe('index.ts', () => {
         expect(mockConsoleLog).toHaveBeenCalledWith('TS-MCP - Touchstone MCP Server for Claude Code');
         expect(mockConsoleLog).toHaveBeenCalledWith('Usage: ts-mcp [command]');
         expect(mockConsoleLog).toHaveBeenCalledWith('Commands:');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  serve              Start MCP server (recommended)');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  serve --cloud      Start MCP server in cloud proxy mode');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  serve --cloud-url  Use custom cloud server URL');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  auth               Authenticate for local mode (stores API key in keychain)');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  login [name]   Authenticate with cloud server');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  logout [name]  Log out from cloud server');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  status         Show authentication status');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  (none)         Start MCP server (mode determined by TS_MCP_MODE)');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  (none)    Start MCP server');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  auth      Authenticate with Touchstone');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  status    Show authentication status');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  --help    Show this help');
       });
 
       it('shows help for "-h" flag', async () => {
@@ -166,46 +114,17 @@ describe('index.ts', () => {
         expect(mockConsoleLog).toHaveBeenCalledWith('TS-MCP - Touchstone MCP Server for Claude Code');
       });
 
-      it('shows environment variables in help', async () => {
+      it('shows example in help', async () => {
         await indexModule.handleCommand(['--help']);
 
-        expect(mockConsoleLog).toHaveBeenCalledWith('Environment:');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  TS_MCP_MODE=local|cloud  Server mode (default: local)');
-      });
-
-      it('shows examples in help', async () => {
-        await indexModule.handleCommand(['--help']);
-
-        expect(mockConsoleLog).toHaveBeenCalledWith('Examples:');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp serve             # Start local MCP server');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp serve --cloud     # Start cloud proxy (auth from keychain)');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp auth              # Authenticate for local mode');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp login             # Authenticate with cloud server');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  ts-mcp status            # Show auth status');
+        expect(mockConsoleLog).toHaveBeenCalledWith('Example:');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  npx github:AEGISnetinc/TS-MCP auth');
       });
     });
 
-    describe('server mode detection', () => {
-      it('starts local server when mode is "local" and no command', async () => {
-        mockGetConfig.mockReturnValue({
-          mode: 'local',
-          touchstoneBaseUrl: 'https://touchstone.aegis.net',
-          port: 3000
-        });
-
-        await indexModule.handleCommand([]);
-
-        expect(MockTSMCPServer).toHaveBeenCalled();
-        expect(mockRun).toHaveBeenCalled();
-      });
-
-      it('starts local server when TS_MCP_MODE defaults to local', async () => {
-        mockGetConfig.mockReturnValue({
-          mode: 'local', // default when not set
-          touchstoneBaseUrl: 'https://touchstone.aegis.net',
-          port: 3000
-        });
-
+    describe('default behavior', () => {
+      it('starts local server when no command provided', async () => {
         await indexModule.handleCommand([]);
 
         expect(MockTSMCPServer).toHaveBeenCalled();
@@ -213,24 +132,12 @@ describe('index.ts', () => {
       });
 
       it('registers SIGINT handler for local server', async () => {
-        mockGetConfig.mockReturnValue({
-          mode: 'local',
-          touchstoneBaseUrl: 'https://touchstone.aegis.net',
-          port: 3000
-        });
-
         await indexModule.handleCommand([]);
 
         expect(mockProcessOn).toHaveBeenCalledWith('SIGINT', expect.any(Function));
       });
 
       it('registers SIGTERM handler for local server', async () => {
-        mockGetConfig.mockReturnValue({
-          mode: 'local',
-          touchstoneBaseUrl: 'https://touchstone.aegis.net',
-          port: 3000
-        });
-
         await indexModule.handleCommand([]);
 
         expect(mockProcessOn).toHaveBeenCalledWith('SIGTERM', expect.any(Function));
@@ -296,14 +203,6 @@ describe('index.ts', () => {
       await indexModule.main();
 
       expect(mockRunAuthCli).toHaveBeenCalled();
-    });
-
-    it('handles login with server name from process.argv', async () => {
-      process.argv = ['node', 'index.js', 'login', 'my-server'];
-
-      await indexModule.main();
-
-      expect(mockRunLoginCli).toHaveBeenCalledWith('my-server');
     });
   });
 });

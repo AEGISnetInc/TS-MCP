@@ -2,11 +2,9 @@
 
 import { realpathSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { getConfig } from './utils/config.js';
 
 /**
- * Start the MCP server in local mode (STDIO transport).
- * Uses dynamic imports to avoid loading keytar in cloud mode.
+ * Start the MCP server (STDIO transport).
  */
 export async function runLocalServer(): Promise<void> {
   const { TSMCPServer } = await import('./server/mcp-server.js');
@@ -32,45 +30,6 @@ export async function runLocalServer(): Promise<void> {
 }
 
 /**
- * Start the MCP server in cloud mode (HTTP transport with database).
- */
-export async function runCloudServer(): Promise<void> {
-  // Dynamic imports to avoid loading DB deps in local mode
-  const { createHttpServer } = await import('./server/http-server.js');
-  const { DatabaseClient } = await import('./db/client.js');
-  const { runMigrations } = await import('./db/migrate.js');
-  const { TouchstoneClient } = await import('./touchstone/client.js');
-
-  const config = getConfig();
-  const db = new DatabaseClient();
-
-  // Run database migrations
-  await runMigrations(db);
-
-  const touchstoneClient = new TouchstoneClient(config.touchstoneBaseUrl);
-  const { app, close } = createHttpServer({ db, touchstoneClient });
-
-  const server = app.listen(config.port, () => {
-    console.log(`TS-MCP cloud server running on port ${config.port}`);
-  });
-
-  // Handle graceful shutdown
-  process.on('SIGINT', async () => {
-    await close();
-    await db.close();
-    server.close();
-    process.exit(0);
-  });
-
-  process.on('SIGTERM', async () => {
-    await close();
-    await db.close();
-    server.close();
-    process.exit(0);
-  });
-}
-
-/**
  * Print help message.
  */
 export function printHelp(): void {
@@ -79,64 +38,26 @@ export function printHelp(): void {
   console.log('Usage: ts-mcp [command]');
   console.log('');
   console.log('Commands:');
-  console.log('  serve              Start MCP server (recommended)');
-  console.log('  serve --cloud      Start MCP server in cloud proxy mode');
-  console.log('  serve --cloud-url  Use custom cloud server URL');
-  console.log('  auth               Authenticate for local mode (stores API key in keychain)');
-  console.log('  login [name]   Authenticate with cloud server');
-  console.log('  logout [name]  Log out from cloud server');
-  console.log('  status         Show authentication status');
-  console.log('  (none)         Start MCP server (mode determined by TS_MCP_MODE)');
+  console.log('  (none)    Start MCP server');
+  console.log('  auth      Authenticate with Touchstone');
+  console.log('  status    Show authentication status');
+  console.log('  --help    Show this help');
   console.log('');
-  console.log('Environment:');
-  console.log('  TS_MCP_MODE=local|cloud  Server mode (default: local)');
-  console.log('');
-  console.log('Examples:');
-  console.log('  ts-mcp serve             # Start local MCP server');
-  console.log('  ts-mcp serve --cloud     # Start cloud proxy (auth from keychain)');
-  console.log('  ts-mcp auth              # Authenticate for local mode');
-  console.log('  ts-mcp login             # Authenticate with cloud server');
-  console.log('  ts-mcp status            # Show auth status');
+  console.log('Example:');
+  console.log('  claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP');
+  console.log('  npx github:AEGISnetinc/TS-MCP auth');
 }
 
 /**
  * Parse command and route to appropriate handler.
- * Uses dynamic imports to avoid loading keytar in cloud server mode.
  */
 export async function handleCommand(args: string[]): Promise<void> {
   const command = args[0];
 
   switch (command) {
-    case 'serve': {
-      // Parse serve options
-      const options: { cloud?: boolean; cloudUrl?: string } = {};
-      for (let i = 1; i < args.length; i++) {
-        if (args[i] === '--cloud') {
-          options.cloud = true;
-        } else if (args[i] === '--cloud-url' && args[i + 1]) {
-          options.cloudUrl = args[++i];
-        }
-      }
-      const { runServeCli } = await import('./cli/serve.js');
-      await runServeCli(options);
-      break;
-    }
-
     case 'auth': {
       const { runAuthCli } = await import('./cli/auth.js');
       await runAuthCli();
-      break;
-    }
-
-    case 'login': {
-      const { runLoginCli } = await import('./cli/login.js');
-      await runLoginCli(args[1]);
-      break;
-    }
-
-    case 'logout': {
-      const { runLogoutCli } = await import('./cli/logout.js');
-      await runLogoutCli(args[1]);
       break;
     }
 
@@ -152,13 +73,8 @@ export async function handleCommand(args: string[]): Promise<void> {
       break;
 
     case undefined:
-      // No command - run server based on mode
-      const config = getConfig();
-      if (config.mode === 'cloud') {
-        await runCloudServer();
-      } else {
-        await runLocalServer();
-      }
+      // No command - run local server
+      await runLocalServer();
       break;
 
     default:

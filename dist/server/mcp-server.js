@@ -22,7 +22,7 @@ export class TSMCPServer {
         this.touchstoneClient = new TouchstoneClient(this.config.touchstoneBaseUrl);
         this.authProvider = authProvider;
         this.rateLimiter = new RateLimiter();
-        this.analytics = new AnalyticsClient(this.config.telemetryEnabled);
+        this.analytics = new AnalyticsClient();
         this.setupHandlers();
     }
     setupHandlers() {

@@ -4,20 +4,18 @@ import { randomUUID } from 'crypto';
 // This placeholder is replaced during CI/CD build
 const POSTHOG_API_KEY = process.env.POSTHOG_API_KEY ?? '__POSTHOG_API_KEY__';
 export class AnalyticsClient {
-    enabled;
     posthog = null;
     instanceId;
-    constructor(enabled) {
-        this.enabled = enabled;
+    constructor() {
         this.instanceId = randomUUID();
-        if (enabled && POSTHOG_API_KEY !== '__POSTHOG_API_KEY__') {
+        if (POSTHOG_API_KEY !== '__POSTHOG_API_KEY__') {
             this.posthog = new PostHog(POSTHOG_API_KEY, {
                 host: 'https://app.posthog.com'
             });
         }
     }
     track(event, properties) {
-        if (!this.enabled || !this.posthog) {
+        if (!this.posthog) {
             return;
         }
         this.posthog.capture({
