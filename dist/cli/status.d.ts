@@ -1,6 +1,6 @@
 /**
  * Run the CLI status flow.
- * Shows authentication status for both local mode and cloud servers.
+ * Shows authentication status and prompts to authenticate if needed.
  */
 export declare function runStatusCli(): Promise<void>;
 //# sourceMappingURL=status.d.ts.map
