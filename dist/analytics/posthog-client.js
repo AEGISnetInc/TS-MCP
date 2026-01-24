@@ -7,7 +7,9 @@ export class AnalyticsClient {
     instanceId;
     constructor() {
         this.instanceId = randomUUID();
-        if (POSTHOG_API_KEY !== 'phc_PwBTjHa06k5Hrq6If5nBjWLeCOUuLeJja26VwBxrCYK') {
+        // PostHog keys start with 'phc_' - check this instead of placeholder
+        // (sed replaces all occurrences of placeholder, breaking !== check)
+        if (POSTHOG_API_KEY.startsWith('phc_')) {
             this.posthog = new PostHog(POSTHOG_API_KEY, {
                 host: 'https://app.posthog.com'
             });
