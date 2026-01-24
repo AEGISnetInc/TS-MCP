@@ -81,7 +81,15 @@ export async function runStatusCli() {
         }
         else {
             console.log('Authenticated: Unknown');
-            console.log(`Error validating API key: ${error instanceof Error ? error.message : 'Unknown error'}`);
+            const message = error instanceof Error ? error.message : 'Unknown error';
+            // Show status code if available (from TouchstoneError)
+            const statusCode = error?.details?.statusCode;
+            if (statusCode) {
+                console.log(`Error validating API key: ${message} (HTTP ${statusCode})`);
+            }
+            else {
+                console.log(`Error validating API key: ${message}`);
+            }
         }
     }
 }
