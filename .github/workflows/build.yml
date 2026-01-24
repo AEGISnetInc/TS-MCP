@@ -24,9 +24,10 @@ jobs:
         run: npm ci
 
       - name: Inject PostHog key
-        if: ${{ secrets.POSTHOG_API_KEY != '' }}
         run: |
-          sed -i "s/__POSTHOG_API_KEY__/$POSTHOG_API_KEY/" src/analytics/posthog-client.ts
+          if [ -n "$POSTHOG_API_KEY" ]; then
+            sed -i "s/__POSTHOG_API_KEY__/$POSTHOG_API_KEY/" src/analytics/posthog-client.ts
+          fi
         env:
           POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}
 
