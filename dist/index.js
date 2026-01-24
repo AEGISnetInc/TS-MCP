@@ -20,6 +20,9 @@ export async function runLocalServer() {
         await server.shutdown();
         process.exit(0);
     });
+    // Log to stderr since stdout is used for MCP protocol
+    console.error('TS-MCP server running (STDIO mode). Press Ctrl+C to exit.');
+    console.error('This server is designed to be launched by Claude Code, not run directly.');
     await server.run();
 }
 /**
