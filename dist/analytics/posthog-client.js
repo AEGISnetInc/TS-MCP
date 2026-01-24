@@ -1,8 +1,7 @@
 import { PostHog } from 'posthog-node';
 import { randomUUID } from 'crypto';
-// PostHog API key is injected at build time
-// This placeholder is replaced during CI/CD build
-const POSTHOG_API_KEY = process.env.POSTHOG_API_KEY ?? '__POSTHOG_API_KEY__';
+// PostHog API key - placeholder replaced by CI/CD build via sed
+const POSTHOG_API_KEY = '__POSTHOG_API_KEY__';
 export class AnalyticsClient {
     posthog = null;
     instanceId;
