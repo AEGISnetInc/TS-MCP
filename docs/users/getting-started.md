@@ -117,17 +117,11 @@ Verify the exact Test Setup name in the Touchstone UI. Names are case-sensitive.
 
 ## Updating TS-MCP
 
-TS-MCP is actively developed with new features released regularly. To get the latest version:
-
-```bash
-npx github:AEGISnetInc/TS-MCP@latest --help
-```
-
-Or clear the cache and reinstall:
+TS-MCP is actively developed with new features released regularly. To get the latest version, clear the npm cache:
 
 ```bash
 npm cache clean --force
-npx github:AEGISnetInc/TS-MCP auth
+npx github:AEGISnetInc/TS-MCP --help
 ```
 
 Your stored credentials will continue to work after updating.
