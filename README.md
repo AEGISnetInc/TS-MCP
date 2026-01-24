@@ -4,27 +4,32 @@ MCP server for conversational FHIR testing with [Touchstone](https://touchstone.
 
 ## Quick Start
 
-1. **Add to Claude Code:**
+1. **Install:**
    ```bash
-   claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP
+   npx github:AEGISnetInc/TS-MCP --help
    ```
 
-2. **Authenticate:**
+2. **Add to Claude Code:**
    ```bash
-   npx github:AEGISnetinc/TS-MCP auth
+   claude mcp add ts-mcp -- npx github:AEGISnetInc/TS-MCP
    ```
 
-3. **Use in Claude Code:**
+3. **Authenticate:**
+   ```bash
+   npx github:AEGISnetInc/TS-MCP auth
+   ```
+
+4. **Use in Claude Code:**
    > "Run the Patient-CRUD test setup"
 
 ## CLI Commands
 
 | Command | Description |
 |---------|-------------|
-| `npx github:AEGISnetinc/TS-MCP` | Start MCP server |
-| `npx github:AEGISnetinc/TS-MCP auth` | Authenticate with Touchstone |
-| `npx github:AEGISnetinc/TS-MCP status` | Show authentication status |
-| `npx github:AEGISnetinc/TS-MCP --help` | Show help |
+| `npx github:AEGISnetInc/TS-MCP` | Start MCP server |
+| `npx github:AEGISnetInc/TS-MCP auth` | Authenticate with Touchstone |
+| `npx github:AEGISnetInc/TS-MCP status` | Show authentication status |
+| `npx github:AEGISnetInc/TS-MCP --help` | Show help |
 
 ## Environment Variables
 
@@ -48,12 +53,14 @@ MCP server for conversational FHIR testing with [Touchstone](https://touchstone.
 
 ## Updating
 
-TS-MCP is actively developed. To get the latest version, clear the npm cache:
+To update to the latest version:
 
 ```bash
 npm cache clean --force
 npx github:AEGISnetInc/TS-MCP --help
 ```
+
+You don't need to re-run `claude mcp add` or re-authenticate.
 
 ## Documentation
 

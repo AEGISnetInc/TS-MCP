@@ -9,18 +9,30 @@ TS-MCP enables conversational FHIR testing through Claude Code by connecting to 
 - **Touchstone account** with valid credentials
 - **Test Setup** configured in the Touchstone UI
 
-## Step 1: Add TS-MCP to Claude Code
+## First-Time Setup
+
+These steps only need to be run once.
+
+### Step 1: Install TS-MCP
 
 ```bash
-claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP
+npx github:AEGISnetInc/TS-MCP --help
 ```
 
-Restart Claude Code after adding the server.
+This downloads TS-MCP and displays the help message.
 
-## Step 2: Authenticate
+### Step 2: Add to Claude Code
 
 ```bash
-npx github:AEGISnetinc/TS-MCP auth
+claude mcp add ts-mcp -- npx github:AEGISnetInc/TS-MCP
+```
+
+This configures Claude Code to use TS-MCP. Restart Claude Code after adding.
+
+### Step 3: Authenticate
+
+```bash
+npx github:AEGISnetInc/TS-MCP auth
 ```
 
 You'll be prompted for your Touchstone username and password:
@@ -39,7 +51,7 @@ Credentials stored for automatic re-authentication when API key expires.
 
 Your API key and credentials are stored securely in your system credential store (macOS Keychain, Windows Credential Manager, or Linux Secret Service).
 
-## Step 3: Use in Claude Code
+### Step 4: Use in Claude Code
 
 Ask Claude to run your test setup by name:
 
@@ -62,7 +74,7 @@ Summary: 47 passed, 3 failed out of 50 tests
 To check if you're authenticated:
 
 ```bash
-npx github:AEGISnetinc/TS-MCP status
+npx github:AEGISnetInc/TS-MCP status
 ```
 
 If you're not authenticated, you'll be prompted to authenticate.
@@ -102,7 +114,7 @@ Claude: [Runs tests, then provides detailed analysis of failures]
 Run the auth command:
 
 ```bash
-npx github:AEGISnetinc/TS-MCP auth
+npx github:AEGISnetInc/TS-MCP auth
 ```
 
 ### "Test Setup not found" Error
@@ -113,18 +125,18 @@ Verify the exact Test Setup name in the Touchstone UI. Names are case-sensitive.
 
 1. Verify configuration: `claude mcp list`
 2. Restart Claude Code
-3. Check that `npx github:AEGISnetinc/TS-MCP` runs without errors
+3. Check that `npx github:AEGISnetInc/TS-MCP` runs without errors
 
 ## Updating TS-MCP
 
-TS-MCP is actively developed with new features released regularly. To get the latest version, clear the npm cache:
+TS-MCP is actively developed. To update to the latest version:
 
 ```bash
 npm cache clean --force
 npx github:AEGISnetInc/TS-MCP --help
 ```
 
-Your stored credentials will continue to work after updating.
+That's it. You don't need to re-run `claude mcp add` or re-authenticate - your configuration and stored credentials continue to work.
 
 ## Security
 

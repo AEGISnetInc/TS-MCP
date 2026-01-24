@@ -20,7 +20,7 @@ export class AuthenticationFailedError extends TSMCPError {
 }
 export class TouchstoneApiKeyExpiredError extends TSMCPError {
     constructor() {
-        super('Touchstone API key expired', 'TOUCHSTONE_API_KEY_EXPIRED', { action: 'npx github:AEGISnetinc/TS-MCP auth' });
+        super('Touchstone API key expired', 'TOUCHSTONE_API_KEY_EXPIRED', { action: 'npx github:AEGISnetInc/TS-MCP auth' });
     }
 }
 export class TestSetupNotFoundError extends TSMCPError {

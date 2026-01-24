@@ -49,7 +49,7 @@ describe('TouchstoneApiKeyExpiredError', () => {
 
   it('includes action in details', () => {
     const error = new TouchstoneApiKeyExpiredError();
-    expect(error.details).toEqual({ action: 'npx github:AEGISnetinc/TS-MCP auth' });
+    expect(error.details).toEqual({ action: 'npx github:AEGISnetInc/TS-MCP auth' });
   });
 });
 
@@ -143,20 +143,20 @@ describe('formatErrorResponse', () => {
     expect(response).toEqual({
       error: 'Touchstone API key expired',
       code: 'TOUCHSTONE_API_KEY_EXPIRED',
-      action: 'npx github:AEGISnetinc/TS-MCP auth'
+      action: 'npx github:AEGISnetInc/TS-MCP auth'
     });
   });
 
   it('includes both action and other details when present', () => {
     const error = new TSMCPError('Custom error', 'CUSTOM', {
-      action: 'npx github:AEGISnetinc/TS-MCP auth',
+      action: 'npx github:AEGISnetInc/TS-MCP auth',
       extra: 'info'
     });
     const response = formatErrorResponse(error);
     expect(response).toEqual({
       error: 'Custom error',
       code: 'CUSTOM',
-      action: 'npx github:AEGISnetinc/TS-MCP auth',
+      action: 'npx github:AEGISnetInc/TS-MCP auth',
       details: { extra: 'info' }
     });
   });

@@ -48,8 +48,8 @@ export function printHelp(): void {
   console.log('  --help    Show this help');
   console.log('');
   console.log('Example:');
-  console.log('  claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP');
-  console.log('  npx github:AEGISnetinc/TS-MCP auth');
+  console.log('  claude mcp add ts-mcp -- npx github:AEGISnetInc/TS-MCP');
+  console.log('  npx github:AEGISnetInc/TS-MCP auth');
 }
 
 /**

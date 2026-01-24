@@ -118,8 +118,8 @@ describe('index.ts', () => {
         await indexModule.handleCommand(['--help']);
 
         expect(mockConsoleLog).toHaveBeenCalledWith('Example:');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  npx github:AEGISnetinc/TS-MCP auth');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  claude mcp add ts-mcp -- npx github:AEGISnetInc/TS-MCP');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  npx github:AEGISnetInc/TS-MCP auth');
       });
     });
 

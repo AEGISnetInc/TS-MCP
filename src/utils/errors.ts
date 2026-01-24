@@ -26,7 +26,7 @@ export class TouchstoneApiKeyExpiredError extends TSMCPError {
     super(
       'Touchstone API key expired',
       'TOUCHSTONE_API_KEY_EXPIRED',
-      { action: 'npx github:AEGISnetinc/TS-MCP auth' }
+      { action: 'npx github:AEGISnetInc/TS-MCP auth' }
     );
   }
 }

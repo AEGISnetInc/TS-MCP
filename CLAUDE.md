@@ -80,7 +80,7 @@ const { MyClass } = await import('./my-module.js');
 Configure TS-MCP as an MCP server for Claude Code:
 
 ```bash
-claude mcp add ts-mcp -- npx github:AEGISnetinc/TS-MCP
+claude mcp add ts-mcp -- npx github:AEGISnetInc/TS-MCP
 ```
 
 Verify with `claude mcp list`. Restart Claude Code after configuration changes.
