@@ -54,8 +54,8 @@ export class TouchstoneClient {
    * Throws TouchstoneApiKeyExpiredError if the key is invalid/expired.
    */
   async validateApiKey(apiKey: string): Promise<void> {
-    // Use a request that will return 401 if key is expired, or any other response if valid
-    // Getting status for ID "0" should return 404 if key is valid, 401 if expired
+    // Make any authenticated request - if key is expired, we get 401.
+    // Other errors (400, 404, 500) mean the key passed auth checks.
     try {
       await this.request<unknown>(
         '/testExecution/0',
@@ -63,11 +63,13 @@ export class TouchstoneClient {
         apiKey
       );
     } catch (error) {
-      if (error instanceof ExecutionNotFoundError) {
-        // 404 means the key is valid, just the execution doesn't exist
-        return;
+      if (error instanceof TouchstoneApiKeyExpiredError) {
+        // 401 means the key is expired
+        throw error;
       }
-      throw error;
+      // Any other error (400, 404, 500, etc.) means auth passed
+      // The request failed for other reasons, but the key is valid
+      return;
     }
   }
 
