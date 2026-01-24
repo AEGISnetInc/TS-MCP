@@ -114,12 +114,12 @@ describe('index.ts', () => {
         expect(mockConsoleLog).toHaveBeenCalledWith('TS-MCP - Touchstone MCP Server for Claude Code');
       });
 
-      it('shows example in help', async () => {
+      it('shows examples in help', async () => {
         await indexModule.handleCommand(['--help']);
 
-        expect(mockConsoleLog).toHaveBeenCalledWith('Example:');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  claude mcp add ts-mcp -- npx github:AEGISnetInc/TS-MCP');
-        expect(mockConsoleLog).toHaveBeenCalledWith('  npx github:AEGISnetInc/TS-MCP auth');
+        expect(mockConsoleLog).toHaveBeenCalledWith('Examples:');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  npx github:AEGISnetInc/TS-MCP auth      # Authenticate with Touchstone');
+        expect(mockConsoleLog).toHaveBeenCalledWith('  npx github:AEGISnetInc/TS-MCP status    # Check authentication status');
       });
     });
 

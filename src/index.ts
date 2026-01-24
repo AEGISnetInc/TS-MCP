@@ -47,9 +47,9 @@ export function printHelp(): void {
   console.log('  status    Show authentication status');
   console.log('  --help    Show this help');
   console.log('');
-  console.log('Example:');
-  console.log('  claude mcp add ts-mcp -- npx github:AEGISnetInc/TS-MCP');
-  console.log('  npx github:AEGISnetInc/TS-MCP auth');
+  console.log('Examples:');
+  console.log('  npx github:AEGISnetInc/TS-MCP auth      # Authenticate with Touchstone');
+  console.log('  npx github:AEGISnetInc/TS-MCP status    # Check authentication status');
 }
 
 /**
