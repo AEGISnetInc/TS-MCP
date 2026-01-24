@@ -9,6 +9,18 @@ export declare class TSMCPServer {
     private config;
     constructor(authProvider: AuthProvider);
     private setupHandlers;
+    /**
+     * Execute a tool with automatic API key refresh on expiration.
+     */
+    private executeToolWithAutoRefresh;
+    /**
+     * Try to refresh the API key using stored credentials.
+     */
+    private tryRefreshApiKey;
+    /**
+     * Execute a tool by name.
+     */
+    private executeTool;
     private handleLaunchExecution;
     private handleGetStatus;
     private handleGetResults;

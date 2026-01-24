@@ -4,6 +4,7 @@ import { EventEmitter } from 'events';
 // Mock dependencies BEFORE importing the module
 const mockAuthenticate = jest.fn<() => Promise<string>>();
 const mockSetApiKey = jest.fn<() => Promise<void>>();
+const mockSetCredentials = jest.fn<() => Promise<void>>();
 const mockGetConfig = jest.fn();
 
 // Mock readline
@@ -24,7 +25,8 @@ jest.unstable_mockModule('../../src/touchstone/client.js', () => ({
 
 jest.unstable_mockModule('../../src/auth/keychain.js', () => ({
   KeychainService: jest.fn().mockImplementation(() => ({
-    setApiKey: mockSetApiKey
+    setApiKey: mockSetApiKey,
+    setCredentials: mockSetCredentials
   }))
 }));
 
@@ -427,7 +429,7 @@ describe('CLI Auth', () => {
 
       await authPromise;
 
-      expect(mockConsoleLog).toHaveBeenCalledWith('\nYou can now use TS-MCP tools in Claude Code without re-authenticating.');
+      expect(mockConsoleLog).toHaveBeenCalledWith('\nCredentials stored for automatic re-authentication when API key expires.');
     });
   });
 });

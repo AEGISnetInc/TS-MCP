@@ -14,7 +14,7 @@ import { RateLimiter, RATE_LIMITS } from '../touchstone/rate-limiter.js';
 import { AnalyticsClient } from '../analytics/posthog-client.js';
 import { AnalyticsEvents } from '../analytics/events.js';
 import { getConfig } from '../utils/config.js';
-import { formatErrorResponse, TSMCPError } from '../utils/errors.js';
+import { formatErrorResponse, TSMCPError, TouchstoneApiKeyExpiredError } from '../utils/errors.js';
 import { transformResults } from '../utils/result-transformer.js';
 import {
   TOOL_DEFINITIONS,
@@ -102,16 +102,7 @@ export class TSMCPServer {
         : undefined;
 
       try {
-        switch (name) {
-          case 'launch_test_execution':
-            return await this.handleLaunchExecution(args, authContext);
-          case 'get_test_status':
-            return await this.handleGetStatus(args, authContext);
-          case 'get_test_results':
-            return await this.handleGetResults(args, authContext);
-          default:
-            throw new Error(`Unknown tool: ${name}`);
-        }
+        return await this.executeToolWithAutoRefresh(name, args, authContext);
       } catch (error) {
         this.analytics.track(AnalyticsEvents.TOOL_ERROR, {
           tool_name: name,
@@ -126,6 +117,63 @@ export class TSMCPServer {
         };
       }
     });
+  }
+
+  /**
+   * Execute a tool with automatic API key refresh on expiration.
+   */
+  private async executeToolWithAutoRefresh(
+    name: string,
+    args: unknown,
+    authContext?: AuthContext
+  ) {
+    try {
+      return await this.executeTool(name, args, authContext);
+    } catch (error) {
+      // If API key expired, try to refresh and retry
+      if (error instanceof TouchstoneApiKeyExpiredError) {
+        const refreshed = await this.tryRefreshApiKey();
+        if (refreshed) {
+          // Retry the operation with the new API key
+          return await this.executeTool(name, args, authContext);
+        }
+      }
+      throw error;
+    }
+  }
+
+  /**
+   * Try to refresh the API key using stored credentials.
+   */
+  private async tryRefreshApiKey(): Promise<boolean> {
+    // Check if auth provider supports refresh (duck typing)
+    const provider = this.authProvider as { refreshApiKey?: () => Promise<string | null> };
+    if (typeof provider.refreshApiKey !== 'function') {
+      return false;
+    }
+
+    try {
+      const newApiKey = await provider.refreshApiKey();
+      return newApiKey !== null;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Execute a tool by name.
+   */
+  private async executeTool(name: string, args: unknown, authContext?: AuthContext) {
+    switch (name) {
+      case 'launch_test_execution':
+        return await this.handleLaunchExecution(args, authContext);
+      case 'get_test_status':
+        return await this.handleGetStatus(args, authContext);
+      case 'get_test_results':
+        return await this.handleGetResults(args, authContext);
+      default:
+        throw new Error(`Unknown tool: ${name}`);
+    }
   }
 
   private async handleLaunchExecution(args: unknown, authContext?: AuthContext) {

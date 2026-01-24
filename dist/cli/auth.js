@@ -88,8 +88,9 @@ export async function runAuthCli() {
         const apiKey = await client.authenticate(username, password);
         const keychain = new KeychainService();
         await keychain.setApiKey(apiKey);
+        await keychain.setCredentials(username, password);
         console.log('✓ Authenticated successfully. API key stored in keychain.');
-        console.log('\nYou can now use TS-MCP tools in Claude Code without re-authenticating.');
+        console.log('\nCredentials stored for automatic re-authentication when API key expires.');
     }
     catch (error) {
         if (error instanceof Error) {
