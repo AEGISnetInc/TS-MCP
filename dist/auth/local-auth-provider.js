@@ -47,5 +47,11 @@ export class LocalAuthProvider {
     async canAutoRefresh() {
         return this.keychain.hasCredentials();
     }
+    /**
+     * Get the user's email from stored credentials.
+     */
+    async getEmail() {
+        return this.keychain.getEmail();
+    }
 }
 //# sourceMappingURL=local-auth-provider.js.map

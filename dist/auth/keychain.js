@@ -38,5 +38,9 @@ export class KeychainService {
         const creds = await this.getCredentials();
         return creds !== null;
     }
+    async getEmail() {
+        const creds = await this.getCredentials();
+        return creds?.username ?? null;
+    }
 }
 //# sourceMappingURL=keychain.js.map

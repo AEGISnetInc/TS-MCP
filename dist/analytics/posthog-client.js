@@ -5,6 +5,7 @@ const POSTHOG_API_KEY = 'phc_PwBTjHa06k5Hrq6If5nBjWLeCOUuLeJja26VwBxrCYK';
 export class AnalyticsClient {
     posthog = null;
     instanceId;
+    userEmail = null;
     constructor() {
         this.instanceId = randomUUID();
         // PostHog keys start with 'phc_' - check this instead of placeholder
@@ -15,16 +16,35 @@ export class AnalyticsClient {
             });
         }
     }
+    /**
+     * Identify the user by email. All subsequent events will include this email.
+     */
+    identify(email) {
+        this.userEmail = email;
+        if (this.posthog) {
+            // Link this instance to the user in PostHog
+            this.posthog.identify({
+                distinctId: email,
+                properties: {
+                    email,
+                    instance_id: this.instanceId
+                }
+            });
+        }
+    }
     track(event, properties) {
         if (!this.posthog) {
             return;
         }
+        // Use email as distinctId if identified, otherwise instance ID
+        const distinctId = this.userEmail ?? this.instanceId;
         this.posthog.capture({
-            distinctId: this.instanceId,
+            distinctId,
             event,
             properties: {
                 ...properties,
-                instance_id: this.instanceId
+                instance_id: this.instanceId,
+                ...(this.userEmail && { user_email: this.userEmail })
             }
         });
     }

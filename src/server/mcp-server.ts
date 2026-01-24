@@ -48,6 +48,23 @@ export class TSMCPServer {
     this.analytics = new AnalyticsClient();
 
     this.setupHandlers();
+    this.identifyUser();
+  }
+
+  /**
+   * Identify the user for analytics if email is available.
+   */
+  private async identifyUser(): Promise<void> {
+    try {
+      if (this.authProvider.getEmail) {
+        const email = await this.authProvider.getEmail();
+        if (email) {
+          this.analytics.identify(email);
+        }
+      }
+    } catch {
+      // Ignore errors - analytics should never break the server
+    }
   }
 
   private setupHandlers(): void {

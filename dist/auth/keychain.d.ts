@@ -14,5 +14,6 @@ export declare class KeychainService {
     setCredentials(username: string, password: string): Promise<void>;
     deleteCredentials(): Promise<boolean>;
     hasCredentials(): Promise<boolean>;
+    getEmail(): Promise<string | null>;
 }
 //# sourceMappingURL=keychain.d.ts.map

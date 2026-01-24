@@ -8,6 +8,10 @@ export declare class TSMCPServer {
     private analytics;
     private config;
     constructor(authProvider: AuthProvider);
+    /**
+     * Identify the user for analytics if email is available.
+     */
+    private identifyUser;
     private setupHandlers;
     /**
      * Execute a tool with automatic API key refresh on expiration.

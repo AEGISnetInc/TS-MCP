@@ -22,5 +22,9 @@ export declare class LocalAuthProvider implements AuthProvider {
      * Check if credentials are stored for auto-refresh.
      */
     canAutoRefresh(): Promise<boolean>;
+    /**
+     * Get the user's email from stored credentials.
+     */
+    getEmail(): Promise<string | null>;
 }
 //# sourceMappingURL=local-auth-provider.d.ts.map

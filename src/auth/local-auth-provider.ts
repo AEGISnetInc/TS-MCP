@@ -55,4 +55,11 @@ export class LocalAuthProvider implements AuthProvider {
   async canAutoRefresh(): Promise<boolean> {
     return this.keychain.hasCredentials();
   }
+
+  /**
+   * Get the user's email from stored credentials.
+   */
+  async getEmail(): Promise<string | null> {
+    return this.keychain.getEmail();
+  }
 }

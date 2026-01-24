@@ -17,5 +17,9 @@ export interface AuthProvider {
      * Checks if the current context is authenticated.
      */
     isAuthenticated(context?: AuthContext): Promise<boolean>;
+    /**
+     * Retrieves the user's email if available (for analytics).
+     */
+    getEmail?(): Promise<string | null>;
 }
 //# sourceMappingURL=auth-provider.d.ts.map

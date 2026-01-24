@@ -50,4 +50,9 @@ export class KeychainService {
     const creds = await this.getCredentials();
     return creds !== null;
   }
+
+  async getEmail(): Promise<string | null> {
+    const creds = await this.getCredentials();
+    return creds?.username ?? null;
+  }
 }
