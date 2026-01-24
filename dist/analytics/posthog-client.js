@@ -11,7 +11,7 @@ export class AnalyticsClient {
         // (sed replaces all occurrences of placeholder, breaking !== check)
         if (POSTHOG_API_KEY.startsWith('phc_')) {
             this.posthog = new PostHog(POSTHOG_API_KEY, {
-                host: 'https://app.posthog.com'
+                host: 'https://us.i.posthog.com'
             });
         }
     }
