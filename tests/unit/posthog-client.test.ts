@@ -1,4 +1,6 @@
 import { jest } from '@jest/globals';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 // Create mock capture and shutdown functions
 const mockCapture = jest.fn();
@@ -55,5 +57,13 @@ describe('AnalyticsClient', () => {
       const client = new AnalyticsClient();
       await expect(client.shutdown()).resolves.not.toThrow();
     });
+  });
+});
+
+describe('Release verification', () => {
+  it('dist should not contain PostHog placeholder', () => {
+    const distPath = join(process.cwd(), 'dist/analytics/posthog-client.js');
+    const distContent = readFileSync(distPath, 'utf-8');
+    expect(distContent).not.toContain('__POSTHOG_API_KEY__');
   });
 });
