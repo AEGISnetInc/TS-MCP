@@ -35,6 +35,24 @@ export class TouchstoneClient {
         }
         throw new TouchstoneError(status);
     }
+    /**
+     * Validate an API key by making a lightweight authenticated request.
+     * Throws TouchstoneApiKeyExpiredError if the key is invalid/expired.
+     */
+    async validateApiKey(apiKey) {
+        // Use a request that will return 401 if key is expired, or any other response if valid
+        // Getting status for ID "0" should return 404 if key is valid, 401 if expired
+        try {
+            await this.request('/testExecution/0', { method: 'GET' }, apiKey);
+        }
+        catch (error) {
+            if (error instanceof ExecutionNotFoundError) {
+                // 404 means the key is valid, just the execution doesn't exist
+                return;
+            }
+            throw error;
+        }
+    }
     async authenticate(username, password) {
         const data = await this.request('/authenticate', {
             method: 'POST',

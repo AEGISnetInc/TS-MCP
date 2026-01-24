@@ -1,22 +1,53 @@
 import { jest, describe, it, expect, beforeEach, afterEach } from '@jest/globals';
 
+// Mock functions
+const mockGetApiKey = jest.fn<() => Promise<string | null>>();
+const mockValidateApiKey = jest.fn<() => Promise<void>>();
+const mockCanAutoRefresh = jest.fn<() => Promise<boolean>>();
+const mockRefreshApiKey = jest.fn<() => Promise<string | null>>();
+const mockRunAuthCli = jest.fn<() => Promise<void>>();
+const mockQuestion = jest.fn<(query: string, callback: (answer: string) => void) => void>();
+const mockClose = jest.fn();
+
 // Mock keychain
-const mockHasApiKey = jest.fn<() => Promise<boolean>>();
 jest.unstable_mockModule('../../src/auth/keychain.js', () => ({
   KeychainService: jest.fn().mockImplementation(() => ({
-    hasApiKey: mockHasApiKey
+    getApiKey: mockGetApiKey
   }))
 }));
 
+// Mock TouchstoneClient
+jest.unstable_mockModule('../../src/touchstone/client.js', () => ({
+  TouchstoneClient: jest.fn().mockImplementation(() => ({
+    validateApiKey: mockValidateApiKey
+  }))
+}));
+
+// Mock LocalAuthProvider
+jest.unstable_mockModule('../../src/auth/local-auth-provider.js', () => ({
+  LocalAuthProvider: jest.fn().mockImplementation(() => ({
+    canAutoRefresh: mockCanAutoRefresh,
+    refreshApiKey: mockRefreshApiKey
+  }))
+}));
+
+// Mock config
+jest.unstable_mockModule('../../src/utils/config.js', () => ({
+  getConfig: jest.fn().mockReturnValue({ touchstoneBaseUrl: 'https://touchstone.example.com' })
+}));
+
+// Mock errors
+const { TouchstoneApiKeyExpiredError } = await import('../../src/utils/errors.js');
+jest.unstable_mockModule('../../src/utils/errors.js', () => ({
+  TouchstoneApiKeyExpiredError
+}));
+
 // Mock auth CLI
-const mockRunAuthCli = jest.fn<() => Promise<void>>();
 jest.unstable_mockModule('../../src/cli/auth.js', () => ({
   runAuthCli: mockRunAuthCli
 }));
 
 // Mock readline
-const mockQuestion = jest.fn<(query: string, callback: (answer: string) => void) => void>();
-const mockClose = jest.fn();
 jest.unstable_mockModule('readline', () => ({
   createInterface: jest.fn().mockReturnValue({
     question: mockQuestion,
@@ -33,27 +64,6 @@ describe('runStatusCli', () => {
     mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
     mockRunAuthCli.mockResolvedValue(undefined);
 
-    // Reset module cache to get fresh import with mocks
-    jest.resetModules();
-
-    // Re-setup mocks after reset
-    jest.unstable_mockModule('../../src/auth/keychain.js', () => ({
-      KeychainService: jest.fn().mockImplementation(() => ({
-        hasApiKey: mockHasApiKey
-      }))
-    }));
-
-    jest.unstable_mockModule('../../src/cli/auth.js', () => ({
-      runAuthCli: mockRunAuthCli
-    }));
-
-    jest.unstable_mockModule('readline', () => ({
-      createInterface: jest.fn().mockReturnValue({
-        question: mockQuestion,
-        close: mockClose
-      })
-    }));
-
     // Import after mocks are set up
     const module = await import('../../src/cli/status.js');
     runStatusCli = module.runStatusCli;
@@ -63,57 +73,110 @@ describe('runStatusCli', () => {
     mockConsoleLog.mockRestore();
   });
 
-  it('shows Authenticated: Yes when key exists', async () => {
-    mockHasApiKey.mockResolvedValue(true);
+  describe('when no API key exists', () => {
+    beforeEach(() => {
+      mockGetApiKey.mockResolvedValue(null);
+    });
 
-    await runStatusCli();
+    it('shows Authenticated: No', async () => {
+      mockQuestion.mockImplementation((q, cb) => cb('n'));
 
-    expect(mockConsoleLog).toHaveBeenCalledWith('Authenticated: Yes');
-    expect(mockQuestion).not.toHaveBeenCalled();
+      await runStatusCli();
+
+      expect(mockConsoleLog).toHaveBeenCalledWith('Authenticated: No');
+    });
+
+    it('prompts and calls auth when user says yes', async () => {
+      mockQuestion.mockImplementation((q, cb) => cb('y'));
+
+      await runStatusCli();
+
+      expect(mockRunAuthCli).toHaveBeenCalled();
+    });
+
+    it('does not call auth when user says no', async () => {
+      mockQuestion.mockImplementation((q, cb) => cb('n'));
+
+      await runStatusCli();
+
+      expect(mockRunAuthCli).not.toHaveBeenCalled();
+    });
   });
 
-  it('shows Authenticated: No when no key', async () => {
-    mockHasApiKey.mockResolvedValue(false);
-    mockQuestion.mockImplementation((q, cb) => cb('n'));
+  describe('when API key exists and is valid', () => {
+    beforeEach(() => {
+      mockGetApiKey.mockResolvedValue('valid-api-key');
+      mockValidateApiKey.mockResolvedValue(undefined);
+    });
 
-    await runStatusCli();
+    it('shows Authenticated: Yes and API Key: Valid', async () => {
+      await runStatusCli();
 
-    expect(mockConsoleLog).toHaveBeenCalledWith('Authenticated: No');
+      expect(mockConsoleLog).toHaveBeenCalledWith('Authenticated: Yes');
+      expect(mockConsoleLog).toHaveBeenCalledWith('API Key: Valid');
+    });
+
+    it('does not prompt for auth', async () => {
+      await runStatusCli();
+
+      expect(mockQuestion).not.toHaveBeenCalled();
+    });
   });
 
-  it('prompts and calls auth when user says yes', async () => {
-    mockHasApiKey.mockResolvedValue(false);
-    mockQuestion.mockImplementation((q, cb) => cb('y'));
+  describe('when API key is expired', () => {
+    beforeEach(() => {
+      mockGetApiKey.mockResolvedValue('expired-api-key');
+      mockValidateApiKey.mockRejectedValue(new TouchstoneApiKeyExpiredError());
+    });
 
-    await runStatusCli();
+    it('shows API Key: Expired', async () => {
+      mockCanAutoRefresh.mockResolvedValue(false);
+      mockQuestion.mockImplementation((q, cb) => cb('n'));
 
-    expect(mockRunAuthCli).toHaveBeenCalled();
-  });
+      await runStatusCli();
 
-  it('does not call auth when user says no', async () => {
-    mockHasApiKey.mockResolvedValue(false);
-    mockQuestion.mockImplementation((q, cb) => cb('n'));
+      expect(mockConsoleLog).toHaveBeenCalledWith('API Key: Expired');
+    });
 
-    await runStatusCli();
+    describe('with stored credentials', () => {
+      beforeEach(() => {
+        mockCanAutoRefresh.mockResolvedValue(true);
+      });
 
-    expect(mockRunAuthCli).not.toHaveBeenCalled();
-  });
+      it('auto-refreshes successfully', async () => {
+        mockRefreshApiKey.mockResolvedValue('new-api-key');
 
-  it('calls auth when user enters empty response (defaults to yes)', async () => {
-    mockHasApiKey.mockResolvedValue(false);
-    mockQuestion.mockImplementation((q, cb) => cb(''));
+        await runStatusCli();
 
-    await runStatusCli();
+        expect(mockConsoleLog).toHaveBeenCalledWith('Refreshing API key...');
+        expect(mockConsoleLog).toHaveBeenCalledWith('✓ API key refreshed successfully.');
+        expect(mockRunAuthCli).not.toHaveBeenCalled();
+      });
 
-    expect(mockRunAuthCli).toHaveBeenCalled();
-  });
+      it('prompts for re-auth when auto-refresh fails', async () => {
+        mockRefreshApiKey.mockRejectedValue(new Error('Auth failed'));
+        mockQuestion.mockImplementation((q, cb) => cb('y'));
 
-  it('calls auth when user enters Y (uppercase)', async () => {
-    mockHasApiKey.mockResolvedValue(false);
-    mockQuestion.mockImplementation((q, cb) => cb('Y'));
+        await runStatusCli();
 
-    await runStatusCli();
+        expect(mockConsoleLog).toHaveBeenCalledWith('✗ Auto-refresh failed.');
+        expect(mockRunAuthCli).toHaveBeenCalled();
+      });
+    });
 
-    expect(mockRunAuthCli).toHaveBeenCalled();
+    describe('without stored credentials', () => {
+      beforeEach(() => {
+        mockCanAutoRefresh.mockResolvedValue(false);
+      });
+
+      it('prompts for re-auth', async () => {
+        mockQuestion.mockImplementation((q, cb) => cb('y'));
+
+        await runStatusCli();
+
+        expect(mockConsoleLog).toHaveBeenCalledWith('No stored credentials for auto-refresh.');
+        expect(mockRunAuthCli).toHaveBeenCalled();
+      });
+    });
   });
 });
