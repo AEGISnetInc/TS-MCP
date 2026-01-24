@@ -32,10 +32,12 @@ Username (email): your.email@example.com
 Password: ********
 
 Authenticating...
-✓ Authenticated successfully. API key stored in credential store.
+✓ Authenticated successfully. API key stored in keychain.
+
+Credentials stored for automatic re-authentication when API key expires.
 ```
 
-Your API key is stored securely in your system credential store (macOS Keychain, Windows Credential Manager, or Linux Secret Service).
+Your API key and credentials are stored securely in your system credential store (macOS Keychain, Windows Credential Manager, or Linux Secret Service).
 
 ## Step 3: Use in Claude Code
 
@@ -65,9 +67,15 @@ npx github:AEGISnetinc/TS-MCP status
 
 If you're not authenticated, you'll be prompted to authenticate.
 
-## Re-authentication
+## Automatic Re-authentication
 
-When your Touchstone API key expires, Claude will notify you and automatically run the authentication command. Enter your credentials and Claude will retry your request.
+Touchstone API keys expire periodically. TS-MCP handles this automatically:
+
+1. When an API key expires, TS-MCP detects the 401 response
+2. Using your stored credentials, it re-authenticates with Touchstone
+3. The new API key is saved and the original request is retried
+
+**You won't be interrupted** - the refresh happens transparently. This only works after you've run `auth` at least once to store your credentials.
 
 ## Example Workflows
 
@@ -107,8 +115,26 @@ Verify the exact Test Setup name in the Touchstone UI. Names are case-sensitive.
 2. Restart Claude Code
 3. Check that `npx github:AEGISnetinc/TS-MCP` runs without errors
 
+## Updating TS-MCP
+
+TS-MCP is actively developed with new features released regularly. To get the latest version:
+
+```bash
+npx github:AEGISnetInc/TS-MCP@latest --help
+```
+
+Or clear the cache and reinstall:
+
+```bash
+npm cache clean --force
+npx github:AEGISnetInc/TS-MCP auth
+```
+
+Your stored credentials will continue to work after updating.
+
 ## Security
 
-- **Credentials**: Username and password are only used during authentication, never stored
+- **Credentials**: Stored securely in your system credential store for automatic re-authentication
 - **API Key**: Stored securely in your system credential store
 - **Transport**: All communication uses HTTPS
+- **Credential Store**: macOS Keychain, Windows Credential Manager, or Linux Secret Service

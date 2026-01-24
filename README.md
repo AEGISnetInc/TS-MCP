@@ -46,6 +46,21 @@ MCP server for conversational FHIR testing with [Touchstone](https://touchstone.
 | `get_test_status` | Check execution status |
 | `get_test_results` | Get detailed results |
 
+## Updating
+
+TS-MCP is actively developed. To get the latest version:
+
+```bash
+npx github:AEGISnetInc/TS-MCP@latest --help
+```
+
+Or clear the npx cache and reinstall:
+
+```bash
+npm cache clean --force
+npx github:AEGISnetInc/TS-MCP auth
+```
+
 ## Documentation
 
 See [Getting Started Guide](docs/users/getting-started.md) for detailed instructions.

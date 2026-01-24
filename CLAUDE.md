@@ -46,9 +46,10 @@ const { MyClass } = await import('./my-module.js');
 ## Architecture Decisions
 
 1. **STDIO Transport:** Uses STDIO for Claude Code CLI compatibility
-2. **Keychain Storage:** API keys stored in system keychain, never in plain text
-3. **Rate Limiting:** Respects Touchstone API limits (4s status, 15s detail)
-4. **PostHog Key Injection:** API key injected at build time via CI/CD, not in source
+2. **Keychain Storage:** API keys and credentials stored in system keychain, never in plain text
+3. **Auto-Refresh:** When Touchstone API key expires, automatically re-authenticates using stored credentials
+4. **Rate Limiting:** Respects Touchstone API limits (4s status, 15s detail)
+5. **PostHog Key Injection:** API key injected at build time via CI/CD, not in source
 
 ## Important Files
 
