@@ -21,6 +21,7 @@ This document captures proposed enhancements for discussion with the AEGIS Touch
 | No list test setups endpoint | Users must know Test Setup names from UI | Cannot browse available setups programmatically |
 | No dynamic endpoint specification | Test systems must be pre-configured in UI | Cannot specify FHIR server URL at runtime |
 | No test script search | Must browse UI to find tests | Cannot discover relevant tests programmatically |
+| No Test Setup introspection | Cannot inspect what a Test Setup contains or requires | Cannot detect expected variables, fixtures, or parameters before execution |
 | Polling-only status | Must poll every 4+ seconds | Inefficient; no real-time updates |
 
 ---
@@ -104,7 +105,50 @@ Ideally, if `trargetEndpoint` is not yet found as a TestSytem, we create it (pop
 
 ---
 
-### 4. Webhook Notifications
+### 4. Test Setup Introspection Endpoint
+
+**Endpoint:** `GET /api/testSetups/{name}`
+
+**Purpose:** Retrieve the full configuration of a Test Setup, including its TestScripts, required variables, fixtures, and destination Test System details. This enables callers to detect what user input is expected before launching an execution.
+
+**Response:**
+```json
+{
+  "name": "Patient-CRUD",
+  "description": "Patient resource CRUD operations",
+  "testSystem": {
+    "name": "My-Dev-Server",
+    "baseUrl": "https://my-fhir-server.com/fhir",
+    "organization": "My Org"
+  },
+  "testScripts": [
+    {
+      "name": "Patient-client-id-xml",
+      "path": "/FHIR3-0-2-Basic/P-R/Patient/Client Assigned Id/Patient-client-id-xml",
+      "variables": [
+        {
+          "name": "searchParamIdentifier",
+          "description": "Patient identifier for search operations",
+          "defaultValue": "urn:oid:1.2.3.4.5.6.7"
+        }
+      ],
+      "fixtures": [
+        {
+          "id": "patient-create",
+          "resourceType": "Patient",
+          "description": "Patient resource used for create operation"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Value:** Enables AI assistants and automation tools to prompt users for required inputs before execution, validate configurations, and provide meaningful guidance about what a Test Setup will do.
+
+---
+
+### 5. Webhook Notifications
 
 **Enhancement:** Register webhook URL for execution status updates.
 
@@ -130,7 +174,7 @@ Ideally, if `trargetEndpoint` is not yet found as a TestSytem, we create it (pop
 
 ---
 
-### 5. Batch Execution
+### 6. Batch Execution
 
 **Enhancement:** Launch multiple Test Setups in a single request.
 
@@ -161,6 +205,7 @@ Ideally, if `trargetEndpoint` is not yet found as a TestSytem, we create it (pop
 | Priority | Enhancement | Rationale |
 |----------|-------------|-----------|
 | **High** | List Test Setups | Fundamental for usability |
+| **High** | Test Setup Introspection | Enables detecting required inputs before execution |
 | **High** | Test Script Search | Enables intelligent test discovery |
 | **Medium** | Dynamic Endpoint | Valuable for CI/CD workflows |
 | **Medium** | Webhook Notifications | Improves efficiency |
