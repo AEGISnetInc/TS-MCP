@@ -1,6 +1,5 @@
 node_modules/
 # dist/ is committed for npx github:AEGISnetinc/TS-MCP support
-dist/analytics/
 .env
 .env.local
 *.log
