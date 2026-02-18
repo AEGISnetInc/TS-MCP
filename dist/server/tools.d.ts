@@ -14,6 +14,7 @@ export declare const GetTestStatusInputSchema: z.ZodObject<{
 export type GetTestStatusInput = z.infer<typeof GetTestStatusInputSchema>;
 export declare const GetTestResultsInputSchema: z.ZodObject<{
     executionId: z.ZodString;
+    verbose: z.ZodDefault<z.ZodOptional<z.ZodBoolean>>;
 }, z.core.$strip>;
 export type GetTestResultsInput = z.infer<typeof GetTestResultsInputSchema>;
 export declare const TOOL_DEFINITIONS: readonly [{
@@ -51,6 +52,10 @@ export declare const TOOL_DEFINITIONS: readonly [{
             readonly executionId: {
                 readonly type: "string";
                 readonly description: "The execution ID returned from launch_test_execution";
+            };
+            readonly verbose: {
+                readonly type: "boolean";
+                readonly description: "When true, fetches individual test details for all scripts including passing ones. Note: adds ~15 seconds per script due to API rate limits.";
             };
         };
         readonly required: readonly ["executionId"];

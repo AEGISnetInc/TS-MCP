@@ -17,7 +17,8 @@ export const GetTestStatusInputSchema = z.object({
 export type GetTestStatusInput = z.infer<typeof GetTestStatusInputSchema>;
 
 export const GetTestResultsInputSchema = z.object({
-  executionId: z.string().describe('The execution ID returned from launch_test_execution')
+  executionId: z.string().describe('The execution ID returned from launch_test_execution'),
+  verbose: z.boolean().optional().default(false).describe('When true, fetches individual test details for all scripts including passing ones')
 });
 export type GetTestResultsInput = z.infer<typeof GetTestResultsInputSchema>;
 
@@ -50,7 +51,8 @@ export const TOOL_DEFINITIONS = [
     inputSchema: {
       type: 'object' as const,
       properties: {
-        executionId: { type: 'string', description: 'The execution ID returned from launch_test_execution' }
+        executionId: { type: 'string', description: 'The execution ID returned from launch_test_execution' },
+        verbose: { type: 'boolean', description: 'When true, fetches individual test details for all scripts including passing ones. Note: adds ~15 seconds per script due to API rate limits.' }
       },
       required: ['executionId']
     }

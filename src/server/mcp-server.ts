@@ -252,7 +252,7 @@ export class TSMCPServer {
   }
 
   private async handleGetResults(args: unknown, authContext?: AuthContext) {
-    const { executionId } = GetTestResultsInputSchema.parse(args);
+    const { executionId, verbose } = GetTestResultsInputSchema.parse(args);
     const apiKey = await this.authProvider.getApiKey(authContext);
 
     // Fetch execution detail (summary of all scripts)
@@ -264,7 +264,7 @@ export class TSMCPServer {
     const scriptExecutions = detail.testScriptExecutions ?? [];
 
     for (const script of scriptExecutions) {
-      const needsDetails = script.status !== 'Passed' && script.status !== 'PassedWithWarnings';
+      const needsDetails = verbose || (script.status !== 'Passed' && script.status !== 'PassedWithWarnings');
       if (needsDetails) {
         await this.rateLimiter.throttle('scriptDetail', RATE_LIMITS.SCRIPT_DETAIL_ENDPOINT);
         const scriptDetail = await this.touchstoneClient.getScriptDetail(
